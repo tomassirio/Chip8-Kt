@@ -3,6 +3,7 @@ package cpu
 import com.tomassirio.cpu.CPU
 import com.tomassirio.cpu.Register
 import com.tomassirio.cpu.opcode.Command
+import com.tomassirio.cpu.opcode.OpcodeTable
 import com.tomassirio.cpu.opcode.SysAddrCommand
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
@@ -22,6 +23,7 @@ class CPUTest {
     private lateinit var sp: Register.ByteRegister
     private lateinit var I: Register.ShortRegister
     private lateinit var mockCommand: Command
+    private lateinit var opcodeTable: OpcodeTable
 
     @BeforeEach
     fun setup() {
@@ -31,7 +33,8 @@ class CPUTest {
         display = mockk(relaxed = true)
         pc = Register.ShortRegister("pc", 0x200u)
         sp = mockk(relaxed = true)
-        I = mockk(relaxed = true)
+        I = Register.ShortRegister("I")
+        opcodeTable = mockk(relaxed = true)
 
         // Create and configure mock command
         mockCommand = mockk(relaxed = true)
@@ -48,17 +51,19 @@ class CPUTest {
             pc = pc,
             sp = sp,
             I = I,
-            stack = listOf(),
-            opcodes = mapOf(0x0000u to mockCommand)  // Inject mock command directly
+            stack = mutableListOf(),
+            opcodeTable = opcodeTable
         )
     }
     @Test
     fun `test runCycle fetches, decodes, and executes an opcode`() {
+        every { opcodeTable.getCommand(0x0000u.toUShort()) } returns mockCommand
+
         // Act
         cpu.runCycle()
 
         // Assert
-        verify(exactly = 1) { mockCommand.execute(any()) }
+        verify(exactly = 1) { mockCommand.execute(cpu, 0x0000u) }
         assertEquals(0x202u.toUShort(), cpu.pc.value, "PC should be incremented by 2")
     }
 
@@ -71,8 +76,10 @@ class CPUTest {
 
     @Test
     fun `test opcode decoding`() {
+        every { opcodeTable.getCommand(0x0000u.toUShort()) } returns SysAddrCommand
+
         // Test that our mock command is returned for opcode 0x0000
-        val command = CPU.defaultOpcodes[0x0000u]
+        val command = cpu.opcodeTable.getCommand(0x0000u.toUShort())
         assertNotNull(command, "Should find command for opcode 0x0000")
         assertTrue(command is SysAddrCommand, "Command should be SysAddrCommand")
     }
@@ -80,12 +87,14 @@ class CPUTest {
     @Test
     fun `test opcode execution`() {
         // Test that the command is executed
-        mockCommand.execute(cpu)
-        verify(exactly = 1) { mockCommand.execute(any()) }
+        mockCommand.execute(cpu, 0x0000u.toUShort())
+        verify(exactly = 1) { mockCommand.execute(cpu, 0x0000u) }
     }
 
     @Test
     fun `test invalid opcode decoding throws exception`() {
+        every { opcodeTable.getCommand(any()) } throws IllegalArgumentException("Invalid opcode")
+
         // Write an invalid opcode to memory
         memory.write(0x200, 0x8888u.toUShort())
 

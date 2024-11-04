@@ -1,7 +1,7 @@
 package com.tomassirio.cpu
 
 import com.tomassirio.cpu.opcode.Command
-import com.tomassirio.cpu.opcode.SysAddrCommand
+import com.tomassirio.cpu.opcode.OpcodeTable
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.Memory
@@ -11,16 +11,18 @@ class CPU(
     val registers: MutableSet<Register.ByteRegister>,
     val keyboard: Keyboard,
     val display: Display,
-    var pc: Register.ShortRegister,
-    var sp: Register.ByteRegister,
-    var I: Register.ShortRegister,
+    val pc: Register.ShortRegister,
+    val sp: Register.ByteRegister,
+    val I: Register.ShortRegister,
 
-    var stack: List<UShort>,
-    private val opcodes: Map<UInt, Command> = defaultOpcodes
+    val stack: MutableList<UShort>,
+    val opcodeTable: OpcodeTable = OpcodeTable()
 ) {
 
     fun runCycle() {
-        execute(decode(fetch()))
+        val opcode = fetch()
+        val command = decode(opcode)
+        execute(command, opcode)
     }
 
     private fun fetch(): UShort {
@@ -28,12 +30,11 @@ class CPU(
     }
 
     private fun decode(opcode: UShort): Command {
-        val maskedOpcode = opcode.and(0xFFFu)
-        return opcodes[maskedOpcode.toUInt()] ?: throw IllegalArgumentException("Invalid OpCode")
+        return opcodeTable.getCommand(opcode)
     }
 
-    private fun execute(command: Command) {
-        command.execute(this)
+    private fun execute(command: Command, opcode: UShort) {
+        command.execute(this, opcode)
         pc.value = pc.value.plus(2u).toUShort()
     }
 
@@ -54,11 +55,5 @@ class CPU(
             append("Memory: $memory\n")
             println(toString())
         }
-    }
-
-    companion object {
-        val defaultOpcodes: Map<UInt, Command> = mapOf(
-            0x0000u to SysAddrCommand
-        )
     }
 }

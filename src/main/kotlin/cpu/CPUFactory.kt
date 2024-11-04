@@ -4,10 +4,9 @@ import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.MemoryFactory
 
-class CPUFactory {
+object CPUFactory {
 
     private val emptyValue: UShort = 0x0000u
-    private val memoryFactory: MemoryFactory = MemoryFactory()
 
     fun createCPU(cpuType: CPUType = CPUType.CHIP8): CPU {
         return when (cpuType) {
@@ -18,7 +17,7 @@ class CPUFactory {
 
     private fun createChip8CPU(): CPU {
         return CPU(
-            memoryFactory.createMemory(),
+            MemoryFactory.createMemory(),
             createRegisterSet(),
             Keyboard(),
             Display(),
@@ -31,7 +30,7 @@ class CPUFactory {
 
     private fun createETI660CPU(): CPU {
         return CPU(
-            memoryFactory.createETIMemory(),
+            MemoryFactory.createETIMemory(),
             createRegisterSet(),
             Keyboard(),
             Display(),
@@ -63,7 +62,7 @@ class CPUFactory {
         )
     }
 
-    private fun createStack(): List<UShort> {
-        return List(16) { emptyValue }
+    private fun createStack(): MutableList<UShort> {
+        return MutableList(16) { emptyValue }
     }
 }

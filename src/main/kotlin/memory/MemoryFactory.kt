@@ -1,6 +1,6 @@
 package com.tomassirio.memory
 
-class MemoryFactory {
+object MemoryFactory {
     fun createMemory(): Memory {
         return Memory(4096)
     }

@@ -4,18 +4,11 @@ import com.tomassirio.cpu.CPU
 import com.tomassirio.cpu.CPUFactory
 import com.tomassirio.cpu.CPUType
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class CPUFactoryTest {
 
-    private lateinit var cpuFactory: CPUFactory
-
-    @BeforeEach
-    fun setup() {
-        cpuFactory = CPUFactory()
-    }
-
+    private val cpuFactory: CPUFactory = CPUFactory
 
     @Test
     fun `createCPU with CHIP8 type returns initialized CHIP8 CPU`() {
