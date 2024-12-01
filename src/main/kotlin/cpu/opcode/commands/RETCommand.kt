@@ -1,6 +1,7 @@
-package com.tomassirio.cpu.opcode
+package com.tomassirio.cpu.opcode.commands
 
 import com.tomassirio.cpu.CPU
+import com.tomassirio.cpu.opcode.Command
 
 /**
  * 00EE - RET

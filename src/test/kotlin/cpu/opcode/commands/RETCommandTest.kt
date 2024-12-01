@@ -1,7 +1,7 @@
-package cpu.opcode
+package cpu.opcode.commands
 
 import com.tomassirio.cpu.CPUFactory.createCPU
-import com.tomassirio.cpu.opcode.RETCommand
+import com.tomassirio.cpu.opcode.commands.RETCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

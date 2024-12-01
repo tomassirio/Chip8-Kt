@@ -1,5 +1,6 @@
 package com.tomassirio.cpu
 
+import com.tomassirio.cpu.opcode.OpCodeTable
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.MemoryFactory
@@ -25,7 +26,8 @@ object CPUFactory {
             Register.ShortRegister("pc",0x200u),
             Register.ByteRegister("sp"),
             Register.ShortRegister("I"),
-            createStack()
+            createStack(),
+            OpCodeTable.chip8CommandGetter
         )
     }
 
@@ -38,7 +40,8 @@ object CPUFactory {
             Register.ShortRegister("pc", 0x600u),
             Register.ByteRegister("sp"),
             Register.ShortRegister("I"),
-            createStack()
+            createStack(),
+            OpCodeTable.chip48CommandGetter
         )
     }
 

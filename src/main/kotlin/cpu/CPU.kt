@@ -1,7 +1,6 @@
 package com.tomassirio.cpu
 
 import com.tomassirio.cpu.opcode.Command
-import com.tomassirio.cpu.opcode.OpcodeTable
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.Memory
@@ -17,7 +16,7 @@ class CPU(
     val I: Register.ShortRegister,
 
     val stack: SizedStack<UShort>,
-    val opcodeTable: OpcodeTable = OpcodeTable()
+    val commands: (UShort) -> Command
 ) {
 
     fun runCycle() {
@@ -31,7 +30,7 @@ class CPU(
     }
 
     private fun decode(opcode: UShort): Command {
-        return opcodeTable.getCommand(opcode)
+        return commands(opcode)
     }
 
     private fun execute(command: Command, opcode: UShort) {

@@ -3,8 +3,7 @@ package cpu
 import com.tomassirio.cpu.CPU
 import com.tomassirio.cpu.Register
 import com.tomassirio.cpu.opcode.Command
-import com.tomassirio.cpu.opcode.OpcodeTable
-import com.tomassirio.cpu.opcode.SYSAddrCommand
+import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.Memory
@@ -26,7 +25,7 @@ class CPUTest {
     private lateinit var sp: Register.ByteRegister
     private lateinit var I: Register.ShortRegister
     private lateinit var mockCommand: Command
-    private lateinit var opcodeTable: OpcodeTable
+    private lateinit var commands: (UShort) -> Command
 
     @BeforeEach
     fun setup() {
@@ -37,7 +36,7 @@ class CPUTest {
         pc = Register.ShortRegister("pc", 0x200u)
         sp = mockk(relaxed = true)
         I = Register.ShortRegister("I")
-        opcodeTable = mockk(relaxed = true)
+        commands = mockk(relaxed = true)
 
         // Create and configure mock command
         mockCommand = mockk(relaxed = true)
@@ -55,12 +54,12 @@ class CPUTest {
             sp = sp,
             I = I,
             stack = SizedStack(16),
-            opcodeTable = opcodeTable
+            commands = commands
         )
     }
     @Test
     fun `test runCycle fetches, decodes, and executes an opcode`() {
-        every { opcodeTable.getCommand(0x0000u.toUShort()) } returns mockCommand
+        every { commands(0x0000u.toUShort()) } returns mockCommand
 
         // Act
         cpu.runCycle()
@@ -81,10 +80,10 @@ class CPUTest {
 
     @Test
     fun `test opcode decoding`() {
-        every { opcodeTable.getCommand(0x0000u.toUShort()) } returns SYSAddrCommand
+        every { commands(0x0000u.toUShort()) } returns SYSAddrCommand
 
         // Test that our mock command is returned for opcode 0x0000
-        val command = cpu.opcodeTable.getCommand(0x0000u.toUShort())
+        val command = cpu.commands(0x0000u.toUShort())
         assertThat(command).isNotNull()
             .withFailMessage("Should find command for opcode 0x0000")
         assertThat(command).isInstanceOf(SYSAddrCommand.javaClass)
@@ -100,7 +99,7 @@ class CPUTest {
 
     @Test
     fun `test invalid opcode decoding throws exception`() {
-        every { opcodeTable.getCommand(any()) } throws IllegalArgumentException("Invalid opcode")
+        every { commands(any()) } throws IllegalArgumentException("Invalid opcode")
 
         // Write an invalid opcode to memory
         memory.write(0x200, 0x8888u.toUShort())

@@ -1,8 +1,8 @@
-package cpu.opcode
+package cpu.opcode.commands
 
 import com.tomassirio.cpu.CPU
 import com.tomassirio.cpu.CPUFactory
-import com.tomassirio.cpu.opcode.SYSAddrCommand
+import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

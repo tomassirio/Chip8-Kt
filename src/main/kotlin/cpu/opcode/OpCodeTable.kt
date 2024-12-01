@@ -1,9 +1,15 @@
 package com.tomassirio.cpu.opcode
 
 import com.tomassirio.cpu.exception.CommandNotFoundException
+import com.tomassirio.cpu.opcode.commands.CLSCommand
+import com.tomassirio.cpu.opcode.commands.RETCommand
+import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
 
-class OpcodeTable {
-    fun getCommand(opcode: UShort): Command {
+object OpCodeTable {
+    val chip8CommandGetter: (UShort) -> Command = ::getCommand
+    val chip48CommandGetter: (UShort) -> Command = ::getChip48Command
+
+    private fun getCommand(opcode: UShort): Command {
         return when (opcode.and(0xFFFu).toUInt()) {
             0x0000u -> SYSAddrCommand
             0x00E0u -> CLSCommand
@@ -53,25 +59,25 @@ class OpcodeTable {
         }
     }
 
-//    fun getChip48Command(opcode: UShort): Command {
-//        return when(opcode.and(0xFFFu).toUInt()) {
-//            0x0000u -> when (opcode.and(0xFFu).toUInt()) {
+    private fun getChip48Command(opcode: UShort): Command {
+        return when(opcode.and(0xFFFu).toUInt()) {
+            0x0000u -> when (opcode.and(0xFFu).toUInt()) {
 //                0xC0u -> SCDCommand //fixme
 //                0x00FBu -> SCRCommand
 //                0x00FCu -> SCLCommand
 //                0x00FDu -> EXITCommand
 //                0x00FEu -> LOWCommand
 //                0x00FFu -> HIGHCommand
-//                else -> getCommand(opcode)
-//            }
+                else -> getCommand(opcode)
+            }
 //            0xD000u -> DRWVxVyNCommand
-//            0xF000u -> when (opcode.and(0xFFu).toUInt()) {
+            0xF000u -> when (opcode.and(0xFFu).toUInt()) {
 //                0x30u -> LDHFVxCommand
 //                0x75u -> LDRVxCommand
 //                0x85u -> LDRVxCommand
-//                else -> getCommand(opcode)
-//            }
-//            else -> getCommand(opcode)
-//        }
-//    }
+                else -> getCommand(opcode)
+            }
+            else -> getCommand(opcode)
+        }
+    }
 }
