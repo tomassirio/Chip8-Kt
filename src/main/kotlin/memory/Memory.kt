@@ -1,6 +1,6 @@
 package com.tomassirio.memory
 
-class Memory(val size: Int, val startAddress: Int = 0x200) {
+class Memory(size: Int, val startAddress: Int = 0x200) {
 
     @OptIn(ExperimentalUnsignedTypes::class)
     val memory = UByteArray(size)
