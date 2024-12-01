@@ -13,6 +13,6 @@ import com.tomassirio.cpu.opcode.Command
 object RETCommand : Command {
     override fun execute(cpu: CPU, opcode: UShort) {
         cpu.pc.write(cpu.stack.pop())
-        cpu.sp.value = cpu.sp.value.minus(1u).toUByte()
+        cpu.sp.write(cpu.sp.read().minus(1u).toUByte())
     }
 }

@@ -1,9 +1,11 @@
-package com.tomassirio.cpu
+package com.tomassirio.factory
 
+import com.tomassirio.cpu.CPU
+import com.tomassirio.cpu.CPUType
+import com.tomassirio.cpu.Register
 import com.tomassirio.cpu.opcode.OpCodeTable
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
-import com.tomassirio.memory.MemoryFactory
 import com.tomassirio.cpu.utils.RegisterSet
 import com.tomassirio.utils.SizedStack
 

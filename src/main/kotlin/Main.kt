@@ -1,6 +1,6 @@
 package com.tomassirio
 
-import com.tomassirio.cpu.CPUFactory
+import com.tomassirio.factory.CPUFactory
 
 
 fun main() {

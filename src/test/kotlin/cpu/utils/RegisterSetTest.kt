@@ -19,8 +19,8 @@ class RegisterSetTest {
         val v0 = registerSet["0"]
         val v1 = registerSet["1"]
 
-        assertThat(v0.value).isEqualTo(0x1u.toUByte())
-        assertThat(v1.value).isEqualTo(0x2u.toUByte())
+        assertThat(v0.read()).isEqualTo(0x1u.toUByte())
+        assertThat(v1.read()).isEqualTo(0x2u.toUByte())
     }
 
     @Test
@@ -70,8 +70,8 @@ class RegisterSetTest {
         val v1 = registerSet["v1"]
         val vF = registerSet["vF"]
 
-        assertThat(v0.value).isEqualTo(0x1u.toUByte())
-        assertThat(v1.value).isEqualTo(0x2u.toUByte())
-        assertThat(vF.value).isEqualTo(0xFFu.toUByte())
+        assertThat(v0.read()).isEqualTo(0x1u.toUByte())
+        assertThat(v1.read()).isEqualTo(0x2u.toUByte())
+        assertThat(vF.read()).isEqualTo(0xFFu.toUByte())
     }
 }

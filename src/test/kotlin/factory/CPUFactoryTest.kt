@@ -1,7 +1,7 @@
-package cpu
+package factory
 
 import com.tomassirio.cpu.CPU
-import com.tomassirio.cpu.CPUFactory
+import com.tomassirio.factory.CPUFactory
 import com.tomassirio.cpu.CPUType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -21,13 +21,13 @@ class CPUFactoryTest {
         assertThat(chip8.memory).isNotNull
 
         // Check registers are initialized and PC starts at 0x200
-        assertThat(chip8.pc.value).isEqualTo(0x200u.toUShort())
-        assertThat(chip8.sp.value).isEqualTo(0x0u.toUByte())
-        assertThat(chip8.I.value).isEqualTo(0x0u.toUShort())
+        assertThat(chip8.pc.read()).isEqualTo(0x200u.toUShort())
+        assertThat(chip8.sp.read()).isEqualTo(0x0u.toUByte())
+        assertThat(chip8.I.read()).isEqualTo(0x0u.toUShort())
 
         // Check that the register set is initialized correctly
         assertThat(chip8.registers).hasSize(16)
-        assertThat(chip8.registers.map { it.value }).containsOnly(0x0u)
+        assertThat(chip8.registers.map { it.read() }).containsOnly(0x0u)
 
         // Check that the stack is initialized to 16 empty entries
         assertThat(chip8.stack.maxSize).isEqualTo(16)
@@ -49,9 +49,9 @@ class CPUFactoryTest {
         assertThat(eti660.memory).isNotNull
 
         // Check PC, SP, and I registers
-        assertThat(eti660.pc.value).isEqualTo(0x600u.toUShort())
-        assertThat(eti660.sp.value).isEqualTo(0x0u.toUByte())
-        assertThat(eti660.I.value).isEqualTo(0x0u.toUShort())
+        assertThat(eti660.pc.read()).isEqualTo(0x600u.toUShort())
+        assertThat(eti660.sp.read()).isEqualTo(0x0u.toUByte())
+        assertThat(eti660.I.read()).isEqualTo(0x0u.toUShort())
 
         // Check that the register set is initialized correctly
         assertThat(eti660.registers).hasSize(16)

@@ -67,14 +67,14 @@ class CPUTest {
 
         // Assert
         verify(exactly = 1) { mockCommand.execute(cpu, 0x0000u) }
-        assertThat(0x202u.toUShort()).isEqualTo(cpu.pc.value)
+        assertThat(0x202u.toUShort()).isEqualTo(cpu.pc.read())
             .withFailMessage("PC should be incremented by 2")
     }
 
     @Test
     fun `test opcode fetching`() {
         // Test that we can read the correct opcode from memory
-        val opcode = memory.read<UShort>(pc.value.toInt())
+        val opcode = memory.read<UShort>(pc.read().toInt())
         assertThat(0x0000u).isEqualTo(opcode.toUInt())
             .withFailMessage("Should read correct opcode from memory")
     }

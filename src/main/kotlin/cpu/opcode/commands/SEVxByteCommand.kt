@@ -14,8 +14,8 @@ object SEVxByteCommand : Command {
         val registerName = (opcode.toInt() and 0x0F00) shr 8
         val register = cpu.registers[registerName.toString()]
         val value = (opcode and 0x00FFu).toUByte()
-        if (register.value == value) {
-            cpu.pc.value = cpu.pc.value.plus(2u).toUShort()
+        if (register.read() == value) {
+            cpu.pc.write(cpu.pc.read().plus(2u).toUShort())
         }
     }
 }

@@ -1,4 +1,6 @@
-package com.tomassirio.memory
+package com.tomassirio.factory
+
+import com.tomassirio.memory.Memory
 
 object MemoryFactory {
     fun createMemory(): Memory {

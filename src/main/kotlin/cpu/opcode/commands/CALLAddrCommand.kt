@@ -11,8 +11,8 @@ import com.tomassirio.cpu.opcode.Command
  */
 object CALLAddrCommand : Command {
     override fun execute(cpu: CPU, opcode: UShort) {
-        cpu.sp.value = cpu.sp.value.plus(1u).toUByte()
-        cpu.stack.push(cpu.pc.value)
+        cpu.sp.write(cpu.sp.read().plus(1u).toUByte())
+        cpu.stack.push(cpu.pc.read())
         cpu.pc.write(opcode.and(0x0FFFu))
     }
 }

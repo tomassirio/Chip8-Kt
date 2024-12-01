@@ -27,7 +27,7 @@ class CPU(
     }
 
     private fun fetch(): UShort {
-        return memory.read<UShort>(pc.value.toInt())
+        return memory.read<UShort>(pc.read().toInt())
     }
 
     private fun decode(opcode: UShort): Command {
@@ -36,7 +36,7 @@ class CPU(
 
     private fun execute(command: Command, opcode: UShort) {
         command.execute(this, opcode)
-        pc.value = pc.value.plus(2u).toUShort()
+        pc.write(pc.read().plus(2u).toUShort())
     }
 
     fun debug() {
