@@ -1,4 +1,4 @@
-package com.tomassirio.utils
+package com.tomassirio.cpu.utils
 
 import com.tomassirio.cpu.Register
 import com.tomassirio.cpu.exception.RegisterNotFoundException

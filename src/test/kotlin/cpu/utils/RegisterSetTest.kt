@@ -1,7 +1,7 @@
-package utils
+package cpu.utils
 
 import com.tomassirio.cpu.exception.RegisterNotFoundException
-import com.tomassirio.utils.RegisterSet
+import com.tomassirio.cpu.utils.RegisterSet
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test

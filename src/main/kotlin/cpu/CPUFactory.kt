@@ -4,7 +4,7 @@ import com.tomassirio.cpu.opcode.OpCodeTable
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.MemoryFactory
-import com.tomassirio.utils.RegisterSet
+import com.tomassirio.cpu.utils.RegisterSet
 import com.tomassirio.utils.SizedStack
 
 object CPUFactory {
