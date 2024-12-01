@@ -1,6 +1,7 @@
 package com.tomassirio.cpu.opcode
 
 import com.tomassirio.cpu.exception.CommandNotFoundException
+import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.CLSCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.cpu.opcode.commands.RETCommand
@@ -16,7 +17,7 @@ object OpCodeTable {
             0x00E0u -> CLSCommand
             0x00EEu -> RETCommand
             0x1000u -> JPAddrCommand
-//            0x2000u -> CALLAddrCommand
+            0x2000u -> CALLAddrCommand
 //            0x3000u -> SEVxByteCommand
 //            0x4000u -> SNEVxByteCommand
 //            0x5000u -> SEVxVyCommand
