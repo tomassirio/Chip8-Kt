@@ -4,6 +4,7 @@ import com.tomassirio.cpu.opcode.OpCodeTable
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.MemoryFactory
+import com.tomassirio.utils.RegisterSet
 import com.tomassirio.utils.SizedStack
 
 object CPUFactory {
@@ -45,25 +46,25 @@ object CPUFactory {
         )
     }
 
-    private fun createRegisterSet(): MutableSet<Register.ByteRegister> {
-        return mutableSetOf(
-            Register.ByteRegister("v0"),
-            Register.ByteRegister("v1"),
-            Register.ByteRegister("v2"),
-            Register.ByteRegister("v3"),
-            Register.ByteRegister("v4"),
-            Register.ByteRegister("v5"),
-            Register.ByteRegister("v6"),
-            Register.ByteRegister("v7"),
-            Register.ByteRegister("v8"),
-            Register.ByteRegister("v9"),
-            Register.ByteRegister("vA"),
-            Register.ByteRegister("vB"),
-            Register.ByteRegister("vC"),
-            Register.ByteRegister("vD"),
-            Register.ByteRegister("vE"),
-            Register.ByteRegister("vF") //Flag register
-        )
+    private fun createRegisterSet(): RegisterSet {
+        return RegisterSet.Builder()
+            .addRegister("0")
+            .addRegister("1")
+            .addRegister("2")
+            .addRegister("3")
+            .addRegister("4")
+            .addRegister("5")
+            .addRegister("6")
+            .addRegister("7")
+            .addRegister("8")
+            .addRegister("9")
+            .addRegister("A")
+            .addRegister("B")
+            .addRegister("C")
+            .addRegister("D")
+            .addRegister("E")
+            .addRegister("F") // Flag register
+            .build()
     }
 
     private fun createStack(): SizedStack<UShort> {

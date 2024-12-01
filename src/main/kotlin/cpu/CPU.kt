@@ -4,11 +4,12 @@ import com.tomassirio.cpu.opcode.Command
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.Memory
+import com.tomassirio.utils.RegisterSet
 import com.tomassirio.utils.SizedStack
 
 class CPU(
     val memory: Memory,
-    val registers: MutableSet<Register.ByteRegister>,
+    val registers: RegisterSet,
     val keyboard: Keyboard,
     val display: Display,
     val pc: Register.ShortRegister,
