@@ -2,14 +2,14 @@ package cpu.opcode
 
 import com.tomassirio.cpu.CPU
 import com.tomassirio.cpu.CPUFactory
-import com.tomassirio.cpu.opcode.SysAddrCommand
-import org.junit.jupiter.api.Assertions.assertEquals
+import com.tomassirio.cpu.opcode.SYSAddrCommand
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class SysAddrCommandTest {
+class SYSAddrCommandTest {
 
-    private val sysAddrCommand = SysAddrCommand
+    private val sysAddrCommand = SYSAddrCommand
     private lateinit var cpu: CPU
 
     @BeforeEach
@@ -26,8 +26,8 @@ class SysAddrCommandTest {
         sysAddrCommand.execute(cpu, opcode)
 
         // Then
-        assertEquals(0x0123u.toUShort(), cpu.I.value,
-            "I register should contain the address 0x0123 from opcode")
+        assertThat(0x0123u.toUShort()).isEqualTo(cpu.I.value)
+            .withFailMessage("I register should contain the address 0x0123 from opcode")
     }
 
     @Test
@@ -39,7 +39,7 @@ class SysAddrCommandTest {
         sysAddrCommand.execute(cpu, opcode)
 
         // Then
-        assertEquals(0x0123u.toUShort(), cpu.I.value,
-            "I register should only contain lower 12 bits of the address")
+        assertThat(0x0123u.toUShort()).isEqualTo(cpu.I.value)
+            .withFailMessage("I register should only contain lower 12 bits of the address")
     }
 }

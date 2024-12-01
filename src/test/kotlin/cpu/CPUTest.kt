@@ -4,14 +4,17 @@ import com.tomassirio.cpu.CPU
 import com.tomassirio.cpu.Register
 import com.tomassirio.cpu.opcode.Command
 import com.tomassirio.cpu.opcode.OpcodeTable
-import com.tomassirio.cpu.opcode.SysAddrCommand
+import com.tomassirio.cpu.opcode.SYSAddrCommand
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.Memory
-import io.mockk.*
+import com.tomassirio.utils.SizedStack
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
 
 class CPUTest {
@@ -51,7 +54,7 @@ class CPUTest {
             pc = pc,
             sp = sp,
             I = I,
-            stack = mutableListOf(),
+            stack = SizedStack(16),
             opcodeTable = opcodeTable
         )
     }
@@ -64,24 +67,28 @@ class CPUTest {
 
         // Assert
         verify(exactly = 1) { mockCommand.execute(cpu, 0x0000u) }
-        assertEquals(0x202u.toUShort(), cpu.pc.value, "PC should be incremented by 2")
+        assertThat(0x202u.toUShort()).isEqualTo(cpu.pc.value)
+            .withFailMessage("PC should be incremented by 2")
     }
 
     @Test
     fun `test opcode fetching`() {
         // Test that we can read the correct opcode from memory
         val opcode = memory.read<UShort>(pc.value.toInt())
-        assertEquals(0x0000u, opcode.toUInt(), "Should read correct opcode from memory")
+        assertThat(0x0000u).isEqualTo(opcode.toUInt())
+            .withFailMessage("Should read correct opcode from memory")
     }
 
     @Test
     fun `test opcode decoding`() {
-        every { opcodeTable.getCommand(0x0000u.toUShort()) } returns SysAddrCommand
+        every { opcodeTable.getCommand(0x0000u.toUShort()) } returns SYSAddrCommand
 
         // Test that our mock command is returned for opcode 0x0000
         val command = cpu.opcodeTable.getCommand(0x0000u.toUShort())
-        assertNotNull(command, "Should find command for opcode 0x0000")
-        assertTrue(command is SysAddrCommand, "Command should be SysAddrCommand")
+        assertThat(command).isNotNull()
+            .withFailMessage("Should find command for opcode 0x0000")
+        assertThat(command).isInstanceOf(SYSAddrCommand.javaClass)
+            .withFailMessage("Command should be SysAddrCommand")
     }
 
     @Test

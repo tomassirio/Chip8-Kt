@@ -30,7 +30,7 @@ class CPUFactoryTest {
         assertThat(chip8.registers.map { it.value }).containsOnly(0x0u)
 
         // Check that the stack is initialized to 16 empty entries
-        assertThat(chip8.stack).hasSize(16)
+        assertThat(chip8.stack.maxSize).isEqualTo(16)
         assertThat(chip8.stack).containsOnly(0x0000u)
 
         // Check that keyboard and display are initialized
@@ -57,7 +57,7 @@ class CPUFactoryTest {
         assertThat(eti660.registers).hasSize(16)
 
         // Check that the stack is initialized to 16 empty entries
-        assertThat(eti660.stack).hasSize(16)
+        assertThat(eti660.stack.maxSize).isEqualTo(16)
         assertThat(eti660.stack).containsOnly(0x0000u)
 
         // Check that keyboard and display are initialized

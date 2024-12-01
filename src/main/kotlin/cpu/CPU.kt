@@ -5,6 +5,7 @@ import com.tomassirio.cpu.opcode.OpcodeTable
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.Memory
+import com.tomassirio.utils.SizedStack
 
 class CPU(
     val memory: Memory,
@@ -15,7 +16,7 @@ class CPU(
     val sp: Register.ByteRegister,
     val I: Register.ShortRegister,
 
-    val stack: MutableList<UShort>,
+    val stack: SizedStack<UShort>,
     val opcodeTable: OpcodeTable = OpcodeTable()
 ) {
 

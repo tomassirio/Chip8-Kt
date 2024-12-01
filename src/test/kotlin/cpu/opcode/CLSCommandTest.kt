@@ -3,9 +3,9 @@ package cpu.opcode
 import com.tomassirio.cpu.CPU
 import com.tomassirio.cpu.CPUFactory
 import com.tomassirio.cpu.opcode.CLSCommand
-import org.junit.jupiter.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 class CLSCommandTest {
 
@@ -43,8 +43,8 @@ class CLSCommandTest {
         // Then
         for (x in 0 until cpu.display.width) {
             for (y in 0 until cpu.display.height) {
-                assertEquals(false, cpu.display.getPixel(x, y),
-                    "Pixel at ($x, $y) should be cleared")
+                assertThat(cpu.display.getPixel(x, y)).isFalse()
+                    .withFailMessage("Pixel at ($x, $y) should be cleared")
             }
         }
     }

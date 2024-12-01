@@ -3,6 +3,7 @@ package com.tomassirio.cpu
 import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.MemoryFactory
+import com.tomassirio.utils.SizedStack
 
 object CPUFactory {
 
@@ -62,7 +63,9 @@ object CPUFactory {
         )
     }
 
-    private fun createStack(): MutableList<UShort> {
-        return MutableList(16) { emptyValue }
+    private fun createStack(): SizedStack<UShort> {
+        return SizedStack<UShort>(16).apply {
+            push(emptyValue)
+        }
     }
 }
