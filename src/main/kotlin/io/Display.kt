@@ -2,7 +2,7 @@ package com.tomassirio.io
 
 import java.util.BitSet
 
-class Display(private val width: Int = 64, height: Int = 32) {
+class Display(val width: Int = 64, val height: Int = 32) {
 
     private val gfx: BitSet = BitSet(width * height)
 

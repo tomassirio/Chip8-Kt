@@ -3,7 +3,7 @@ package cpu.opcode
 import com.tomassirio.cpu.CPU
 import com.tomassirio.cpu.CPUFactory
 import com.tomassirio.cpu.opcode.SysAddrCommand
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
