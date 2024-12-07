@@ -7,6 +7,7 @@ import com.tomassirio.cpu.opcode.commands.CLSCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.cpu.opcode.commands.LDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.LDVxVyCommand
+import com.tomassirio.cpu.opcode.commands.ORVxVyCommand
 import com.tomassirio.cpu.opcode.commands.RETCommand
 import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
@@ -14,14 +15,17 @@ import com.tomassirio.cpu.opcode.commands.SNEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
 
 object OpCodeTable {
-    val chip8CommandGetter: (UShort) -> Command = ::getCommand
-    val chip48CommandGetter: (UShort) -> Command = ::getChip48Command
+    val chip8CommandGetter: (UShort) -> Command = OpCodeTable::getCommand
+    val chip48CommandGetter: (UShort) -> Command = OpCodeTable::getChip48Command
 
     private fun getCommand(opcode: UShort): Command {
-        return when (opcode.and(0xFFFFu).toUInt()) {
-            0x0000u -> SYSAddrCommand
-            0x00E0u -> CLSCommand
-            0x00EEu -> RETCommand
+        return when (opcode.and(0xF000u).toUInt()) {
+            0x0000u -> when (opcode.and(0x00FFu).toUInt()) {
+                0x0000u -> SYSAddrCommand
+                0x00E0u -> CLSCommand
+                0x00EEu -> RETCommand
+                else -> throw CommandNotFoundException(opcode)
+            }
             0x1000u -> JPAddrCommand
             0x2000u -> CALLAddrCommand
             0x3000u -> SEVxByteCommand
@@ -31,7 +35,7 @@ object OpCodeTable {
             0x7000u -> ADDVxByteCommand
             0x8000u -> when (opcode.and(0xFu).toUInt()) {
                 0x0u -> LDVxVyCommand
-//                0x1u -> ORVxVyCommand
+                0x1u -> ORVxVyCommand
 //                0x2u -> ANDVxVyCommand
 //                0x3u -> XORVxVyCommand
 //                0x4u -> ADDVxVyCommand

@@ -1,5 +1,6 @@
 package cpu.opcode
 
+import com.tomassirio.cpu.exception.CommandNotFoundException
 import com.tomassirio.cpu.opcode.commands.CLSCommand
 import com.tomassirio.cpu.opcode.Command
 import com.tomassirio.cpu.opcode.OpCodeTable
@@ -8,12 +9,15 @@ import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.cpu.opcode.commands.LDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.LDVxVyCommand
+import com.tomassirio.cpu.opcode.commands.ORVxVyCommand
 import com.tomassirio.cpu.opcode.commands.RETCommand
 import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SNEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -28,6 +32,14 @@ class OpcodeTableTest {
         val opcodeTable = OpCodeTable.chip8CommandGetter
         val command = opcodeTable(opcode.toUShort())
         assertThat(expectedCommand).isEqualTo(command)
+    }
+
+    @Test
+    fun `test getCommand Chip8 throws CommandNotFoundException for unknown opcode`() {
+        val opcodeTable = OpCodeTable.chip8CommandGetter
+        val unknownOpcode = 0xFFFF
+        assertThatThrownBy { opcodeTable(unknownOpcode.toUShort())}
+            .isInstanceOf(CommandNotFoundException::class.java)
     }
 
     companion object {
@@ -45,6 +57,7 @@ class OpcodeTableTest {
                 Arguments.of(0x6000, LDVxByteCommand),
                 Arguments.of(0x7000, ADDVxByteCommand),
                 Arguments.of(0x8000, LDVxVyCommand),
+                Arguments.of(0x8001, ORVxVyCommand),
             )
         }
     }
