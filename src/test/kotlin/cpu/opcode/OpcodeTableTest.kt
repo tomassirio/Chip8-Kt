@@ -3,6 +3,7 @@ package cpu.opcode
 import com.tomassirio.cpu.opcode.commands.CLSCommand
 import com.tomassirio.cpu.opcode.Command
 import com.tomassirio.cpu.opcode.OpCodeTable
+import com.tomassirio.cpu.opcode.commands.ADDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.cpu.opcode.commands.LDVxByteCommand
@@ -41,6 +42,7 @@ class OpcodeTableTest {
                 Arguments.of(0x4000, SNEVxByteCommand),
                 Arguments.of(0x5000, SEVxVyCommand),
                 Arguments.of(0x6000, LDVxByteCommand),
+                Arguments.of(0x7000, ADDVxByteCommand)
             )
         }
     }

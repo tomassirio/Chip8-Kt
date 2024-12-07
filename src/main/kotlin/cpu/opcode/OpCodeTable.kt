@@ -1,6 +1,7 @@
 package com.tomassirio.cpu.opcode
 
 import com.tomassirio.cpu.exception.CommandNotFoundException
+import com.tomassirio.cpu.opcode.commands.ADDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.CLSCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
@@ -26,7 +27,7 @@ object OpCodeTable {
             0x4000u -> SNEVxByteCommand
             0x5000u -> SEVxVyCommand
             0x6000u -> LDVxByteCommand
-//            0x7000u -> ADDVxByteCommand
+            0x7000u -> ADDVxByteCommand
 //            0x8000u -> when (opcode.and(0xFu).toUInt()) {
 //                0x0u -> LDVxVyCommand
 //                0x1u -> ORVxVyCommand
