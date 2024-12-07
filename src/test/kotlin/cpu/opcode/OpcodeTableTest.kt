@@ -7,6 +7,7 @@ import com.tomassirio.cpu.opcode.commands.ADDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.cpu.opcode.commands.LDVxByteCommand
+import com.tomassirio.cpu.opcode.commands.LDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.RETCommand
 import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
@@ -42,7 +43,8 @@ class OpcodeTableTest {
                 Arguments.of(0x4000, SNEVxByteCommand),
                 Arguments.of(0x5000, SEVxVyCommand),
                 Arguments.of(0x6000, LDVxByteCommand),
-                Arguments.of(0x7000, ADDVxByteCommand)
+                Arguments.of(0x7000, ADDVxByteCommand),
+                Arguments.of(0x8000, LDVxVyCommand),
             )
         }
     }
