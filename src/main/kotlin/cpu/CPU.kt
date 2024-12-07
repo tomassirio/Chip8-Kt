@@ -9,7 +9,7 @@ import com.tomassirio.utils.SizedStack
 
 class CPU(
     val memory: Memory,
-    val registers: RegisterSet,
+    val registers: RegisterSet<Register.ByteRegister>,
     val keyboard: Keyboard,
     val display: Display,
     val pc: Register.ShortRegister,

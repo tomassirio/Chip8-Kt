@@ -48,8 +48,8 @@ object CPUFactory {
         )
     }
 
-    private fun createRegisterSet(): RegisterSet {
-        return RegisterSet.Builder()
+    private fun createRegisterSet(): RegisterSet<Register.ByteRegister> {
+        return RegisterSet.Builder<Register.ByteRegister>()
             .addRegister("0")
             .addRegister("1")
             .addRegister("2")

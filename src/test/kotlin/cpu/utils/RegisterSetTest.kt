@@ -1,5 +1,6 @@
 package cpu.utils
 
+import com.tomassirio.cpu.Register
 import com.tomassirio.cpu.exception.RegisterNotFoundException
 import com.tomassirio.cpu.utils.RegisterSet
 import org.assertj.core.api.Assertions.assertThat
@@ -10,7 +11,7 @@ class RegisterSetTest {
 
     @Test
     fun `should retrieve a register by name`() {
-        val registerSet = RegisterSet.Builder()
+        val registerSet = RegisterSet.Builder<Register.ByteRegister>()
             .addRegister("0", 0x1u)
             .addRegister("1", 0x2u)
             .addRegister("2", 0x3u)
@@ -25,7 +26,7 @@ class RegisterSetTest {
 
     @Test
     fun `should throw exception when retrieving a non-existent register`() {
-        val registerSet = RegisterSet.Builder()
+        val registerSet = RegisterSet.Builder<Register.ByteRegister>()
             .addRegister("v0", 0x1u)
             .build()
 
@@ -36,7 +37,7 @@ class RegisterSetTest {
 
     @Test
     fun `should support iteration over registers`() {
-        val registerSet = RegisterSet.Builder()
+        val registerSet = RegisterSet.Builder<Register.ByteRegister>()
             .addRegister("v0", 0x1u)
             .addRegister("v1", 0x2u)
             .addRegister("v2", 0x3u)
@@ -50,7 +51,7 @@ class RegisterSetTest {
 
     @Test
     fun `should build an empty register set`() {
-        val registerSet = RegisterSet.Builder().build()
+        val registerSet = RegisterSet.Builder<Register.ByteRegister>().build()
 
         assertThatThrownBy { registerSet["v0"] }
             .isInstanceOf(RegisterNotFoundException::class.java)
@@ -60,7 +61,7 @@ class RegisterSetTest {
 
     @Test
     fun `should allow multiple registers with distinct names`() {
-        val registerSet = RegisterSet.Builder()
+        val registerSet = RegisterSet.Builder<Register.ByteRegister>()
             .addRegister("v0", 0x1u)
             .addRegister("v1", 0x2u)
             .addRegister("vF", 0xFFu)

@@ -48,7 +48,7 @@ class CPUTest {
         // Create CPU instance with mocked opcodes
         cpu = CPU(
             memory = memory,
-            registers = RegisterSet.Builder().build(),
+            registers = RegisterSet.Builder<Register.ByteRegister>().build(),
             keyboard = keyboard,
             display = display,
             pc = pc,
