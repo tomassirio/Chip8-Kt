@@ -5,8 +5,10 @@ import com.tomassirio.cpu.opcode.Command
 import com.tomassirio.cpu.opcode.OpCodeTable
 import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
+import com.tomassirio.cpu.opcode.commands.LDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.RETCommand
 import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
+import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SNEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
 import org.assertj.core.api.Assertions.assertThat
@@ -37,7 +39,8 @@ class OpcodeTableTest {
                 Arguments.of(0x2000, CALLAddrCommand),
                 Arguments.of(0x3000, SEVxByteCommand),
                 Arguments.of(0x4000, SNEVxByteCommand),
-                Arguments.of(0x5000, SEVxByteCommand)
+                Arguments.of(0x5000, SEVxVyCommand),
+                Arguments.of(0x6000, LDVxByteCommand),
             )
         }
     }

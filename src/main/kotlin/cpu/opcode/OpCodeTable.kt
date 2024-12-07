@@ -4,6 +4,7 @@ import com.tomassirio.cpu.exception.CommandNotFoundException
 import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.CLSCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
+import com.tomassirio.cpu.opcode.commands.LDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.RETCommand
 import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
@@ -24,7 +25,7 @@ object OpCodeTable {
             0x3000u -> SEVxByteCommand
             0x4000u -> SNEVxByteCommand
             0x5000u -> SEVxVyCommand
-//            0x6000u -> LDVxByteCommand
+            0x6000u -> LDVxByteCommand
 //            0x7000u -> ADDVxByteCommand
 //            0x8000u -> when (opcode.and(0xFu).toUInt()) {
 //                0x0u -> LDVxVyCommand
