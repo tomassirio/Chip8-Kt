@@ -2,6 +2,7 @@ package com.tomassirio.cpu.opcode
 
 import com.tomassirio.cpu.exception.CommandNotFoundException
 import com.tomassirio.cpu.opcode.commands.ADDVxByteCommand
+import com.tomassirio.cpu.opcode.commands.ANDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.CLSCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
@@ -20,7 +21,7 @@ object OpCodeTable {
 
     private fun getCommand(opcode: UShort): Command {
         return when (opcode.and(0xF000u).toUInt()) {
-            0x0000u -> when (opcode.and(0x00FFu).toUInt()) {
+            0x0000u -> when (opcode.and(0xFFu).toUInt()) {
                 0x0000u -> SYSAddrCommand
                 0x00E0u -> CLSCommand
                 0x00EEu -> RETCommand
@@ -36,7 +37,7 @@ object OpCodeTable {
             0x8000u -> when (opcode.and(0xFu).toUInt()) {
                 0x0u -> LDVxVyCommand
                 0x1u -> ORVxVyCommand
-//                0x2u -> ANDVxVyCommand
+                0x2u -> ANDVxVyCommand
 //                0x3u -> XORVxVyCommand
 //                0x4u -> ADDVxVyCommand
 //                0x5u -> SUBVxVyCommand
