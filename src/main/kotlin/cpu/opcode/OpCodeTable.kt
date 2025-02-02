@@ -14,6 +14,7 @@ import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SNEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
+import com.tomassirio.cpu.opcode.commands.XORVxVyCommand
 
 object OpCodeTable {
     val chip8CommandGetter: (UShort) -> Command = OpCodeTable::getCommand
@@ -38,7 +39,7 @@ object OpCodeTable {
                 0x0u -> LDVxVyCommand
                 0x1u -> ORVxVyCommand
                 0x2u -> ANDVxVyCommand
-//                0x3u -> XORVxVyCommand
+                0x3u -> XORVxVyCommand
 //                0x4u -> ADDVxVyCommand
 //                0x5u -> SUBVxVyCommand
 //                0x6u -> SHRCommand
