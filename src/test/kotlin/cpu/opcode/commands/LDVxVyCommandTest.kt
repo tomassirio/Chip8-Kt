@@ -9,8 +9,8 @@ class LDVxVyCommandTest {
         fun `execute should set Vx to Vy`() {
             // Given
             val cpu = com.tomassirio.factory.CPUFactory.createCPU()
-            val registerX = cpu.registers["0"]
-            val registerY = cpu.registers["1"]
+            val registerX = cpu.registers[0]
+            val registerY = cpu.registers[1]
             registerY.write(0x69u)
             val opcode = 0x8010u.toUShort()
 

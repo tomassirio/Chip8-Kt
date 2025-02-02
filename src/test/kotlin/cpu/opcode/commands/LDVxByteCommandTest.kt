@@ -11,7 +11,7 @@ class LDVxByteCommandTest {
     fun `execute should set Vx to kk`() {
         // Given
         val cpu = createCPU()
-        val register = cpu.registers["0"]
+        val register = cpu.registers[0]
         val opcode = 0x6069u.toUShort()
 
         // When

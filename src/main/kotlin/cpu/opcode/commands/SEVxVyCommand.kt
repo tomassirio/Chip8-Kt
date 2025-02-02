@@ -9,12 +9,10 @@ import com.tomassirio.cpu.opcode.Command
  *
  * The interpreter compares register Vx to register Vy, and if they are equal, increments the program counter by 2.
  */
-object SEVxVyCommand: Command {
+object SEVxVyCommand: Command{
     override fun execute(cpu: CPU, opcode: UShort) {
-        val registerXName = (opcode.toInt() and 0x0F00) shr 8
-        val registerYName = (opcode.toInt() and 0x00F0) shr 4
-        val registerX = cpu.registers[registerXName.toString()]
-        val registerY = cpu.registers[registerYName.toString()]
+        val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
+        val registerY = cpu.registers[(opcode and 0xF0u).toInt() shr 4]
 
         if (registerX.read() == registerY.read()) {
             cpu.pc.write(cpu.pc.read().plus(2u).toUShort())

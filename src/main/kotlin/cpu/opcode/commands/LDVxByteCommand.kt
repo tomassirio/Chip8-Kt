@@ -9,11 +9,10 @@ import com.tomassirio.cpu.opcode.Command
  *
  * The interpreter puts the value kk into register Vx.
  */
-object LDVxByteCommand: Command {
+object LDVxByteCommand: Command{
     override fun execute(cpu: CPU, opcode: UShort) {
-        val registerName = (opcode.toInt() and 0x0F00) shr 8
-        val register = cpu.registers[registerName.toString()]
+        val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val value = (opcode and 0x00FFu).toUByte()
-        register.write(value)
+        registerX.write(value)
     }
 }

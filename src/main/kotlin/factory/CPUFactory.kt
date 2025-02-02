@@ -26,9 +26,9 @@ object CPUFactory {
             createRegisterSet(),
             Keyboard(),
             Display(),
-            Register.ShortRegister("pc",0x200u),
-            Register.ByteRegister("sp"),
-            Register.ShortRegister("I"),
+            pc =Register.ShortRegister(value = 0x200u),
+            sp = Register.ByteRegister(),
+            I = Register.ShortRegister(),
             createStack(),
             OpCodeTable.chip8CommandGetter
         )
@@ -40,33 +40,20 @@ object CPUFactory {
             createRegisterSet(),
             Keyboard(),
             Display(),
-            Register.ShortRegister("pc", 0x600u),
-            Register.ByteRegister("sp"),
-            Register.ShortRegister("I"),
+            pc = Register.ShortRegister(0x600u),
+            sp = Register.ByteRegister(),
+            I = Register.ShortRegister(),
             createStack(),
             OpCodeTable.chip48CommandGetter
         )
     }
 
-    private fun createRegisterSet(): RegisterSet<Register.ByteRegister> {
-        return RegisterSet.Builder<Register.ByteRegister>()
-            .addRegister("0")
-            .addRegister("1")
-            .addRegister("2")
-            .addRegister("3")
-            .addRegister("4")
-            .addRegister("5")
-            .addRegister("6")
-            .addRegister("7")
-            .addRegister("8")
-            .addRegister("9")
-            .addRegister("A")
-            .addRegister("B")
-            .addRegister("C")
-            .addRegister("D")
-            .addRegister("E")
-            .addRegister("F") // Flag register
-            .build()
+    private fun createRegisterSet(): RegisterSet {
+        return RegisterSet.Builder().apply {
+            for (i in 0..0xf) {
+                addRegister(i.toShort())
+            }
+        }.build()
     }
 
     private fun createStack(): SizedStack<UShort> {

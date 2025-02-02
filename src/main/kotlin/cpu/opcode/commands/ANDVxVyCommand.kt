@@ -14,13 +14,10 @@ import com.tomassirio.cpu.opcode.Command
  * Otherwise, it is 0.
  */
 
-object ANDVxVyCommand: Command {
+object ANDVxVyCommand: Command{
     override fun execute(cpu: CPU, opcode: UShort) {
-        val registerXName = (opcode.toInt() and 0x0F00) shr 8
-        val registerX = cpu.registers[registerXName.toString()]
-
-        val registerYName = (opcode.toInt() and 0x00F0) shr 4
-        val registerY = cpu.registers[registerYName.toString()]
+        val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
+        val registerY = cpu.registers[(opcode and 0xF0u).toInt() shr 4]
 
         registerX.write((registerX.read() and registerY.read()))
     }

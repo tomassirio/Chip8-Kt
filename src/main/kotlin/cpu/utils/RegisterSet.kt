@@ -3,33 +3,28 @@ package com.tomassirio.cpu.utils
 import com.tomassirio.cpu.Register
 import com.tomassirio.cpu.exception.RegisterNotFoundException
 
-class RegisterSet<T : Register<*>> private constructor(
-    private val registers: List<T>
-) : Iterable<T> {
-    private val registerMap: Map<String, T> = registers.associateBy { it.name }
+class RegisterSet private constructor(
+    private val registers: MutableMap<Int, Register.ByteRegister>
+) : Iterable<Register.ByteRegister> {
 
-    operator fun get(name: String): T = registerMap[name] ?: throw RegisterNotFoundException(name)
+    operator fun get(index: Int): Register.ByteRegister {
+        return registers[index] ?: throw RegisterNotFoundException(index.toShort())
+    }
 
-    override fun iterator(): Iterator<T> = registers.iterator()
+    override fun iterator(): Iterator<Register.ByteRegister> = registers.values.iterator()
 
-    class Builder<T : Register<*>> {
-        private val registers = mutableListOf<T>()
-        private var registerInitializer: (String, UByte) -> T = { name, initialValue ->
-            @Suppress("UNCHECKED_CAST")
-            Register.ByteRegister(name, initialValue) as T
+    class Builder {
+        private val registers = mutableMapOf<Int, Register.ByteRegister>()
+        private var registerInitializer: (Short, UByte) -> Register.ByteRegister = { index, initialValue ->
+            Register.ByteRegister(index, initialValue)
         }
 
-        fun addRegister(name: String, initialValue: UByte = 0u, register: T? = null): Builder<T> {
-            registers.add(register ?: registerInitializer(name, initialValue))
+        fun addRegister(index: Short, initialValue: UByte = 0u, register: Register.ByteRegister? = null): Builder {
+            registers[index.toInt()] = register ?: registerInitializer(index, initialValue)
             return this
         }
 
-        fun withRegisterInitializer(initializer: (String, UByte) -> T): Builder<T> {
-            this.registerInitializer = initializer
-            return this
-        }
-
-        fun build(): RegisterSet<T> {
+        fun build(): RegisterSet {
             return RegisterSet(registers)
         }
     }

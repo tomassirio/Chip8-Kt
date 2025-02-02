@@ -9,12 +9,10 @@ import com.tomassirio.cpu.opcode.Command
  *
  * Stores the value of register Vy in register Vx.
  */
-object LDVxVyCommand: Command {
+object LDVxVyCommand: Command{
     override fun execute(cpu: CPU, opcode: UShort) {
-        val registerXName = (opcode.toInt() and 0x0F00) shr 8
-        val registerYName = (opcode.toInt() and 0x00F0) shr 4
-        val registerX = cpu.registers[registerXName.toString()]
-        val registerY = cpu.registers[registerYName.toString()]
+        val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
+        val registerY = cpu.registers[(opcode and 0xF0u).toInt() shr 4]
 
         registerX.write(registerY.read())
     }

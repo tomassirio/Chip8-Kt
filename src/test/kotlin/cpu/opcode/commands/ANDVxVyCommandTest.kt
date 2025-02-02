@@ -12,8 +12,8 @@ class ANDVxVyCommandTest {
         // Given
         val cpu = createCPU()
         val opcode = 0x8012.toUShort()
-        val registerX = cpu.registers["0"]
-        val registerY = cpu.registers["1"]
+        val registerX = cpu.registers[0]
+        val registerY = cpu.registers[1]
         registerX.write(0x0Fu)
         registerY.write(0xFFu)
 
@@ -21,6 +21,6 @@ class ANDVxVyCommandTest {
         ANDVxVyCommand.execute(cpu, opcode)
 
         // Then
-        assertEquals(0x0Fu.toUByte(), cpu.registers["0"].read())
+        assertEquals(0x0Fu.toUByte(), cpu.registers[0].read())
     }
 }

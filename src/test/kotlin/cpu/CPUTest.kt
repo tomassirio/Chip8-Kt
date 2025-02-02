@@ -34,9 +34,9 @@ class CPUTest {
         memory = Memory(4096)
         keyboard = mockk(relaxed = true)
         display = mockk(relaxed = true)
-        pc = Register.ShortRegister("pc", 0x200u)
+        pc = Register.ShortRegister(0x200u)
         sp = mockk(relaxed = true)
-        I = Register.ShortRegister("I")
+        I = Register.ShortRegister()
         commands = mockk(relaxed = true)
 
         // Create and configure mock command
@@ -48,7 +48,7 @@ class CPUTest {
         // Create CPU instance with mocked opcodes
         cpu = CPU(
             memory = memory,
-            registers = RegisterSet.Builder<Register.ByteRegister>().build(),
+            registers = RegisterSet.Builder().build(),
             keyboard = keyboard,
             display = display,
             pc = pc,

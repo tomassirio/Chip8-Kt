@@ -11,7 +11,7 @@ class ADDVxByteCommandTest {
     fun `execute should add kk to Vx`() {
         // Given
         val cpu = createCPU()
-        val register = cpu.registers["0"]
+        val register = cpu.registers[0]
         register.write(0x01u)
         val opcode = 0x7001u.toUShort()
 

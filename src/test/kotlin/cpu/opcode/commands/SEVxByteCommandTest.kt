@@ -11,7 +11,7 @@ class SEVxByteCommandTest {
     fun testExecute() {
         // Given
         val cpu = createCPU()
-        cpu.registers["0"].write(0x12u)
+        cpu.registers[0].write(0x12u)
         val opcode = 0x3012u.toUShort()
 
         val previousPC = cpu.pc.read()
@@ -27,7 +27,7 @@ class SEVxByteCommandTest {
     fun `should do nothing if register value is not equal to the value in the opcode`() {
         // Given
         val cpu = createCPU()
-        cpu.registers["0"].write(0x12u)
+        cpu.registers[0].write(0x12u)
         val opcode = 0x3013u.toUShort()
 
         val previousPC = cpu.pc.read()

@@ -10,7 +10,7 @@ class SNEVxByteCommandTest {
     fun `execute should skip next instruction if Vx != kk`() {
         // Given
         val cpu = createCPU()
-        val register = cpu.registers["0"]
+        val register = cpu.registers[0]
         register.write(0x01u)
         cpu.pc.write(0x200u)
         val opcode = 0x4010u.toUShort()
@@ -26,7 +26,7 @@ class SNEVxByteCommandTest {
     fun `execute should not skip next instruction if Vx == kk`() {
         // Given
         val cpu = createCPU()
-        val register = cpu.registers["0"]
+        val register = cpu.registers[0]
         register.write(0x11u)
         cpu.pc.write(0x200u)
         val opcode = 0x4011u.toUShort()

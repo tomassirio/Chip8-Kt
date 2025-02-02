@@ -11,8 +11,8 @@ class SEVxVyCommandTest {
     fun `execute should skip next instruction if Vx == Vy`() {
         // Given
         val cpu = createCPU()
-        val registerX = cpu.registers["0"]
-        val registerY = cpu.registers["1"]
+        val registerX = cpu.registers[0]
+        val registerY = cpu.registers[1]
         registerX.write(0x01u)
         registerY.write(0x01u)
         cpu.pc.write(0x200u)
@@ -29,8 +29,8 @@ class SEVxVyCommandTest {
     fun `execute should not skip next instruction if Vx != Vy`() {
         // Given
         val cpu = createCPU()
-        val registerX = cpu.registers["0"]
-        val registerY = cpu.registers["1"]
+        val registerX = cpu.registers[0]
+        val registerY = cpu.registers[1]
         registerX.write(0x01u)
         registerY.write(0x02u)
         cpu.pc.write(0x200u)

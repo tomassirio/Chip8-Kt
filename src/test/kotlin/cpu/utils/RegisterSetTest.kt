@@ -1,6 +1,5 @@
 package cpu.utils
 
-import com.tomassirio.cpu.Register
 import com.tomassirio.cpu.exception.RegisterNotFoundException
 import com.tomassirio.cpu.utils.RegisterSet
 import org.assertj.core.api.Assertions.assertThat
@@ -11,14 +10,14 @@ class RegisterSetTest {
 
     @Test
     fun `should retrieve a register by name`() {
-        val registerSet = RegisterSet.Builder<Register.ByteRegister>()
-            .addRegister("0", 0x1u)
-            .addRegister("1", 0x2u)
-            .addRegister("2", 0x3u)
+        val registerSet = RegisterSet.Builder()
+            .addRegister(0, 0x1u)
+            .addRegister(1, 0x2u)
+            .addRegister(2, 0x3u)
             .build()
 
-        val v0 = registerSet["0"]
-        val v1 = registerSet["1"]
+        val v0 = registerSet[0]
+        val v1 = registerSet[1]
 
         assertThat(v0.read()).isEqualTo(0x1u.toUByte())
         assertThat(v1.read()).isEqualTo(0x2u.toUByte())
@@ -26,50 +25,48 @@ class RegisterSetTest {
 
     @Test
     fun `should throw exception when retrieving a non-existent register`() {
-        val registerSet = RegisterSet.Builder<Register.ByteRegister>()
-            .addRegister("v0", 0x1u)
+        val registerSet = RegisterSet.Builder()
+            .addRegister(0, 0x1u)
             .build()
 
         assertThatThrownBy {
-            registerSet["v1"]
+            registerSet[1]
         }.isInstanceOf(RegisterNotFoundException::class.java)
     }
 
     @Test
     fun `should support iteration over registers`() {
-        val registerSet = RegisterSet.Builder<Register.ByteRegister>()
-            .addRegister("v0", 0x1u)
-            .addRegister("v1", 0x2u)
-            .addRegister("v2", 0x3u)
+        val registerSet = RegisterSet.Builder()
+            .addRegister(0, 0x1u)
+            .addRegister(1, 0x2u)
+            .addRegister(2, 0x3u)
             .build()
 
-        val registerNames = registerSet.map { it.name }
-        assertThat("v0").isIn(registerNames)
-        assertThat("v1").isIn(registerNames)
-        assertThat("v2").isIn(registerNames)
+        val registerIndexes = registerSet.map { it.index }
+        assertThat(registerIndexes).containsExactly(0, 1, 2)
     }
 
     @Test
     fun `should build an empty register set`() {
-        val registerSet = RegisterSet.Builder<Register.ByteRegister>().build()
+        val registerSet = RegisterSet.Builder().build()
 
-        assertThatThrownBy { registerSet["v0"] }
+        assertThatThrownBy { registerSet[0] }
             .isInstanceOf(RegisterNotFoundException::class.java)
 
         assertThat(registerSet.iterator().hasNext()).isFalse()
     }
 
     @Test
-    fun `should allow multiple registers with distinct names`() {
-        val registerSet = RegisterSet.Builder<Register.ByteRegister>()
-            .addRegister("v0", 0x1u)
-            .addRegister("v1", 0x2u)
-            .addRegister("vF", 0xFFu)
+    fun `should allow multiple registers with distinct indexes`() {
+        val registerSet = RegisterSet.Builder()
+            .addRegister(0, 0x1u)
+            .addRegister(1, 0x2u)
+            .addRegister(0xF, 0xFFu)
             .build()
 
-        val v0 = registerSet["v0"]
-        val v1 = registerSet["v1"]
-        val vF = registerSet["vF"]
+        val v0 = registerSet[0]
+        val v1 = registerSet[1]
+        val vF = registerSet[0xF]
 
         assertThat(v0.read()).isEqualTo(0x1u.toUByte())
         assertThat(v1.read()).isEqualTo(0x2u.toUByte())

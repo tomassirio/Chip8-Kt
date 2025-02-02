@@ -9,12 +9,10 @@ import com.tomassirio.cpu.opcode.Command
  *
  * Performs a bitwise OR on the values of Vx and Vy, then stores the result in Vx.
  */
-object ORVxVyCommand: Command {
+object ORVxVyCommand: Command{
     override fun execute(cpu: CPU, opcode: UShort) {
-        val registerXName = (opcode.toInt() and 0x0F00) shr 8
-        val registerYName = (opcode.toInt() and 0x00F0) shr 4
-        val registerX = cpu.registers[registerXName.toString()]
-        val registerY = cpu.registers[registerYName.toString()]
+        val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
+        val registerY = cpu.registers[(opcode and 0xF0u).toInt() shr 4]
 
         registerX.write(registerX.read() or registerY.read())
     }
