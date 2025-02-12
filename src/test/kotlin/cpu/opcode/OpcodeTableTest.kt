@@ -5,6 +5,7 @@ import com.tomassirio.cpu.opcode.commands.CLSCommand
 import com.tomassirio.cpu.opcode.Command
 import com.tomassirio.cpu.opcode.OpCodeTable
 import com.tomassirio.cpu.opcode.commands.ADDVxByteCommand
+import com.tomassirio.cpu.opcode.commands.ADDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.ANDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
@@ -16,6 +17,7 @@ import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SNEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
+import com.tomassirio.cpu.opcode.commands.XORVxVyCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
@@ -59,7 +61,9 @@ class OpcodeTableTest {
                 Arguments.of(0x7000, ADDVxByteCommand),
                 Arguments.of(0x8000, LDVxVyCommand),
                 Arguments.of(0x8001, ORVxVyCommand),
-                Arguments.of(0x8002, ANDVxVyCommand)
+                Arguments.of(0x8002, ANDVxVyCommand),
+                Arguments.of(0x8003, XORVxVyCommand),
+                Arguments.of(0x8004, ADDVxVyCommand)
             )
         }
     }

@@ -2,6 +2,7 @@ package com.tomassirio.cpu.opcode
 
 import com.tomassirio.cpu.exception.CommandNotFoundException
 import com.tomassirio.cpu.opcode.commands.ADDVxByteCommand
+import com.tomassirio.cpu.opcode.commands.ADDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.ANDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.CLSCommand
@@ -40,7 +41,7 @@ object OpCodeTable {
                 0x1u -> ORVxVyCommand
                 0x2u -> ANDVxVyCommand
                 0x3u -> XORVxVyCommand
-//                0x4u -> ADDVxVyCommand
+                0x4u -> ADDVxVyCommand
 //                0x5u -> SUBVxVyCommand
 //                0x6u -> SHRCommand
 //                0x7u -> SUBNVxVyCommand
