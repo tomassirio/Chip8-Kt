@@ -15,6 +15,7 @@ import com.tomassirio.cpu.opcode.commands.LDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.LDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.ORVxVyCommand
 import com.tomassirio.cpu.opcode.commands.RETCommand
+import com.tomassirio.cpu.opcode.commands.RNDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SHLVxCommand
@@ -32,6 +33,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
+import kotlin.random.Random
 
 class OpcodeTableTest {
     @ParameterizedTest
@@ -78,6 +80,7 @@ class OpcodeTableTest {
                 Arguments.of(0x9000, SNEVxVyCommand),
                 Arguments.of(0xA000, LDIToAddrCommand),
                 Arguments.of(0xB000, JPAddrV0Command),
+                Arguments.of(0xC000, RNDVxByteCommand(Random.Default)),
             )
         }
     }

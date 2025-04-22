@@ -15,6 +15,7 @@ import com.tomassirio.cpu.opcode.commands.LDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.LDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.ORVxVyCommand
 import com.tomassirio.cpu.opcode.commands.RETCommand
+import com.tomassirio.cpu.opcode.commands.RNDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SHLVxCommand
@@ -23,6 +24,7 @@ import com.tomassirio.cpu.opcode.commands.SNEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SNEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
 import com.tomassirio.cpu.opcode.commands.XORVxVyCommand
+import kotlin.random.Random
 
 object OpCodeTable {
     val chip8CommandGetter: (UShort) -> Command = OpCodeTable::getCommand
@@ -58,7 +60,7 @@ object OpCodeTable {
             0x9000u -> SNEVxVyCommand
             0xA000u -> LDIToAddrCommand
             0xB000u -> JPAddrV0Command
-//            0xC000u -> RNDVxByteCommand
+            0xC000u -> RNDVxByteCommand(Random.Default)
 //            0xD000u -> DRWVxVyNCommand
 //            0xE000u -> when (opcode.and(0xFFu).toUInt()) {
 //                0x9Eu -> SKPVxCommand
