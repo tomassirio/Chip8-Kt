@@ -16,6 +16,7 @@ import com.tomassirio.cpu.opcode.commands.RETCommand
 import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SNEVxByteCommand
+import com.tomassirio.cpu.opcode.commands.SUBVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
 import com.tomassirio.cpu.opcode.commands.XORVxVyCommand
 import org.assertj.core.api.Assertions.assertThat
@@ -63,7 +64,8 @@ class OpcodeTableTest {
                 Arguments.of(0x8001, ORVxVyCommand),
                 Arguments.of(0x8002, ANDVxVyCommand),
                 Arguments.of(0x8003, XORVxVyCommand),
-                Arguments.of(0x8004, ADDVxVyCommand)
+                Arguments.of(0x8004, ADDVxVyCommand),
+                Arguments.of(0x8005, SUBVxVyCommand),
             )
         }
     }
