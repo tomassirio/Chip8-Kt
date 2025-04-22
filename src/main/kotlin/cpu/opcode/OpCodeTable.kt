@@ -9,6 +9,7 @@ import com.tomassirio.cpu.opcode.commands.ANDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.CLSCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
+import com.tomassirio.cpu.opcode.commands.LDIToAddrCommand
 import com.tomassirio.cpu.opcode.commands.LDVxByteCommand
 import com.tomassirio.cpu.opcode.commands.LDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.ORVxVyCommand
@@ -54,7 +55,7 @@ object OpCodeTable {
                 else -> throw CommandNotFoundException(opcode)
             }
             0x9000u -> SNEVxVyCommand
-//            0xA000u -> LDIToAddrCommand
+            0xA000u -> LDIToAddrCommand
 //            0xB000u -> JPAddrV0Command
 //            0xC000u -> RNDVxByteCommand
 //            0xD000u -> DRWVxVyNCommand
