@@ -15,6 +15,7 @@ import com.tomassirio.cpu.opcode.commands.ORVxVyCommand
 import com.tomassirio.cpu.opcode.commands.RETCommand
 import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
+import com.tomassirio.cpu.opcode.commands.SHLVxCommand
 import com.tomassirio.cpu.opcode.commands.SHRVxCommand
 import com.tomassirio.cpu.opcode.commands.SNEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
@@ -48,7 +49,7 @@ object OpCodeTable {
                 0x5u -> SUBVxVyCommand
                 0x6u -> SHRVxCommand
                 0x7u -> SUBNVxVyCommand
-//                0xEu -> SHLCommand
+                0xEu -> SHLVxCommand
                 else -> throw CommandNotFoundException(opcode)
             }
 //            0x9000u -> SNEVxVyCommand
