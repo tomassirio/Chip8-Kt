@@ -18,6 +18,7 @@ import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SHLVxCommand
 import com.tomassirio.cpu.opcode.commands.SHRVxCommand
 import com.tomassirio.cpu.opcode.commands.SNEVxByteCommand
+import com.tomassirio.cpu.opcode.commands.SNEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SUBNVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SUBVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SYSAddrCommand
@@ -72,6 +73,7 @@ class OpcodeTableTest {
                 Arguments.of(0x8006, SHRVxCommand),
                 Arguments.of(0x8007, SUBNVxVyCommand),
                 Arguments.of(0x800E, SHLVxCommand),
+                Arguments.of(0x9000, SNEVxVyCommand),
             )
         }
     }
