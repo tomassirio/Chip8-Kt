@@ -8,6 +8,7 @@ import com.tomassirio.cpu.opcode.commands.ADDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.ANDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.cpu.opcode.commands.CLSCommand
+import com.tomassirio.cpu.opcode.commands.DRWVxVyNCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrV0Command
 import com.tomassirio.cpu.opcode.commands.LDIToAddrCommand
@@ -61,7 +62,7 @@ object OpCodeTable {
             0xA000u -> LDIToAddrCommand
             0xB000u -> JPAddrV0Command
             0xC000u -> RNDVxByteCommand(Random.Default)
-//            0xD000u -> DRWVxVyNCommand
+            0xD000u -> DRWVxVyNCommand
 //            0xE000u -> when (opcode.and(0xFFu).toUInt()) {
 //                0x9Eu -> SKPVxCommand
 //                0xA1u -> SKNPVxCommand

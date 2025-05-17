@@ -5,6 +5,7 @@ import com.tomassirio.io.Display
 import com.tomassirio.io.Keyboard
 import com.tomassirio.memory.Memory
 import com.tomassirio.cpu.utils.RegisterSet
+import com.tomassirio.memory.toUShortAt
 import com.tomassirio.utils.SizedStack
 
 class CPU(
@@ -26,8 +27,9 @@ class CPU(
         execute(command, opcode)
     }
 
+    @OptIn(ExperimentalUnsignedTypes::class)
     private fun fetch(): UShort {
-        return memory.read<UShort>(pc.read().toInt())
+        return memory.read(pc.read().toInt()) { bytes, addr -> bytes.toUShortAt(addr) }
     }
 
     private fun decode(opcode: UShort): Command {
