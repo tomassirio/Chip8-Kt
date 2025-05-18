@@ -21,6 +21,7 @@ import com.tomassirio.cpu.opcode.commands.SEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SEVxVyCommand
 import com.tomassirio.cpu.opcode.commands.SHLVxCommand
 import com.tomassirio.cpu.opcode.commands.SHRVxCommand
+import com.tomassirio.cpu.opcode.commands.SKNPVxCommand
 import com.tomassirio.cpu.opcode.commands.SKPVxCommand
 import com.tomassirio.cpu.opcode.commands.SNEVxByteCommand
 import com.tomassirio.cpu.opcode.commands.SNEVxVyCommand
@@ -66,7 +67,7 @@ object OpCodeTable {
             0xD000u -> DRWVxVyNCommand
             0xE000u -> when (opcode.and(0xFFu).toUInt()) {
                 0x9Eu -> SKPVxCommand
-//                0xA1u -> SKNPVxCommand
+                0xA1u -> SKNPVxCommand
                 else -> throw CommandNotFoundException(opcode)
             }
 //            0xF000u -> when (opcode.and(0xFFu).toUInt()) {
