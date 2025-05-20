@@ -29,6 +29,8 @@ object CPUFactory {
             pc =Register.ShortRegister(value = 0x200u),
             sp = Register.ByteRegister(),
             I = Register.ShortRegister(),
+            DT = Register.TimerRegister(),
+            ST = Register.TimerRegister(),
             createStack(),
             OpCodeTable.chip8CommandGetter
         )
@@ -43,6 +45,8 @@ object CPUFactory {
             pc = Register.ShortRegister(0x600u),
             sp = Register.ByteRegister(),
             I = Register.ShortRegister(),
+            DT = Register.TimerRegister(),
+            ST = Register.TimerRegister(),
             createStack(),
             OpCodeTable.chip48CommandGetter
         )

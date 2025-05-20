@@ -17,6 +17,9 @@ class CPU(
     val sp: Register.ByteRegister,
     val I: Register.ShortRegister,
 
+    val DT: Register.TimerRegister,
+    val ST: Register.TimerRegister,
+
     val stack: SizedStack<UShort>,
     val commands: (UShort) -> Command
 ) {

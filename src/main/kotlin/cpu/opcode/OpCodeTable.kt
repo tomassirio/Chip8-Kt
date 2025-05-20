@@ -13,6 +13,7 @@ import com.tomassirio.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.cpu.opcode.commands.JPAddrV0Command
 import com.tomassirio.cpu.opcode.commands.LDIToAddrCommand
 import com.tomassirio.cpu.opcode.commands.LDVxByteCommand
+import com.tomassirio.cpu.opcode.commands.LDVxDTCommand
 import com.tomassirio.cpu.opcode.commands.LDVxVyCommand
 import com.tomassirio.cpu.opcode.commands.ORVxVyCommand
 import com.tomassirio.cpu.opcode.commands.RETCommand
@@ -70,8 +71,8 @@ object OpCodeTable {
                 0xA1u -> SKNPVxCommand
                 else -> throw CommandNotFoundException(opcode)
             }
-//            0xF000u -> when (opcode.and(0xFFu).toUInt()) {
-//                0x07u -> LDVxDTCommand
+            0xF000u -> when (opcode.and(0xFFu).toUInt()) {
+                0x07u -> LDVxDTCommand
 //                0x0Au -> LDVxKCommand
 //                0x15u -> LDDTVxCommand
 //                0x18u -> LDSTVxCommand
@@ -80,8 +81,8 @@ object OpCodeTable {
 //                0x33u -> LDBVxCommand
 //                0x55u -> LDIVxCommand
 //                0x65u -> LDVxICommand
-//                else -> throw CommandNotFoundException(opcode)
-//            }
+                else -> throw CommandNotFoundException(opcode)
+            }
             else -> throw CommandNotFoundException(opcode)
         }
     }

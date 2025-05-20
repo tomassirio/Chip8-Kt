@@ -27,6 +27,8 @@ class CPUTest {
     private lateinit var pc: Register.ShortRegister
     private lateinit var sp: Register.ByteRegister
     private lateinit var I: Register.ShortRegister
+    private lateinit var DT: Register.TimerRegister
+    private lateinit var ST: Register.TimerRegister
     private lateinit var mockCommand: Command
     private lateinit var commands: (UShort) -> Command
 
@@ -39,6 +41,8 @@ class CPUTest {
         pc = Register.ShortRegister(0x200u)
         sp = mockk(relaxed = true)
         I = Register.ShortRegister()
+        DT = Register.TimerRegister()
+        ST = Register.TimerRegister()
         commands = mockk(relaxed = true)
 
         // Create and configure mock command
@@ -56,6 +60,8 @@ class CPUTest {
             pc = pc,
             sp = sp,
             I = I,
+            DT = DT,
+            ST = ST,
             stack = SizedStack(16),
             commands = commands
         )
