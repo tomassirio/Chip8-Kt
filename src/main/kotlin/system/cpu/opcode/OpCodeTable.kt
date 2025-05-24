@@ -13,6 +13,7 @@ import com.tomassirio.system.cpu.opcode.commands.DRWVxVyNCommand
 import com.tomassirio.system.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.JPAddrV0Command
 import com.tomassirio.system.cpu.opcode.commands.LDDTVxCommand
+import com.tomassirio.system.cpu.opcode.commands.LDFVxCommand
 import com.tomassirio.system.cpu.opcode.commands.LDIToAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.LDSTVxCommand
 import com.tomassirio.system.cpu.opcode.commands.LDVxByteCommand
@@ -81,7 +82,7 @@ object OpCodeTable {
                 0x15u -> LDDTVxCommand
                 0x18u -> LDSTVxCommand
                 0x1Eu -> ADDIVxCommand
-//                0x29u -> LDFVxCommand
+                0x29u -> LDFVxCommand
 //                0x33u -> LDBVxCommand
 //                0x55u -> LDIVxCommand
 //                0x65u -> LDVxICommand

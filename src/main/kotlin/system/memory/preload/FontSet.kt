@@ -1,4 +1,4 @@
-package com.tomassirio.system.preload
+package com.tomassirio.system.memory.preload
 
 class FontSet {
     private val fontMap: Map<Int, List<UByte>> = mapOf(
@@ -19,8 +19,8 @@ class FontSet {
         0xE to listOf(0xF0u, 0x80u, 0xF0u, 0x80u, 0xF0u),
         0xF to listOf(0xF0u, 0x80u, 0xF0u, 0x80u, 0x80u))
 
-    fun getFont(character: Int): List<UByte> {
-        return fontMap[character] ?: throw IllegalArgumentException("Character $character not found")
+    fun getFontSet(): Map<Int, List<UByte>> {
+        return fontMap
     }
 }
 

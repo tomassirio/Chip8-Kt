@@ -4,6 +4,7 @@ import com.tomassirio.system.cpu.exception.CommandNotFoundException
 import com.tomassirio.system.cpu.opcode.commands.CLSCommand
 import com.tomassirio.system.cpu.opcode.Command
 import com.tomassirio.system.cpu.opcode.OpCodeTable
+import com.tomassirio.system.cpu.opcode.commands.ADDIVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ADDVxByteCommand
 import com.tomassirio.system.cpu.opcode.commands.ADDVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.ANDVxVyCommand
@@ -12,6 +13,7 @@ import com.tomassirio.system.cpu.opcode.commands.DRWVxVyNCommand
 import com.tomassirio.system.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.JPAddrV0Command
 import com.tomassirio.system.cpu.opcode.commands.LDDTVxCommand
+import com.tomassirio.system.cpu.opcode.commands.LDFVxCommand
 import com.tomassirio.system.cpu.opcode.commands.LDIToAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.LDSTVxCommand
 import com.tomassirio.system.cpu.opcode.commands.LDVxByteCommand
@@ -95,7 +97,8 @@ class OpcodeTableTest {
                 Arguments.of(0xF00A, LDVxKCommand),
                 Arguments.of(0xF015, LDDTVxCommand),
                 Arguments.of(0xF018, LDSTVxCommand),
-                Arguments.of(0xF01E, ADDVxVyCommand),
+                Arguments.of(0xF01E, ADDIVxCommand),
+                Arguments.of(0xF029, LDFVxCommand),
             )
         }
     }
