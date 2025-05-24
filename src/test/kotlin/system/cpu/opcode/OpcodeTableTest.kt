@@ -95,6 +95,7 @@ class OpcodeTableTest {
                 Arguments.of(0xF00A, LDVxKCommand),
                 Arguments.of(0xF015, LDDTVxCommand),
                 Arguments.of(0xF018, LDSTVxCommand),
+                Arguments.of(0xF01E, ADDVxVyCommand),
             )
         }
     }

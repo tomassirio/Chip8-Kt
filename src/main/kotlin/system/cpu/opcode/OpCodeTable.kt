@@ -1,6 +1,7 @@
 package com.tomassirio.system.cpu.opcode
 
 import com.tomassirio.system.cpu.exception.CommandNotFoundException
+import com.tomassirio.system.cpu.opcode.commands.ADDIVxCommand
 import com.tomassirio.system.cpu.opcode.commands.SUBNVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.SUBVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.ADDVxByteCommand
@@ -79,7 +80,7 @@ object OpCodeTable {
                 0x0Au -> LDVxKCommand
                 0x15u -> LDDTVxCommand
                 0x18u -> LDSTVxCommand
-//                0x1Eu -> ADDIVxCommand
+                0x1Eu -> ADDIVxCommand
 //                0x29u -> LDFVxCommand
 //                0x33u -> LDBVxCommand
 //                0x55u -> LDIVxCommand
