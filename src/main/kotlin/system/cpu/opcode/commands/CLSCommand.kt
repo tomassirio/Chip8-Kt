@@ -10,6 +10,6 @@ import com.tomassirio.system.cpu.opcode.Command
  */
 object CLSCommand: Command {
     override fun execute(cpu: CPU, opcode: UShort) {
-        cpu.displayState.clearScreen()
+        cpu.displayState.clear()
     }
 }

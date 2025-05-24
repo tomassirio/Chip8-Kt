@@ -17,7 +17,7 @@ class DisplayState(val width: Int = 64, val height: Int = 32) {
         return gfx.get(index)
     }
 
-    fun clearScreen() {
+    fun clear() {
         gfx.clear()
     }
 

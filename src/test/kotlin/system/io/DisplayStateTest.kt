@@ -37,7 +37,7 @@ class DisplayStateTest {
     @Test
     fun `test clear`() {
         displayState.setPixel(10, 5, true)
-        displayState.clearScreen()
+        displayState.clear()
         for (displayX in 0 until displayState.width) {
             for (displayY in 0 until displayState.height) {
                 assertThat(displayState.getPixel(displayX, displayY)).isFalse()
