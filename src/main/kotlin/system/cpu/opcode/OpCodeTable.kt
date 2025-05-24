@@ -1,8 +1,8 @@
 package com.tomassirio.system.cpu.opcode
 
+import com.tomassirio.system.cpu.exception.CommandNotFoundException
 import com.tomassirio.system.cpu.opcode.commands.SUBNVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.SUBVxVyCommand
-import com.tomassirio.system.cpu.exception.CommandNotFoundException
 import com.tomassirio.system.cpu.opcode.commands.ADDVxByteCommand
 import com.tomassirio.system.cpu.opcode.commands.ADDVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.ANDVxVyCommand
@@ -11,6 +11,7 @@ import com.tomassirio.system.cpu.opcode.commands.CLSCommand
 import com.tomassirio.system.cpu.opcode.commands.DRWVxVyNCommand
 import com.tomassirio.system.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.JPAddrV0Command
+import com.tomassirio.system.cpu.opcode.commands.LDDTVxCommand
 import com.tomassirio.system.cpu.opcode.commands.LDIToAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.LDVxByteCommand
 import com.tomassirio.system.cpu.opcode.commands.LDVxDTCommand
@@ -75,7 +76,7 @@ object OpCodeTable {
             0xF000u -> when (opcode.and(0xFFu).toUInt()) {
                 0x07u -> LDVxDTCommand
                 0x0Au -> LDVxKCommand
-//                0x15u -> LDDTVxCommand
+                0x15u -> LDDTVxCommand
 //                0x18u -> LDSTVxCommand
 //                0x1Eu -> ADDIVxCommand
 //                0x29u -> LDFVxCommand

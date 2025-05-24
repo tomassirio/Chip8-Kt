@@ -1,7 +1,7 @@
 package com.tomassirio.system.register.utils
 
-import com.tomassirio.system.register.Register
 import com.tomassirio.system.cpu.exception.RegisterNotFoundException
+import com.tomassirio.system.register.Register
 
 
 class RegisterSet private constructor(
