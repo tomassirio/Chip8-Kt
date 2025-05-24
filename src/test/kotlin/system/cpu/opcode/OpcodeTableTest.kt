@@ -11,6 +11,7 @@ import com.tomassirio.system.cpu.opcode.commands.CALLAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.DRWVxVyNCommand
 import com.tomassirio.system.cpu.opcode.commands.JPAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.JPAddrV0Command
+import com.tomassirio.system.cpu.opcode.commands.LDDTVxCommand
 import com.tomassirio.system.cpu.opcode.commands.LDIToAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.LDVxByteCommand
 import com.tomassirio.system.cpu.opcode.commands.LDVxDTCommand
@@ -91,6 +92,7 @@ class OpcodeTableTest {
                 Arguments.of(0xE0A1, SKNPVxCommand),
                 Arguments.of(0xF007, LDVxDTCommand),
                 Arguments.of(0xF00A, LDVxKCommand),
+                Arguments.of(0xF015, LDDTVxCommand),
             )
         }
     }
