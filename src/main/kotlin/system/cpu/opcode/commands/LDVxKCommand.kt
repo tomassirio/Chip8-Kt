@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,9 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * All execution stops until a key is pressed, then the value of that key is stored in Vx.
  */
-
-object LDVxKCommand: Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun ldVxKCommand(): Command {
+    return Command {cpu, opcode ->
         val vX = (opcode and 0xF00u).toInt() shr 8
 
         cpu.waitingForKey = true

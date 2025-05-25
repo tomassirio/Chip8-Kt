@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,9 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
 
     The value of register I is set to nnn.
 */
-
-object LDIToAddrCommand : Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun ldIToAddrCommand(): Command {
+    return Command {cpu, opcode ->
         val value = opcode and 0x0FFFu
         cpu.I.write(value)
     }

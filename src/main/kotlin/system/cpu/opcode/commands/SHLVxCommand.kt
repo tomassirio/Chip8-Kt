@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,9 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * If the most significant bit of Vx is 1, then VF is set to 1. Otherwise, VF is set to 0. Then Vx is multiplied by 2.
 */
-
-object SHLVxCommand : Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun shlVxCommand(): Command {
+    return Command {cpu, opcode ->
         val vX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val vXValue = vX.read()
 

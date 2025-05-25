@@ -1,7 +1,7 @@
 package system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.opcode.commands.ADDVxVyCommand
 import com.tomassirio.system.cpu.factory.CPUFactory.createCPU
+import com.tomassirio.system.cpu.opcode.commands.addVxVyCommand
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -17,7 +17,7 @@ class ADDVxVyCommandTest {
         registerY.write(0x01u)
 
         // When
-        ADDVxVyCommand.execute(cpu, opcode)
+        addVxVyCommand().execute(cpu, opcode)
 
         // Then
         assertEquals(0x10u.toUByte(), cpu.registers[0].read())
@@ -35,7 +35,7 @@ class ADDVxVyCommandTest {
         registerY.write(0x01u)
 
         // When
-        ADDVxVyCommand.execute(cpu, opcode)
+        addVxVyCommand().execute(cpu, opcode)
 
         // Then
         assertEquals(0x00u.toUByte(), cpu.registers[0].read())

@@ -2,7 +2,7 @@ package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.factory.CPUFactory
-import com.tomassirio.system.cpu.opcode.commands.LDFVxCommand
+import com.tomassirio.system.cpu.opcode.commands.ldFVxCommand
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class LDFVxCommandTest {
 
-    private val command = LDFVxCommand
+    private val command = ldFVxCommand()
     private lateinit var cpu: CPU
 
     @BeforeEach

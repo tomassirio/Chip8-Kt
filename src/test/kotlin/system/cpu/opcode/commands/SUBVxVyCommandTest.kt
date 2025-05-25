@@ -1,15 +1,15 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.CPU
-import com.tomassirio.system.cpu.opcode.commands.SUBVxVyCommand
 import com.tomassirio.system.cpu.factory.CPUFactory
+import com.tomassirio.system.cpu.opcode.commands.subVxVyCommand
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 
 class SUBVxVyCommandTest {
 
-    private val command = SUBVxVyCommand
+    private val command = subVxVyCommand()
     private lateinit var cpu: CPU
 
     @BeforeEach

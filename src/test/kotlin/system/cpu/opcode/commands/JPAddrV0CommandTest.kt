@@ -1,14 +1,14 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.CPU
-import com.tomassirio.system.cpu.opcode.commands.JPAddrV0Command
 import com.tomassirio.system.cpu.factory.CPUFactory
+import com.tomassirio.system.cpu.opcode.commands.jpAddrV0Command
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class JPAddrV0CommandTest {
 
-    private val command = JPAddrV0Command
+    private val command = jpAddrV0Command()
     private lateinit var cpu: CPU
 
     @Test

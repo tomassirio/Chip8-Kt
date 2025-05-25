@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,8 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * Stores the value of register Vy in register Vx.
  */
-object LDVxVyCommand: Command{
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun ldVxVyCommand(): Command {
+    return Command { cpu, opcode ->
         val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val registerY = cpu.registers[(opcode and 0xF0u).toInt() shr 4]
 

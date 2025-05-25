@@ -1,14 +1,14 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.CPU
-import com.tomassirio.system.cpu.opcode.commands.SHLVxCommand
 import com.tomassirio.system.cpu.factory.CPUFactory
+import com.tomassirio.system.cpu.opcode.commands.shlVxCommand
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class SHLVxCommandTest {
 
-    private val command = SHLVxCommand
+    private val command = shlVxCommand()
     private lateinit var cpu: CPU
 
     @BeforeEach

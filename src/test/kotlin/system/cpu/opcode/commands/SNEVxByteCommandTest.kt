@@ -1,7 +1,7 @@
 package system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.opcode.commands.SNEVxByteCommand
 import com.tomassirio.system.cpu.factory.CPUFactory.createCPU
+import com.tomassirio.system.cpu.opcode.commands.sneVxByteCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -16,7 +16,7 @@ class SNEVxByteCommandTest {
         val opcode = 0x4010u.toUShort()
 
         // When
-        SNEVxByteCommand.execute(cpu, opcode)
+        sneVxByteCommand().execute(cpu, opcode)
 
         // Then
         assertThat(cpu.pc.read()).isEqualTo(0x202u.toUShort())
@@ -32,7 +32,7 @@ class SNEVxByteCommandTest {
         val opcode = 0x4011u.toUShort()
 
         // When
-        SNEVxByteCommand.execute(cpu, opcode)
+        sneVxByteCommand().execute(cpu, opcode)
 
         // Then
         assertThat(cpu.pc.read()).isEqualTo(0x200u.toUShort())

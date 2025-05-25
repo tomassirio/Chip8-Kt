@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -13,9 +12,8 @@ import com.tomassirio.system.cpu.opcode.Command
  * and if both bits are 1, then the same bit in the result is also 1.
  * Otherwise, it is 0.
  */
-
-object ANDVxVyCommand: Command{
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun andVxVyCommand(): Command {
+    return Command { cpu, opcode ->
         val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val registerY = cpu.registers[(opcode and 0xF0u).toInt() shr 4]
 

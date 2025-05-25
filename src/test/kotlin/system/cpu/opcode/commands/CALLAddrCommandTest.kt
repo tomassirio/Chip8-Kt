@@ -1,7 +1,7 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.factory.CPUFactory.createCPU
-import com.tomassirio.system.cpu.opcode.commands.CALLAddrCommand
+import com.tomassirio.system.cpu.opcode.commands.callAddrCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -14,7 +14,7 @@ class CALLAddrCommandTest {
         val previousSP = cpu.sp.read()
 
         // When
-        CALLAddrCommand.execute(cpu, opcode)
+        callAddrCommand().execute(cpu, opcode)
 
         // Then
         assertThat(cpu.sp.read()).isEqualTo(previousSP.plus(0x1u).toUByte())

@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 
@@ -10,8 +9,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  *     ST is set equal to the value of Vx.
  */
-object LDSTVxCommand: Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun ldSTVxCommand(): Command {
+    return Command {cpu, opcode ->
         val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val value = registerX.read()
 

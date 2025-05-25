@@ -11,22 +11,31 @@ import kotlin.random.Random
  *   The interpreter generates a random number from 0 to 255, which is then ANDed with the value kk.
  *   The results are stored in Vx. See instruction 8xy2 for more information on ANDing values.
  */
-
-class RNDVxByteCommand(private val random: Random) : Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun rndVxByteCommand(random: Random = Random.Default): Command {
+    return CommandWrapper("RNDVxByteCommand") { cpu, opcode ->
         val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val value = (opcode and 0x00FFu).toUByte()
 
         val randomValue = random.nextInt(0, 256).toUByte()
         registerX.write(randomValue and value)
     }
+}
+
+class CommandWrapper(
+    private val commandType: String,
+    private val executeFunc: (CPU, UShort) -> Unit
+) : Command {
+
+    override fun execute(cpu: CPU, opcode: UShort) {
+        executeFunc(cpu, opcode)
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        return other is RNDVxByteCommand
+        return other is CommandWrapper && commandType == other.commandType
     }
 
     override fun hashCode(): Int {
-        return javaClass.hashCode()
+        return commandType.hashCode()
     }
 }

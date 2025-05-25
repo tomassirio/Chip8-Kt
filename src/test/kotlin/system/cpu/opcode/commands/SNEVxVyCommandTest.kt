@@ -1,14 +1,14 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.CPU
-import com.tomassirio.system.cpu.opcode.commands.SNEVxVyCommand
 import com.tomassirio.system.cpu.factory.CPUFactory
+import com.tomassirio.system.cpu.opcode.commands.sneVxVyCommand
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class SNEVxVyCommandTest {
-    private val command = SNEVxVyCommand
+    private val command = sneVxVyCommand()
     private lateinit var cpu: CPU
 
     @BeforeEach

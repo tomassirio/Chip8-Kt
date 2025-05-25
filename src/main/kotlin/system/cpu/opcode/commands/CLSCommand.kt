@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -8,8 +7,8 @@ import com.tomassirio.system.cpu.opcode.Command
  * Clear the display.
  *
  */
-object CLSCommand: Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun clsCommand(): Command {
+    return Command { cpu, _ ->
         cpu.displayState.clear()
     }
 }

@@ -1,7 +1,7 @@
 package system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.opcode.commands.ORVxVyCommand
 import com.tomassirio.system.cpu.factory.CPUFactory.createCPU
+import com.tomassirio.system.cpu.opcode.commands.orVxVyCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -17,7 +17,7 @@ class ORVxVyCommandTest {
         registerY.write(0xF0u)
 
         // When
-        ORVxVyCommand.execute(cpu, opcode)
+        orVxVyCommand().execute(cpu, opcode)
 
         // Then
         assertThat(cpu.registers[0].read()).isEqualTo(0xFFu.toUByte())

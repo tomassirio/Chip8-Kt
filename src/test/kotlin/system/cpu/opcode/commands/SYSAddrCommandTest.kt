@@ -2,14 +2,14 @@ package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.factory.CPUFactory
-import com.tomassirio.system.cpu.opcode.commands.SYSAddrCommand
+import com.tomassirio.system.cpu.opcode.commands.sysAddrCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class SYSAddrCommandTest {
 
-    private val sysAddrCommand = SYSAddrCommand
+    private val sysAddrCommand = sysAddrCommand()
     private lateinit var cpu: CPU
 
     @BeforeEach

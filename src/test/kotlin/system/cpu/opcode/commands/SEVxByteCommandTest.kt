@@ -1,7 +1,7 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.factory.CPUFactory.createCPU
-import com.tomassirio.system.cpu.opcode.commands.SEVxByteCommand
+import com.tomassirio.system.cpu.opcode.commands.seVxByteCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -17,7 +17,7 @@ class SEVxByteCommandTest {
         val previousPC = cpu.pc.read()
 
         // When
-        SEVxByteCommand.execute(cpu, opcode)
+        seVxByteCommand().execute(cpu, opcode)
 
         // Then
         assertThat(cpu.pc.read()).isEqualTo((previousPC + 2u).toUShort())
@@ -33,7 +33,7 @@ class SEVxByteCommandTest {
         val previousPC = cpu.pc.read()
 
         // When
-        SEVxByteCommand.execute(cpu, opcode)
+        seVxByteCommand().execute(cpu, opcode)
 
         // Then
         assertThat(cpu.pc.read()).isEqualTo(previousPC)

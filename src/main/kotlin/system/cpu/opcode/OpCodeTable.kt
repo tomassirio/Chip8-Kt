@@ -1,38 +1,39 @@
 package com.tomassirio.system.cpu.opcode
 
 import com.tomassirio.system.cpu.exception.CommandNotFoundException
-import com.tomassirio.system.cpu.opcode.commands.ADDIVxCommand
-import com.tomassirio.system.cpu.opcode.commands.SUBNVxVyCommand
-import com.tomassirio.system.cpu.opcode.commands.SUBVxVyCommand
-import com.tomassirio.system.cpu.opcode.commands.ADDVxByteCommand
-import com.tomassirio.system.cpu.opcode.commands.ADDVxVyCommand
-import com.tomassirio.system.cpu.opcode.commands.ANDVxVyCommand
-import com.tomassirio.system.cpu.opcode.commands.CALLAddrCommand
-import com.tomassirio.system.cpu.opcode.commands.CLSCommand
-import com.tomassirio.system.cpu.opcode.commands.DRWVxVyNCommand
-import com.tomassirio.system.cpu.opcode.commands.JPAddrCommand
-import com.tomassirio.system.cpu.opcode.commands.JPAddrV0Command
-import com.tomassirio.system.cpu.opcode.commands.LDDTVxCommand
-import com.tomassirio.system.cpu.opcode.commands.LDFVxCommand
-import com.tomassirio.system.cpu.opcode.commands.LDIToAddrCommand
-import com.tomassirio.system.cpu.opcode.commands.LDSTVxCommand
-import com.tomassirio.system.cpu.opcode.commands.LDVxByteCommand
-import com.tomassirio.system.cpu.opcode.commands.LDVxDTCommand
-import com.tomassirio.system.cpu.opcode.commands.LDVxKCommand
-import com.tomassirio.system.cpu.opcode.commands.LDVxVyCommand
-import com.tomassirio.system.cpu.opcode.commands.ORVxVyCommand
-import com.tomassirio.system.cpu.opcode.commands.RETCommand
-import com.tomassirio.system.cpu.opcode.commands.RNDVxByteCommand
-import com.tomassirio.system.cpu.opcode.commands.SEVxByteCommand
-import com.tomassirio.system.cpu.opcode.commands.SEVxVyCommand
-import com.tomassirio.system.cpu.opcode.commands.SHLVxCommand
-import com.tomassirio.system.cpu.opcode.commands.SHRVxCommand
-import com.tomassirio.system.cpu.opcode.commands.SKNPVxCommand
-import com.tomassirio.system.cpu.opcode.commands.SKPVxCommand
-import com.tomassirio.system.cpu.opcode.commands.SNEVxByteCommand
-import com.tomassirio.system.cpu.opcode.commands.SNEVxVyCommand
-import com.tomassirio.system.cpu.opcode.commands.SYSAddrCommand
-import com.tomassirio.system.cpu.opcode.commands.XORVxVyCommand
+
+import com.tomassirio.system.cpu.opcode.commands.addIVxCommand
+import com.tomassirio.system.cpu.opcode.commands.addVxByteCommand
+import com.tomassirio.system.cpu.opcode.commands.addVxVyCommand
+import com.tomassirio.system.cpu.opcode.commands.andVxVyCommand
+import com.tomassirio.system.cpu.opcode.commands.callAddrCommand
+import com.tomassirio.system.cpu.opcode.commands.clsCommand
+import com.tomassirio.system.cpu.opcode.commands.drwVxVyNCommand
+import com.tomassirio.system.cpu.opcode.commands.jpAddrCommand
+import com.tomassirio.system.cpu.opcode.commands.jpAddrV0Command
+import com.tomassirio.system.cpu.opcode.commands.ldDTVxCommand
+import com.tomassirio.system.cpu.opcode.commands.ldFVxCommand
+import com.tomassirio.system.cpu.opcode.commands.ldIToAddrCommand
+import com.tomassirio.system.cpu.opcode.commands.ldSTVxCommand
+import com.tomassirio.system.cpu.opcode.commands.ldVxByteCommand
+import com.tomassirio.system.cpu.opcode.commands.ldVxDTCommand
+import com.tomassirio.system.cpu.opcode.commands.ldVxKCommand
+import com.tomassirio.system.cpu.opcode.commands.ldVxVyCommand
+import com.tomassirio.system.cpu.opcode.commands.orVxVyCommand
+import com.tomassirio.system.cpu.opcode.commands.retCommand
+import com.tomassirio.system.cpu.opcode.commands.rndVxByteCommand
+import com.tomassirio.system.cpu.opcode.commands.seVxByteCommand
+import com.tomassirio.system.cpu.opcode.commands.seVxVyCommand
+import com.tomassirio.system.cpu.opcode.commands.shlVxCommand
+import com.tomassirio.system.cpu.opcode.commands.shrVxCommand
+import com.tomassirio.system.cpu.opcode.commands.sknpVxCommand
+import com.tomassirio.system.cpu.opcode.commands.skpVxCommand
+import com.tomassirio.system.cpu.opcode.commands.sneVxByteCommand
+import com.tomassirio.system.cpu.opcode.commands.sneVxVyCommand
+import com.tomassirio.system.cpu.opcode.commands.subVxVyCommand
+import com.tomassirio.system.cpu.opcode.commands.subnVxVyCommand
+import com.tomassirio.system.cpu.opcode.commands.sysAddrCommand
+import com.tomassirio.system.cpu.opcode.commands.xorVxVyCommand
 import kotlin.random.Random
 
 object OpCodeTable {
@@ -42,47 +43,47 @@ object OpCodeTable {
     fun getCommand(opcode: UShort): Command {
         return when (opcode.and(0xF000u).toUInt()) {
             0x0000u -> when (opcode.and(0xFFu).toUInt()) {
-                0x0000u -> SYSAddrCommand
-                0x00E0u -> CLSCommand
-                0x00EEu -> RETCommand
+                0x0000u -> sysAddrCommand()
+                0x00E0u -> clsCommand()
+                0x00EEu -> retCommand()
                 else -> throw CommandNotFoundException(opcode)
             }
-            0x1000u -> JPAddrCommand
-            0x2000u -> CALLAddrCommand
-            0x3000u -> SEVxByteCommand
-            0x4000u -> SNEVxByteCommand
-            0x5000u -> SEVxVyCommand
-            0x6000u -> LDVxByteCommand
-            0x7000u -> ADDVxByteCommand
+            0x1000u -> jpAddrCommand()
+            0x2000u -> callAddrCommand()
+            0x3000u -> seVxByteCommand()
+            0x4000u -> sneVxByteCommand()
+            0x5000u -> seVxVyCommand()
+            0x6000u -> ldVxByteCommand()
+            0x7000u -> addVxByteCommand()
             0x8000u -> when (opcode.and(0xFu).toUInt()) {
-                0x0u -> LDVxVyCommand
-                0x1u -> ORVxVyCommand
-                0x2u -> ANDVxVyCommand
-                0x3u -> XORVxVyCommand
-                0x4u -> ADDVxVyCommand
-                0x5u -> SUBVxVyCommand
-                0x6u -> SHRVxCommand
-                0x7u -> SUBNVxVyCommand
-                0xEu -> SHLVxCommand
+                0x0u -> ldVxVyCommand()
+                0x1u -> orVxVyCommand()
+                0x2u -> andVxVyCommand()
+                0x3u -> xorVxVyCommand()
+                0x4u -> addVxVyCommand()
+                0x5u -> subVxVyCommand()
+                0x6u -> shrVxCommand()
+                0x7u -> subnVxVyCommand()
+                0xEu -> shlVxCommand()
                 else -> throw CommandNotFoundException(opcode)
             }
-            0x9000u -> SNEVxVyCommand
-            0xA000u -> LDIToAddrCommand
-            0xB000u -> JPAddrV0Command
-            0xC000u -> RNDVxByteCommand(Random.Default)
-            0xD000u -> DRWVxVyNCommand
+            0x9000u -> sneVxVyCommand()
+            0xA000u -> ldIToAddrCommand()
+            0xB000u -> jpAddrV0Command()
+            0xC000u -> rndVxByteCommand()
+            0xD000u -> drwVxVyNCommand()
             0xE000u -> when (opcode.and(0xFFu).toUInt()) {
-                0x9Eu -> SKPVxCommand
-                0xA1u -> SKNPVxCommand
+                0x9Eu -> skpVxCommand()
+                0xA1u -> sknpVxCommand()
                 else -> throw CommandNotFoundException(opcode)
             }
             0xF000u -> when (opcode.and(0xFFu).toUInt()) {
-                0x07u -> LDVxDTCommand
-                0x0Au -> LDVxKCommand
-                0x15u -> LDDTVxCommand
-                0x18u -> LDSTVxCommand
-                0x1Eu -> ADDIVxCommand
-                0x29u -> LDFVxCommand
+                0x07u -> ldVxDTCommand()
+                0x0Au -> ldVxKCommand()
+                0x15u -> ldDTVxCommand()
+                0x18u -> ldSTVxCommand()
+                0x1Eu -> addIVxCommand()
+                0x29u -> ldFVxCommand()
 //                0x33u -> LDBVxCommand
 //                0x55u -> LDIVxCommand
 //                0x65u -> LDVxICommand

@@ -1,14 +1,14 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.CPU
-import com.tomassirio.system.cpu.opcode.commands.LDVxDTCommand
 import com.tomassirio.system.cpu.factory.CPUFactory
+import com.tomassirio.system.cpu.opcode.commands.ldVxDTCommand
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class LDVxDTCommandTest {
-    private val command = LDVxDTCommand
+    private val command = ldVxDTCommand()
     private lateinit var cpu: CPU
 
     @BeforeEach

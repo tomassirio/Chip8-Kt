@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,8 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * The interpreter puts the value kk into register Vx.
  */
-object LDVxByteCommand: Command{
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun ldVxByteCommand(): Command {
+    return Command { cpu, opcode ->
         val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val value = (opcode and 0x00FFu).toUByte()
         registerX.write(value)

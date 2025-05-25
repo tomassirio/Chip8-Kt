@@ -1,7 +1,7 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.factory.CPUFactory.createCPU
-import com.tomassirio.system.cpu.opcode.commands.JPAddrCommand
+import com.tomassirio.system.cpu.opcode.commands.jpAddrCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -13,7 +13,7 @@ class JPAddrCommandTest {
         val opcode = 0x1ABC.toUShort()
 
         // When
-        JPAddrCommand.execute(cpu, opcode)
+        jpAddrCommand().execute(cpu, opcode)
 
         // Then
         assertThat(cpu.pc.read()).isEqualTo(0xABCu.toUShort())

@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,9 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * Compare register Vx to register Vy, and skip the next instruction if they are not equal.
  */
-
-object SNEVxVyCommand : Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun sneVxVyCommand(): Command {
+    return Command {cpu, opcode ->
         val vX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val vY = cpu.registers[(opcode and 0xF0u).toInt() shr 4]
 
@@ -19,5 +17,4 @@ object SNEVxVyCommand : Command {
             cpu.pc.write(cpu.pc.read().plus(2u).toUShort())
         }
     }
-
 }

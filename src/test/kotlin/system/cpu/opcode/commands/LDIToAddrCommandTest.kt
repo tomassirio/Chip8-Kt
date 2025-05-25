@@ -1,12 +1,12 @@
 package system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.opcode.commands.LDIToAddrCommand
 import com.tomassirio.system.cpu.factory.CPUFactory
+import com.tomassirio.system.cpu.opcode.commands.ldIToAddrCommand
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class LDIToAddrCommandTest {
-    private val command = LDIToAddrCommand
+    private val command = ldIToAddrCommand()
 
     @Test
     fun testLDIToAddrCommand() {

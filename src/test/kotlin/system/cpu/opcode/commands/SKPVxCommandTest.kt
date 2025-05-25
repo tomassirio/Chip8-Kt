@@ -1,15 +1,15 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.CPU
-import com.tomassirio.system.cpu.opcode.commands.SKPVxCommand
 import com.tomassirio.system.cpu.factory.CPUFactory
+import com.tomassirio.system.cpu.opcode.commands.skpVxCommand
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class SKPVxCommandTest {
 
-    private val command = SKPVxCommand
+    private val command = skpVxCommand()
     private lateinit var cpu: CPU
 
     @BeforeEach

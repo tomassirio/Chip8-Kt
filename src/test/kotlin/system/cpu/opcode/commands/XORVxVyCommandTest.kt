@@ -1,8 +1,8 @@
 package system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.opcode.commands.XORVxVyCommand
 import com.tomassirio.system.cpu.factory.CPUFactory.createCPU
-import org.junit.jupiter.api.Assertions.*
+import com.tomassirio.system.cpu.opcode.commands.xorVxVyCommand
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class XORVxVyCommandTest {
@@ -20,7 +20,7 @@ class XORVxVyCommandTest {
         registerY.write(0xFFu)
 
         // When
-        XORVxVyCommand.execute(cpu, opcode)
+        xorVxVyCommand().execute(cpu, opcode)
 
         // Then
         assertEquals(0xF0u.toUByte(), cpu.registers[0].read())

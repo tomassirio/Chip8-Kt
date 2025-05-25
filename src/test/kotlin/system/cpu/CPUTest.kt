@@ -4,7 +4,7 @@ import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.register.Register
 import com.tomassirio.system.cpu.opcode.Command
 import com.tomassirio.system.cpu.opcode.OpCodeTable
-import com.tomassirio.system.cpu.opcode.commands.SYSAddrCommand
+import com.tomassirio.system.cpu.opcode.commands.sysAddrCommand
 import com.tomassirio.system.register.utils.RegisterSet
 import com.tomassirio.system.io.DisplayState
 import com.tomassirio.system.io.KeyboardState
@@ -99,7 +99,7 @@ class CPUTest {
         val command = OpCodeTable.getCommand(0x0000u)
         assertThat(command).isNotNull()
             .withFailMessage("Should find command for opcode 0x0000")
-        assertThat(command).isInstanceOf(SYSAddrCommand.javaClass)
+        assertThat(command).isInstanceOf(sysAddrCommand().javaClass)
             .withFailMessage("Command should be SysAddrCommand")
     }
 

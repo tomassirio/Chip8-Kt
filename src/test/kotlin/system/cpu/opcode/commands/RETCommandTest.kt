@@ -1,7 +1,7 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.factory.CPUFactory.createCPU
-import com.tomassirio.system.cpu.opcode.commands.RETCommand
+import com.tomassirio.system.cpu.opcode.commands.retCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -17,7 +17,7 @@ class RETCommandTest {
         val opcode = 0x00EE.toUShort()
 
         // When
-        RETCommand.execute(cpu, opcode)
+        retCommand().execute(cpu, opcode)
 
         // Then
         assertThat(cpu.pc.read()).isEqualTo(0x9abcu.toUShort())

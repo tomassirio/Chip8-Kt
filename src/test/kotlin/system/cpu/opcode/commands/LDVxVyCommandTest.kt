@@ -1,7 +1,7 @@
 package system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.opcode.commands.LDVxVyCommand
 import com.tomassirio.system.cpu.factory.CPUFactory
+import com.tomassirio.system.cpu.opcode.commands.ldVxVyCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -16,7 +16,7 @@ class LDVxVyCommandTest {
             val opcode = 0x8010u.toUShort()
 
             // When
-            LDVxVyCommand.execute(cpu, opcode)
+            ldVxVyCommand().execute(cpu, opcode)
 
             // Then
             assertThat(registerX.read()).isEqualTo(0x69u.toUByte())

@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,8 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * This instruction is only used on the old computers on which Chip-8 was originally implemented. It is ignored by modern interpreters.
  */
-object SYSAddrCommand: Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun sysAddrCommand(): Command {
+    return Command { cpu, opcode ->
         cpu.I.write(opcode.and(0xFFFu))
     }
 }

@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,9 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * Checks the keyboard, and if the key corresponding to the value of Vx is currently in the up position, PC is increased by 2.
  */
-
-object SKNPVxCommand: Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun sknpVxCommand(): Command {
+    return Command { cpu, opcode ->
         val vx = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val vxValue = vx.read()
 

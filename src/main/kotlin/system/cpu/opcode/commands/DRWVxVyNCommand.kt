@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 import com.tomassirio.system.memory.util.toUByteAt
 
@@ -18,10 +17,9 @@ import com.tomassirio.system.memory.util.toUByteAt
  * Display, for more information on the Chip-8 screen and sprites.
  *
 */
-
-object DRWVxVyNCommand : Command {
-    @OptIn(ExperimentalUnsignedTypes::class)
-    override fun execute(cpu: CPU, opcode: UShort) {
+@OptIn(ExperimentalUnsignedTypes::class)
+fun drwVxVyNCommand(): Command {
+    return Command {cpu, opcode ->
         val x = cpu.registers[(opcode and 0x0F00u).toInt() shr 8].read().toInt()
         val y = cpu.registers[(opcode and 0x00F0u).toInt() shr 4].read().toInt()
         val nibble = (opcode and 0x000Fu).toInt()

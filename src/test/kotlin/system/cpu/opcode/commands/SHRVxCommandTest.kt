@@ -1,14 +1,14 @@
 package system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.CPU
-import com.tomassirio.system.cpu.opcode.commands.SHRVxCommand
 import com.tomassirio.system.cpu.factory.CPUFactory
-import org.junit.jupiter.api.Assertions.*
+import com.tomassirio.system.cpu.opcode.commands.shrVxCommand
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class SHRVxCommandTest {
-    private val command = SHRVxCommand
+    private val command = shrVxCommand()
     private lateinit var cpu: CPU
 
     @BeforeEach

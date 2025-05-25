@@ -1,7 +1,7 @@
 package system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.opcode.commands.RNDVxByteCommand
 import com.tomassirio.system.cpu.factory.CPUFactory
+import com.tomassirio.system.cpu.opcode.commands.rndVxByteCommand
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import kotlin.random.Random
@@ -16,7 +16,7 @@ class RNDVxByteCommandTest {
         val fixedRandom = object : Random() {
             override fun nextBits(bitCount: Int): Int = fixedRandomValue
         }
-        val command = RNDVxByteCommand(fixedRandom)
+        val command = rndVxByteCommand(fixedRandom)
         val cpu = CPUFactory.createCPU()
         val opcode: UShort = 0xC123u // C123
         val mask: UByte = 0x23u      // Lower 8 bits of the opcode

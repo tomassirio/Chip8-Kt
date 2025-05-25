@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,8 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * The interpreter sets the program counter to nnn.
  */
-object JPAddrCommand : Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun jpAddrCommand(): Command {
+    return Command { cpu, opcode ->
         cpu.pc.write(opcode.and(0x0FFFu))
     }
 }

@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,8 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * The interpreter increments the stack pointer, then puts the current PC on the top of the stack. The PC is then set to nnn.
  */
-object CALLAddrCommand : Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun callAddrCommand(): Command {
+    return Command { cpu, opcode ->
         cpu.sp.write(cpu.sp.read().plus(1u).toUByte())
         cpu.stack.push(cpu.pc.read())
         cpu.pc.write(opcode.and(0x0FFFu))

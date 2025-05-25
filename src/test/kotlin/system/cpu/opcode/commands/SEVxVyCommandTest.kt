@@ -1,7 +1,7 @@
 package system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.opcode.commands.SEVxVyCommand
 import com.tomassirio.system.cpu.factory.CPUFactory.createCPU
+import com.tomassirio.system.cpu.opcode.commands.seVxVyCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -19,7 +19,7 @@ class SEVxVyCommandTest {
         val opcode = 0x5010u.toUShort()
 
         // When
-        SEVxVyCommand.execute(cpu, opcode)
+        seVxVyCommand().execute(cpu, opcode)
 
         // Then
         assertThat(cpu.pc.read()).isEqualTo(0x202u.toUShort())
@@ -37,7 +37,7 @@ class SEVxVyCommandTest {
         val opcode = 0x5010u.toUShort()
 
         // When
-        SEVxVyCommand.execute(cpu, opcode)
+        seVxVyCommand().execute(cpu, opcode)
 
         // Then
         assertThat(cpu.pc.read()).isEqualTo(0x200u.toUShort())

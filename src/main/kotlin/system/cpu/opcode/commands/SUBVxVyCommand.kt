@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,9 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * If Vx > Vy, then VF is set to 1, otherwise 0. Then Vx is subtracted by Vy, and the results stored in Vx.
 */
-
-object SUBVxVyCommand : Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun subVxVyCommand(): Command {
+    return Command {cpu, opcode ->
         val vX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val vY = cpu.registers[(opcode and 0xF0u).toInt() shr 4]
 

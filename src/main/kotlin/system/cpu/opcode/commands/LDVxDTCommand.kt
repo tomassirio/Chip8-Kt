@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,9 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  * The value of DT is placed into Vx.
  */
-
-object LDVxDTCommand: Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun ldVxDTCommand(): Command {
+    return Command {cpu, opcode ->
         val vX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         vX.write(cpu.DT.read())
     }

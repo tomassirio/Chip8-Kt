@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -9,9 +8,8 @@ import com.tomassirio.system.cpu.opcode.Command
 
     The program counter is set to nnn plus the value of V0.
 */
-
-object JPAddrV0Command : Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun jpAddrV0Command(): Command {
+    return Command {cpu, opcode ->
         val v0Value = cpu.registers[0].read()
         val address = opcode and 0x0FFFu
 

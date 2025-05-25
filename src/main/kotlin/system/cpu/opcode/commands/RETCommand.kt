@@ -1,6 +1,5 @@
 package com.tomassirio.system.cpu.opcode.commands
 
-import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -10,8 +9,8 @@ import com.tomassirio.system.cpu.opcode.Command
  * The interpreter sets the program counter to the address at the top of the stack, then subtracts 1 from the stack pointer.
  *
  */
-object RETCommand : Command {
-    override fun execute(cpu: CPU, opcode: UShort) {
+fun retCommand(): Command {
+    return Command { cpu, _ ->
         cpu.pc.write(cpu.stack.pop())
         cpu.sp.write(cpu.sp.read().minus(1u).toUByte())
     }
