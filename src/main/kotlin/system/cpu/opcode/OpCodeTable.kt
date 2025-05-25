@@ -15,9 +15,11 @@ import com.tomassirio.system.cpu.opcode.commands.ldBVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldDTVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldFVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldIToAddrCommand
+import com.tomassirio.system.cpu.opcode.commands.ldIVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldSTVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldVxByteCommand
 import com.tomassirio.system.cpu.opcode.commands.ldVxDTCommand
+import com.tomassirio.system.cpu.opcode.commands.ldVxICommand
 import com.tomassirio.system.cpu.opcode.commands.ldVxKCommand
 import com.tomassirio.system.cpu.opcode.commands.ldVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.orVxVyCommand
@@ -85,8 +87,8 @@ object OpCodeTable {
                 0x1Eu -> addIVxCommand()
                 0x29u -> ldFVxCommand()
                 0x33u -> ldBVxCommand()
-//                0x55u -> ldIVxCommand()
-//                0x65u -> ldVxICommand()
+                0x55u -> ldIVxCommand()
+                0x65u -> ldVxICommand()
                 else -> throw CommandNotFoundException(opcode)
             }
             else -> throw CommandNotFoundException(opcode)

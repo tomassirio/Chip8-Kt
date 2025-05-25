@@ -16,9 +16,11 @@ import com.tomassirio.system.cpu.opcode.commands.ldBVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldDTVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldFVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldIToAddrCommand
+import com.tomassirio.system.cpu.opcode.commands.ldIVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldSTVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldVxByteCommand
 import com.tomassirio.system.cpu.opcode.commands.ldVxDTCommand
+import com.tomassirio.system.cpu.opcode.commands.ldVxICommand
 import com.tomassirio.system.cpu.opcode.commands.ldVxKCommand
 import com.tomassirio.system.cpu.opcode.commands.ldVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.orVxVyCommand
@@ -100,6 +102,8 @@ class OpcodeTableTest {
                 Arguments.of(0xF01E, addIVxCommand()),
                 Arguments.of(0xF029, ldFVxCommand()),
                 Arguments.of(0xF033, ldBVxCommand()),
+                Arguments.of(0xF055, ldIVxCommand()),
+                Arguments.of(0xF065, ldVxICommand()),
             )
         }
     }
