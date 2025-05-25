@@ -11,6 +11,7 @@ import com.tomassirio.system.cpu.opcode.commands.clsCommand
 import com.tomassirio.system.cpu.opcode.commands.drwVxVyNCommand
 import com.tomassirio.system.cpu.opcode.commands.jpAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.jpAddrV0Command
+import com.tomassirio.system.cpu.opcode.commands.ldBVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldDTVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldFVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldIToAddrCommand
@@ -34,7 +35,6 @@ import com.tomassirio.system.cpu.opcode.commands.subVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.subnVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.sysAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.xorVxVyCommand
-import kotlin.random.Random
 
 object OpCodeTable {
     val chip8CommandGetter: (UShort) -> Command = OpCodeTable::getCommand
@@ -84,9 +84,9 @@ object OpCodeTable {
                 0x18u -> ldSTVxCommand()
                 0x1Eu -> addIVxCommand()
                 0x29u -> ldFVxCommand()
-//                0x33u -> LDBVxCommand
-//                0x55u -> LDIVxCommand
-//                0x65u -> LDVxICommand
+                0x33u -> ldBVxCommand()
+//                0x55u -> ldIVxCommand()
+//                0x65u -> ldVxICommand()
                 else -> throw CommandNotFoundException(opcode)
             }
             else -> throw CommandNotFoundException(opcode)

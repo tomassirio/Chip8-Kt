@@ -12,6 +12,7 @@ import com.tomassirio.system.cpu.opcode.commands.clsCommand
 import com.tomassirio.system.cpu.opcode.commands.drwVxVyNCommand
 import com.tomassirio.system.cpu.opcode.commands.jpAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.jpAddrV0Command
+import com.tomassirio.system.cpu.opcode.commands.ldBVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldDTVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldFVxCommand
 import com.tomassirio.system.cpu.opcode.commands.ldIToAddrCommand
@@ -35,7 +36,6 @@ import com.tomassirio.system.cpu.opcode.commands.subVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.subnVxVyCommand
 import com.tomassirio.system.cpu.opcode.commands.sysAddrCommand
 import com.tomassirio.system.cpu.opcode.commands.xorVxVyCommand
-import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
@@ -99,6 +99,7 @@ class OpcodeTableTest {
                 Arguments.of(0xF018, ldSTVxCommand()),
                 Arguments.of(0xF01E, addIVxCommand()),
                 Arguments.of(0xF029, ldFVxCommand()),
+                Arguments.of(0xF033, ldBVxCommand()),
             )
         }
     }
