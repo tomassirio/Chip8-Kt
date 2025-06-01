@@ -27,6 +27,15 @@ class CPU(
     var waitingForKey: Boolean = false
     var registerToStoreKeyIn: Int? = null
 
+    fun loadRom(data: ByteArray) {
+        data.forEachIndexed { index, byte ->
+            memory.write(
+                memory.startAddress + index,
+                byte.toUByte()
+            )
+        }
+    }
+
     fun runCycle() {
         if (waitingForKey) return
 
@@ -45,6 +54,9 @@ class CPU(
     }
 
     private fun execute(command: Command, opcode: UShort) {
+        println("Command: $command")
+        println("Opcode: 0x${opcode.toString(16).uppercase().padStart(4, '0')}")
+        println("---")
         command.execute(this, opcode)
         pc.write(pc.read().plus(2u).toUShort())
     }
