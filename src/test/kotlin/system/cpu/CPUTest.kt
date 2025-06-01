@@ -123,4 +123,18 @@ class CPUTest {
 
         unmockkObject(OpCodeTable)
     }
+
+    @Test
+    fun `test pc doesnt increment when Command skips increment`() {
+        mockkObject(OpCodeTable)
+        every { OpCodeTable.getCommand(any()) }.returns(mockCommand)
+        every { mockCommand.skipsPcIncrement }.returns(true)
+
+        val pcBeforeValue = cpu.pc.read()
+
+        cpu.runCycle()
+
+        verify(exactly = 1) { mockCommand.execute(cpu, any()) }
+        assertThat(cpu.pc.read()).isEqualTo(pcBeforeValue)
+    }
 }

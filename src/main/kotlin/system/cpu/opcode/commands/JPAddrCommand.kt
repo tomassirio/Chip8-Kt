@@ -9,7 +9,7 @@ import com.tomassirio.system.cpu.opcode.Command
  * The interpreter sets the program counter to nnn.
  */
 fun jpAddrCommand(): Command {
-    return Command { cpu, opcode ->
+    return Command(skipsPcIncrement = true) { cpu, opcode ->
         cpu.pc.write(opcode.and(0x0FFFu))
     }
 }
