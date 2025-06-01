@@ -1,10 +1,8 @@
 package com.tomassirio
 
-import com.tomassirio.cpu.CPUFactory
+import com.tomassirio.ui.EmulatorUI
+import javafx.application.Application
 
 fun main() {
-    val cpuFactory = CPUFactory()
-    val cpu = cpuFactory.createCPU()
-
-    cpu.debug()
+    Application.launch(EmulatorUI::class.java)
 }
