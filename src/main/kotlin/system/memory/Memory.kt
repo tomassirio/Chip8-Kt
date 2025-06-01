@@ -3,7 +3,7 @@ package com.tomassirio.system.memory
 import com.tomassirio.system.memory.util.toMemoryBytes
 
 @OptIn(ExperimentalUnsignedTypes::class)
-class Memory(size: Int, private val startAddress: Int = 0x200) {
+class Memory(size: Int, val startAddress: Int = 0x200) {
 
     private val memory = UByteArray(size)
     private var isLocked = false
