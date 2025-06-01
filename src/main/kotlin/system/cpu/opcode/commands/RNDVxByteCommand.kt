@@ -12,7 +12,7 @@ import kotlin.random.Random
  *   The results are stored in Vx. See instruction 8xy2 for more information on ANDing values.
  */
 fun rndVxByteCommand(random: Random = Random.Default): Command {
-    return CommandWrapper("RNDVxByteCommand") { cpu, opcode ->
+    return CommandWrapper(commandType = "RNDVxByteCommand") { cpu, opcode ->
         val registerX = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val value = (opcode and 0x00FFu).toUByte()
 
@@ -22,11 +22,12 @@ fun rndVxByteCommand(random: Random = Random.Default): Command {
 }
 
 class CommandWrapper(
+    skipsPcIncrement: Boolean = false,
     private val commandType: String,
     private val executeFunc: (CPU, UShort) -> Unit
-) : Command {
+) : Command(skipsPcIncrement, executeFunc) {
 
-    override fun execute(cpu: CPU, opcode: UShort) {
+    fun execute(cpu: CPU, opcode: UShort) {
         executeFunc(cpu, opcode)
     }
 

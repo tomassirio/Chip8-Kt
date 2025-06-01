@@ -54,10 +54,9 @@ class CPU(
     }
 
     private fun execute(command: Command, opcode: UShort) {
-        println("Command: $command")
-        println("Opcode: 0x${opcode.toString(16).uppercase().padStart(4, '0')}")
-        println("---")
         command.execute(this, opcode)
-        pc.write(pc.read().plus(2u).toUShort())
+        if(!command.skipsPcIncrement) {
+            pc.write(pc.read().plus(2u).toUShort())
+        }
     }
 }

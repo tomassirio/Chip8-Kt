@@ -2,6 +2,11 @@ package com.tomassirio.system.cpu.opcode
 
 import com.tomassirio.system.cpu.CPU
 
-fun interface Command {
-    fun execute(cpu: CPU, opcode: UShort)
+open class Command(
+    val skipsPcIncrement: Boolean = false,
+    val execute: (cpu: CPU, opcode: UShort) -> Unit
+) {
+    operator fun invoke(cpu: CPU, opcode: UShort) {
+        execute(cpu, opcode)
+    }
 }
