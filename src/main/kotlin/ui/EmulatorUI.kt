@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyEvent
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
+import java.io.File
 import kotlin.properties.Delegates
 
 class EmulatorUI: Application() {
@@ -26,11 +27,15 @@ class EmulatorUI: Application() {
 
     private lateinit var emulatorController: EmulatorController
     private lateinit var gc: GraphicsContext
+    private val ROM_INPUT = "rom"
+    private lateinit var romPath: String
 
     override fun init() {
         val params = parameters.named
         val cpuTypeInput = params[CPU_INPUT] ?: CPUType.CHIP8.name
         val screenModeInput = params[SCREEN_INPUT] ?: ScreenMode.NORMAL.name
+//        romPath = params[ROM_INPUT] ?: throw IllegalArgumentException("ROM file path is required!")
+        romPath = "src/main/resources/roms/Airplane.ch8"
 
         cpuType = CPUType.getByName(cpuTypeInput)
         val screenMode = ScreenMode.getByName(screenModeInput)
@@ -41,6 +46,8 @@ class EmulatorUI: Application() {
 
     override fun start(stage: Stage) {
         emulatorController = EmulatorController(CPUFactory.createCPU(cpuType))
+        val romBytes = File(romPath).readBytes()
+        emulatorController.loadRom(romBytes)
 
         val canvas = Canvas(width * SCACLE.toDouble(), height * SCACLE.toDouble())
         gc = canvas.graphicsContext2D
@@ -59,7 +66,7 @@ class EmulatorUI: Application() {
             override fun handle(now: Long) {
                 emulatorController.tick()
                 render()
-                debug()
+//                debug()
             }
         }.start()
     }
