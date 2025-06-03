@@ -6,8 +6,15 @@ import com.tomassirio.system.io.KeyboardState
 class EmulatorController(
     val cpu: CPU
 ) {
+    fun loadRom(data: ByteArray) {
+        cpu.loadRom(data)
+    }
+
     fun tick() {
         cpu.runCycle()
+        // Update timers
+        cpu.DT.tick()
+        cpu.ST.tick()
     }
 
     fun onKeyPressed(chip8Key: Char) {
