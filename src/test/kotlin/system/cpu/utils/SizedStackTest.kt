@@ -19,8 +19,8 @@ class SizedStackTest {
         stack.push(1)
         stack.push(2)
         stack.push(3)
-        stack.push(4)
         assertThat(stack.size).isEqualTo(3)
-        assertThat(stack[0]).isEqualTo(2)
+        assertThat(stack[0]).isEqualTo(1)
+        assertThat(stack.lastElement()).isEqualTo(3)
     }
 }

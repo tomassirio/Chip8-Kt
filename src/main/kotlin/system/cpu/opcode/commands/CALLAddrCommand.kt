@@ -10,8 +10,7 @@ import com.tomassirio.system.cpu.opcode.Command
  */
 fun callAddrCommand(): Command {
     return Command(skipsPcIncrement = true) { cpu, opcode ->
-        cpu.sp.write(cpu.sp.read().plus(1u).toUByte())
-        cpu.stack.push(cpu.pc.read())
+        cpu.stack.push(cpu.pc.read().plus(2u).toUShort())
         cpu.pc.write(opcode.and(0x0FFFu))
     }
 }

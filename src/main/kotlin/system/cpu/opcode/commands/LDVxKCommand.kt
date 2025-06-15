@@ -9,10 +9,9 @@ import com.tomassirio.system.cpu.opcode.Command
  * All execution stops until a key is pressed, then the value of that key is stored in Vx.
  */
 fun ldVxKCommand(): Command {
-    return Command {cpu, opcode ->
+    return Command(skipsPcIncrement = true) {cpu, opcode ->
         val vX = (opcode and 0xF00u).toInt() shr 8
 
-        cpu.waitingForKey = true
-        cpu.registerToStoreKeyIn = vX
+        cpu.keyboardState.setWaitingForKey(vX)
     }
 }

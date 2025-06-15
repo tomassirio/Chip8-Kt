@@ -1,5 +1,6 @@
 package com.tomassirio.system.cpu.opcode.commands
 
+import com.tomassirio.system.constants.FONTSET_BASE_ADDRESS
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -11,10 +12,10 @@ import com.tomassirio.system.cpu.opcode.Command
  */
 fun ldFVxCommand(): Command {
     return Command {cpu, opcode ->
-        val x = (opcode and 0x0F00u).toInt() shr 8
-        val vx = cpu.registers[x].read()
+        val vx = cpu.registers[(opcode and 0x0F00u).toInt() shr 8]
+        val value = vx.read()
 
-        val spriteAddress = 0x00u.plus(vx * 5u).toUShort()
+        val spriteAddress = FONTSET_BASE_ADDRESS.plus(value * 5u).toUShort()
         cpu.I.write(spriteAddress)
     }
 }

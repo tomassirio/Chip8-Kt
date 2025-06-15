@@ -25,7 +25,7 @@ class LDVxKCommandTest {
         command.execute(cpu, opcode)
 
         // Then
-        assertThat(cpu.waitingForKey).isTrue()
-        assertThat(cpu.registerToStoreKeyIn).isEqualTo(0)
+        assertThat(cpu.keyboardState.isWaitingForKey).isTrue()
+        assertThat(cpu.keyboardState.registerToStoreKeyIn).isEqualTo(0)
     }
 }

@@ -10,6 +10,6 @@ import com.tomassirio.system.cpu.opcode.Command
  */
 fun sysAddrCommand(): Command {
     return Command { cpu, opcode ->
-        cpu.I.write(opcode.and(0xFFFu))
+        // No longer implemented
     }
 }

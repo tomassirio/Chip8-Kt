@@ -28,7 +28,6 @@ class CPUTest {
     private lateinit var keyboardState: KeyboardState
     private lateinit var displayState: DisplayState
     private lateinit var pc: Register.ShortRegister
-    private lateinit var sp: Register.ByteRegister
     private lateinit var I: Register.ShortRegister
     private lateinit var DT: Register.TimerRegister
     private lateinit var ST: Register.TimerRegister
@@ -41,7 +40,6 @@ class CPUTest {
         keyboardState = mockk(relaxed = true)
         displayState = mockk(relaxed = true)
         pc = Register.ShortRegister(0x200u)
-        sp = mockk(relaxed = true)
         I = Register.ShortRegister()
         DT = Register.TimerRegister()
         ST = Register.TimerRegister()
@@ -59,7 +57,6 @@ class CPUTest {
             keyboardState = keyboardState,
             displayState = displayState,
             pc = pc,
-            sp = sp,
             I = I,
             DT = DT,
             ST = ST,

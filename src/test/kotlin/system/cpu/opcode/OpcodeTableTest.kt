@@ -54,7 +54,7 @@ class OpcodeTableTest {
         expectedCommand: Command) {
         val opcodeTable = OpCodeTable.chip8CommandGetter
         val command = opcodeTable(opcode.toUShort())
-        assertThat(expectedCommand).isEqualTo(command)
+        assertThat(expectedCommand).usingRecursiveComparison().isEqualTo(command)
     }
 
     @Test

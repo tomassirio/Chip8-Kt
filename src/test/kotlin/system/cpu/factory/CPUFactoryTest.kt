@@ -22,7 +22,7 @@ class CPUFactoryTest {
 
         // Check registers are initialized and PC starts at 0x200
         assertThat(chip8.pc.read()).isEqualTo(0x200u.toUShort())
-        assertThat(chip8.sp.read()).isEqualTo(0x0u.toUByte())
+        assertThat(chip8.stack.lastIndex).isEqualTo(-1)
         assertThat(chip8.I.read()).isEqualTo(0x0u.toUShort())
 
         // Check that the register set is initialized correctly
@@ -31,7 +31,7 @@ class CPUFactoryTest {
 
         // Check that the stack is initialized to 16 empty entries
         assertThat(chip8.stack.maxSize).isEqualTo(16)
-        assertThat(chip8.stack).containsOnly(0x0000u)
+        assertThat(chip8.stack).isEmpty()
 
         // Check that keyboard and display are initialized
         assertThat(chip8.keyboardState).isNotNull
@@ -50,7 +50,7 @@ class CPUFactoryTest {
 
         // Check PC, SP, and I registers
         assertThat(eti660.pc.read()).isEqualTo(0x600u.toUShort())
-        assertThat(eti660.sp.read()).isEqualTo(0x0u.toUByte())
+        assertThat(eti660.stack.lastIndex).isEqualTo(-1)
         assertThat(eti660.I.read()).isEqualTo(0x0u.toUShort())
 
         // Check that the register set is initialized correctly
@@ -58,7 +58,7 @@ class CPUFactoryTest {
 
         // Check that the stack is initialized to 16 empty entries
         assertThat(eti660.stack.maxSize).isEqualTo(16)
-        assertThat(eti660.stack).containsOnly(0x0000u)
+        assertThat(eti660.stack).isEmpty()
 
         // Check that keyboard and display are initialized
         assertThat(eti660.keyboardState).isNotNull
