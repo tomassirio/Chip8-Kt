@@ -1,6 +1,6 @@
 package com.tomassirio.system.io
 
-import java.util.BitSet
+import java.util.*
 
 @OptIn(ExperimentalUnsignedTypes::class)
 class DisplayState(val width: Int = 64, val height: Int = 32) {

@@ -1,7 +1,6 @@
 package com.tomassirio.system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.opcode.Command
-import com.tomassirio.system.memory.util.toUByteAt
 
 /**
  * Dxyn - DRW Vx, Vy, nibble

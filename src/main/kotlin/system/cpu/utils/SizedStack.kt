@@ -1,6 +1,6 @@
 package com.tomassirio.system.cpu.utils
 
-import java.util.Stack
+import java.util.*
 
 
 class SizedStack<T>(val maxSize: Int) : Stack<T>() {
