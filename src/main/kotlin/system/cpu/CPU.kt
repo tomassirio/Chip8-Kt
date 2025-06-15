@@ -8,7 +8,7 @@ import com.tomassirio.system.register.utils.RegisterSet
 import com.tomassirio.system.io.DisplayState
 import com.tomassirio.system.io.KeyboardState
 import com.tomassirio.system.cpu.utils.SizedStack
-import com.tomassirio.system.memory.util.toUShortAt
+import com.tomassirio.system.memory.accessor.MemoryAccessor
 
 class CPU(
     val memory: Memory,
@@ -30,10 +30,8 @@ class CPU(
         execute(command, opcode)
     }
 
-    @OptIn(ExperimentalUnsignedTypes::class)
     private fun fetch(): UShort {
-        return memory.read(pc.read().toInt())
-            { bytes, addr -> bytes.toUShortAt(addr) }
+        return MemoryAccessor.readUShort(memory, pc.read().toInt())
     }
 
     private fun decode(opcode: UShort): Command {

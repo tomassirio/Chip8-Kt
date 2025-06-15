@@ -18,7 +18,7 @@ fun ldIVxCommand(): Command {
         // Store registers V0 through Vx in memory
         for (i in 0..registerIndex) {
             val registerValue = cpu.registers[i].read()
-            cpu.memory.write(memoryAddress + i, registerValue)
+            cpu.memory.writeByte(memoryAddress + i, registerValue)
         }
     }
 }

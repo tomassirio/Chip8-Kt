@@ -23,8 +23,8 @@ fun ldBVxCommand(): Command {
 
         val memoryAddress = cpu.I.read().toInt()
 
-        cpu.memory.write(memoryAddress, hundreds.toUByte())
-        cpu.memory.write(memoryAddress + 1, tens.toUByte())
-        cpu.memory.write(memoryAddress + 2, ones.toUByte())
+        cpu.memory.writeByte(memoryAddress, hundreds.toUByte())
+        cpu.memory.writeByte(memoryAddress + 1, tens.toUByte())
+        cpu.memory.writeByte(memoryAddress + 2, ones.toUByte())
     }
 }

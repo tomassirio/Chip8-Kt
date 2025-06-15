@@ -1,7 +1,6 @@
 package com.tomassirio.system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.opcode.Command
-import com.tomassirio.system.memory.util.toUByteAt
 
 /**
  * Fx65 - LD Vx, [I]
@@ -10,7 +9,6 @@ import com.tomassirio.system.memory.util.toUByteAt
  * The interpreter reads values from memory starting at location I into registers V0 through Vx.
  *
  */
-@OptIn(ExperimentalUnsignedTypes::class)
 fun ldVxICommand(): Command {
     return Command {cpu, opcode ->
         val registerIndex = ((opcode and 0x0F00u).toInt() shr 8)
@@ -19,9 +17,7 @@ fun ldVxICommand(): Command {
 
         // Load memory values into registers V0 through Vx
         for (i in 0..registerIndex) {
-            val memoryValue = cpu.memory.read(memoryAddress + i) { bytes, addr ->
-                bytes.toUByteAt(addr)
-            }
+            val memoryValue = cpu.memory.readByte(memoryAddress + i)
             cpu.registers[i].write(memoryValue)
         }
     }
