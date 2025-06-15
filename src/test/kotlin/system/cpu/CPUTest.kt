@@ -1,17 +1,16 @@
 package system.cpu
 
 import com.tomassirio.system.cpu.CPU
-import com.tomassirio.system.register.Register
 import com.tomassirio.system.cpu.opcode.Command
 import com.tomassirio.system.cpu.opcode.OpCodeTable
 import com.tomassirio.system.cpu.opcode.commands.sysAddrCommand
-import com.tomassirio.system.register.utils.RegisterSet
+import com.tomassirio.system.cpu.utils.SizedStack
 import com.tomassirio.system.io.DisplayState
 import com.tomassirio.system.io.KeyboardState
 import com.tomassirio.system.memory.Memory
-import com.tomassirio.system.memory.util.toUShortAt
-import com.tomassirio.system.cpu.utils.SizedStack
 import com.tomassirio.system.memory.accessor.MemoryAccessor
+import com.tomassirio.system.register.Register
+import com.tomassirio.system.register.utils.RegisterSet
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkObject

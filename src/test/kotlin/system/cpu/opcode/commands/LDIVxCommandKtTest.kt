@@ -3,7 +3,6 @@ package system.cpu.opcode.commands
 import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.factory.CPUFactory
 import com.tomassirio.system.cpu.opcode.commands.ldIVxCommand
-import com.tomassirio.system.memory.util.toUByteAt
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
