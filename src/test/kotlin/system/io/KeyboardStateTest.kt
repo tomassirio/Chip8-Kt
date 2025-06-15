@@ -1,5 +1,6 @@
 package system.io
 
+import com.tomassirio.constants.KEYBOARD_KEYS
 import com.tomassirio.system.io.KeyboardState
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.Test
@@ -39,7 +40,7 @@ class KeyboardStateTest {
     fun `test only valid keys are pressed`() {
         val keyboardState = KeyboardState()
 
-        "0123456789ABCDEF".forEach { key ->
+        KEYBOARD_KEYS.forEach { key ->
             keyboardState.pressKey(key)
             assertThat(keyboardState.isKeyPressed(key)).isTrue()
         }
