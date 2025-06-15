@@ -1,5 +1,6 @@
 package com.tomassirio.system.memory.factory
 
+import com.tomassirio.system.constants.FONTSET_BASE_ADDRESS
 import com.tomassirio.system.memory.Memory
 import com.tomassirio.system.memory.preload.FontSet
 
@@ -15,14 +16,14 @@ object MemoryFactory {
         Memory(size, startAddress).apply { loadFontSet(this) }
 
     private fun loadFontSet(memory: Memory) {
-        val fontBase = 0x00
+        val fontBase = FONTSET_BASE_ADDRESS
         val fontData = FontSet().getFontSet()
             .toSortedMap()
             .values
             .flatten()
 
         fontData.forEachIndexed { index, byte ->
-            memory.write(fontBase + index, byte)
+            memory.write((fontBase + index.toUInt()).toInt(), byte)
         }
     }
 }
