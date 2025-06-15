@@ -9,7 +9,7 @@ import com.tomassirio.system.cpu.opcode.Command
     The program counter is set to nnn plus the value of V0.
 */
 fun jpAddrV0Command(): Command {
-    return Command {cpu, opcode ->
+    return Command(skipsPcIncrement = true) {cpu, opcode ->
         val v0Value = cpu.registers[0].read()
         val address = opcode and 0x0FFFu
 

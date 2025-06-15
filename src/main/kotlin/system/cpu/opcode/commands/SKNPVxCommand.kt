@@ -1,5 +1,6 @@
 package com.tomassirio.system.cpu.opcode.commands
 
+import com.tomassirio.constants.KEYBOARD_KEYS
 import com.tomassirio.system.cpu.opcode.Command
 
 /**
@@ -13,7 +14,8 @@ fun sknpVxCommand(): Command {
         val vx = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val vxValue = vx.read()
 
-        val isPressed = cpu.keyboardState.isKeyPressed(vxValue.toInt().toChar())
+        val chip8Key = KEYBOARD_KEYS[vxValue.toInt()]
+        val isPressed = cpu.keyboardState.isKeyPressed(chip8Key)
 
         if (!isPressed) {
             cpu.pc.write(cpu.pc.read().plus(2u).toUShort())

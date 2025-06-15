@@ -10,8 +10,7 @@ import com.tomassirio.system.cpu.opcode.Command
  *
  */
 fun retCommand(): Command {
-    return Command { cpu, _ ->
+    return Command(skipsPcIncrement = true) { cpu, _ ->
         cpu.pc.write(cpu.stack.pop())
-        cpu.sp.write(cpu.sp.read().minus(1u).toUByte())
     }
 }

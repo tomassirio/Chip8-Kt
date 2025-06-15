@@ -10,9 +10,6 @@ import com.tomassirio.system.io.DisplayState
 import com.tomassirio.system.io.KeyboardState
 
 object CPUFactory {
-
-    private val emptyValue: UShort = 0x0000u
-
     fun createCPU(cpuType: CPUType = CPUType.CHIP8): CPU {
         return when (cpuType) {
             CPUType.CHIP8 -> createChip8CPU()
@@ -27,7 +24,6 @@ object CPUFactory {
             keyboardState = KeyboardState(),
             displayState = DisplayState(),
             pc = Register.ShortRegister(value = 0x200u),
-            sp = Register.ByteRegister(),
             I = Register.ShortRegister(),
             DT = Register.TimerRegister(),
             ST = Register.TimerRegister(),
@@ -42,7 +38,6 @@ object CPUFactory {
             keyboardState = KeyboardState(),
             displayState = DisplayState(),
             pc = Register.ShortRegister(0x600u),
-            sp = Register.ByteRegister(),
             I = Register.ShortRegister(),
             DT = Register.TimerRegister(),
             ST = Register.TimerRegister(),
@@ -59,8 +54,6 @@ object CPUFactory {
     }
 
     private fun createStack(): SizedStack<UShort> {
-        return SizedStack<UShort>(16).apply {
-            push(emptyValue)
-        }
+        return SizedStack(16)
     }
 }

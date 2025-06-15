@@ -11,14 +11,14 @@ class CALLAddrCommandTest {
         // Given
         val cpu = createCPU()
         val opcode = 0x2ABC.toUShort()
-        val previousSP = cpu.sp.read()
+        val previousSP = cpu.stack.lastIndex
 
         // When
         callAddrCommand().execute(cpu, opcode)
 
         // Then
-        assertThat(cpu.sp.read()).isEqualTo(previousSP.plus(0x1u).toUByte())
+        assertThat(cpu.stack.lastIndex).isEqualTo(previousSP.plus(1))
         assertThat(cpu.pc.read()).isEqualTo(0xABCu.toUShort())
-        assertThat(cpu.stack.pop()).isEqualTo(0x200u.toUShort())
+        assertThat(cpu.stack.pop()).isEqualTo(0x202u.toUShort())
     }
 }

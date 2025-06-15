@@ -1,20 +1,26 @@
 package com.tomassirio.system.io
 
+import com.tomassirio.constants.KEYBOARD_KEYS
+
 class KeyboardState {
-    private val keyboardState = mutableMapOf<Char, Boolean>().apply {
+    val keyboardState = mutableMapOf<Char, Boolean>().apply {
         KEYS.forEach { this[it] = false }
     }
 
+    var isWaitingForKey: Boolean = false
+        private set
+
+    var registerToStoreKeyIn: Int? = null
+        private set
+
     fun pressKey(physicalKey: Char) {
-        val chip8Key = keyboardState[physicalKey]
-        if (chip8Key != null) {
+        if (keyboardState.containsKey(physicalKey)) {
             keyboardState[physicalKey] = true
         }
     }
 
     fun releaseKey(physicalKey: Char) {
-        val chip8Key = keyboardState[physicalKey]
-        if (chip8Key != null) {
+        if (keyboardState.containsKey(physicalKey)) {
             keyboardState[physicalKey] = false
         }
     }
@@ -27,9 +33,20 @@ class KeyboardState {
         keyboardState.keys.forEach { key ->
             keyboardState[key] = false
         }
+        clearWaitingForKey()
+    }
+
+    fun clearWaitingForKey() {
+        isWaitingForKey = false
+        registerToStoreKeyIn = null
+    }
+
+    fun setWaitingForKey(register: Int) {
+        isWaitingForKey = true
+        registerToStoreKeyIn = register
     }
 
     companion object {
-        val KEYS = "0123456789ABCDEF".toList()
+        val KEYS = KEYBOARD_KEYS.toList()
     }
 }

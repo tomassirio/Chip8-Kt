@@ -20,7 +20,7 @@ class SKNPVxCommandTest {
     @Test
     fun `test SKNPVxCommand when key is not pressed`() {
         val opcode: UShort = 0xE0A1u // ExA1
-        val vxValue = 'A'.code.toUByte()
+        val vxValue = 0xA.toUByte()
 
         cpu.registers[0].write(vxValue) // V0 = 'A'
 
@@ -34,7 +34,7 @@ class SKNPVxCommandTest {
     @Test
     fun `test SKNPVxCommand when key is pressed`() {
         val opcode: UShort = 0xE09Eu // ExA1
-        val vxValue = 'A'.code.toUByte()
+        val vxValue = 0xA.toUByte()
 
         cpu.registers[0].write(vxValue) // V0 = 'A'
         cpu.keyboardState.pressKey('A') // Simulate key 'A' being pressed
