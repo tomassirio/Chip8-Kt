@@ -29,9 +29,9 @@ class DRWVxVyNCommandTest {
         // Byte 1: 10010000 (0x90) - Pixels at positions 0 and 3
         // Byte 2: 10100000 (0xA0) - Pixels at positions 0 and 2
         // Byte 3: 11110000 (0xF0) - Pixels at positions 0, 1, 2, and 3
-        cpu.memory.write(0x200, 0x90u.toUByte())
-        cpu.memory.write(0x201, 0xA0u.toUByte())
-        cpu.memory.write(0x202, 0xF0u.toUByte())
+        cpu.memory.writeByte(0x200, 0x90u)
+        cpu.memory.writeByte(0x201, 0xA0u)
+        cpu.memory.writeByte(0x202, 0xF0u)
 
         // When
         command.execute(cpu, opcode)
@@ -73,7 +73,7 @@ class DRWVxVyNCommandTest {
         cpu.displayState.setPixel(5, 10, true)
 
         // Setup sprite data with a pattern that will collide
-        cpu.memory.write(0x200, 0x80u.toUByte()) // Just the leftmost pixel
+        cpu.memory.writeByte(0x200, 0x80u.toUByte()) // Just the leftmost pixel
 
         // When
         command.execute(cpu, opcode)
@@ -95,7 +95,7 @@ class DRWVxVyNCommandTest {
         cpu.I.write(0x200u) // I register points to the sprite data in memory
 
         // Setup sprite data that will wrap
-        cpu.memory.write(0x200, 0xC0u.toUByte()) // Two leftmost pixels set
+        cpu.memory.writeByte(0x200, 0xC0u) // Two leftmost pixels set
 
         // When
         command.execute(cpu, opcode)

@@ -1,10 +1,7 @@
 package com.tomassirio.system.register
 
 sealed class Register<T>(val index: Short? = null, private var value: T) {
-    class ByteRegister : Register<UByte> {
-        constructor(index: Short, value: UByte = 0x00u) : super(index, value)  // For V0-VF
-        constructor(value: UByte = 0x00u) : super(value = value)  // For DT, ST
-    }
+    class ByteRegister(index: Short, value: UByte = 0x00u) : Register<UByte>(index, value) // For V0-VF
 
     class ShortRegister(value: UShort = 0x0000u) : Register<UShort>(value = value) // For PC, SP, I
 

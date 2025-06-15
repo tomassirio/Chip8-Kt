@@ -1,8 +1,8 @@
 package system.cpu.factory
 
 import com.tomassirio.system.cpu.CPU
-import com.tomassirio.system.cpu.factory.CPUFactory
 import com.tomassirio.system.cpu.CPUType
+import com.tomassirio.system.cpu.factory.CPUFactory
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

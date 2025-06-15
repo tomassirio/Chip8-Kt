@@ -1,16 +1,16 @@
+package system.cpu.opcode.commands
+
 import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.factory.CPUFactory
 import com.tomassirio.system.cpu.opcode.commands.ldBVxCommand
-import com.tomassirio.system.memory.util.toUByteAt
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-@OptIn(ExperimentalUnsignedTypes::class)
 class LDBVXCommandKtTest {
     private val command = ldBVxCommand()
     private lateinit var cpu: CPU
@@ -36,15 +36,9 @@ class LDBVXCommandKtTest {
         command.execute(cpu, opcode)
 
         // Then
-        assertThat(cpu.memory.read(memoryAddress.toInt()){ bytes, addr ->
-            bytes.toUByteAt(addr)
-        }).isEqualTo(2.toUByte()) // hundreds
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 1){ bytes, addr ->
-            bytes.toUByteAt(addr)
-        }).isEqualTo(3.toUByte()) // tens
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 2){ bytes, addr ->
-            bytes.toUByteAt(addr)
-        }).isEqualTo(4.toUByte()) // ones
+        assertThat(cpu.memory.readByte(memoryAddress.toInt())).isEqualTo(2.toUByte()) // hundreds
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 1)).isEqualTo(3.toUByte()) // tens
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 2)).isEqualTo(4.toUByte()) // ones
     }
 
     @ParameterizedTest
@@ -68,15 +62,9 @@ class LDBVXCommandKtTest {
         command.execute(cpu, opcode)
 
         // Then
-        assertThat(cpu.memory.read(memoryAddress.toInt()){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(expectedHundreds.toUByte())
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 1){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(expectedTens.toUByte())
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 2){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(expectedOnes.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress.toInt())).isEqualTo(expectedHundreds.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 1)).isEqualTo(expectedTens.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 2)).isEqualTo(expectedOnes.toUByte())
     }
 
     @Test
@@ -93,29 +81,17 @@ class LDBVXCommandKtTest {
         val opcodeV7 = (0xF733).toUShort() // F733 - LD B, V7
         command.execute(cpu, opcodeV7)
 
-        assertThat(cpu.memory.read(memoryAddress.toInt()){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(1.toUByte()) // 123 -> hundreds = 1
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 1){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(2.toUByte()) // tens = 2
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 2){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(3.toUByte()) // ones = 3
+        assertThat(cpu.memory.readByte(memoryAddress.toInt())).isEqualTo(1.toUByte()) // 123 -> hundreds = 1
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 1)).isEqualTo(2.toUByte()) // tens = 2
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 2)).isEqualTo(3.toUByte()) // ones = 3
 
         // Test register VC
         val opcodeVC = (0xFC33).toUShort() // FC33 - LD B, VC
         command.execute(cpu, opcodeVC)
 
-        assertThat(cpu.memory.read(memoryAddress.toInt()){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0.toUByte()) // 89 -> hundreds = 0
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 1){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(8.toUByte()) // tens = 8
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 2){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(9.toUByte()) // ones = 9
+        assertThat(cpu.memory.readByte(memoryAddress.toInt())).isEqualTo(0.toUByte()) // 89 -> hundreds = 0
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 1)).isEqualTo(8.toUByte()) // tens = 8
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 2)).isEqualTo(9.toUByte()) // ones = 9
     }
 
     @Test
@@ -133,34 +109,20 @@ class LDBVXCommandKtTest {
         cpu.I.write(memoryAddress1)
         command.execute(cpu, opcode)
 
-        assertThat(cpu.memory.read(memoryAddress1.toInt()){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0.toUByte()) // hundreds
-        assertThat(cpu.memory.read(memoryAddress1.toInt() + 1){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(4.toUByte()) // tens
-        assertThat(cpu.memory.read(memoryAddress1.toInt() + 2){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(2.toUByte()) // ones
+        assertThat(cpu.memory.readByte(memoryAddress1.toInt())).isEqualTo(0.toUByte()) // hundreds
+        assertThat(cpu.memory.readByte(memoryAddress1.toInt() + 1)).isEqualTo(4.toUByte()) // tens
+        assertThat(cpu.memory.readByte(memoryAddress1.toInt() + 2)).isEqualTo(2.toUByte()) // ones
 
         // Test with second memory address
         cpu.I.write(memoryAddress2)
         command.execute(cpu, opcode)
 
-        assertThat(cpu.memory.read(memoryAddress2.toInt()){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0.toUByte()) // hundreds
-        assertThat(cpu.memory.read(memoryAddress2.toInt() + 1){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(4.toUByte()) // tens
-        assertThat(cpu.memory.read(memoryAddress2.toInt() + 2){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(2.toUByte()) // ones
+        assertThat(cpu.memory.readByte(memoryAddress2.toInt())).isEqualTo(0.toUByte()) // hundreds
+        assertThat(cpu.memory.readByte(memoryAddress2.toInt() + 1)).isEqualTo(4.toUByte()) // tens
+        assertThat(cpu.memory.readByte(memoryAddress2.toInt() + 2)).isEqualTo(2.toUByte()) // ones
 
         // Verify first memory location is unchanged
-        assertThat(cpu.memory.read(memoryAddress1.toInt()){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress1.toInt())).isEqualTo(0.toUByte())
     }
 
     @Test
@@ -172,9 +134,9 @@ class LDBVXCommandKtTest {
         val opcode = (0xF133).toUShort() // F133 - LD B, V1
 
         // Pre-populate memory with different values
-        cpu.memory.write(memoryAddress.toInt(), 9.toUByte())
-        cpu.memory.write(memoryAddress.toInt() + 1, 8.toUByte())
-        cpu.memory.write(memoryAddress.toInt() + 2, 7.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt(), 9.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt() + 1, 8.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt() + 2, 7.toUByte())
 
         cpu.registers[registerIndex].write(value)
         cpu.I.write(memoryAddress)
@@ -183,15 +145,9 @@ class LDBVXCommandKtTest {
         command.execute(cpu, opcode)
 
         // Then - memory should be overwritten with BCD of 15
-        assertThat(cpu.memory.read(memoryAddress.toInt()){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0.toUByte()) // hundreds
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 1){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(1.toUByte()) // tens
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 2){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(5.toUByte()) // ones
+        assertThat(cpu.memory.readByte(memoryAddress.toInt())).isEqualTo(0.toUByte()) // hundreds
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 1)).isEqualTo(1.toUByte()) // tens
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 2)).isEqualTo(5.toUByte()) // ones
     }
 
     companion object {

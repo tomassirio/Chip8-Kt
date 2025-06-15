@@ -2,13 +2,13 @@ package com.tomassirio.system.cpu
 
 import com.tomassirio.system.cpu.opcode.Command
 import com.tomassirio.system.cpu.opcode.OpCodeTable
-import com.tomassirio.system.memory.Memory
-import com.tomassirio.system.register.Register
-import com.tomassirio.system.register.utils.RegisterSet
+import com.tomassirio.system.cpu.utils.SizedStack
 import com.tomassirio.system.io.DisplayState
 import com.tomassirio.system.io.KeyboardState
-import com.tomassirio.system.cpu.utils.SizedStack
-import com.tomassirio.system.memory.util.toUShortAt
+import com.tomassirio.system.memory.Memory
+import com.tomassirio.system.memory.accessor.MemoryAccessor
+import com.tomassirio.system.register.Register
+import com.tomassirio.system.register.utils.RegisterSet
 
 class CPU(
     val memory: Memory,
@@ -30,10 +30,8 @@ class CPU(
         execute(command, opcode)
     }
 
-    @OptIn(ExperimentalUnsignedTypes::class)
     private fun fetch(): UShort {
-        return memory.read(pc.read().toInt())
-            { bytes, addr -> bytes.toUShortAt(addr) }
+        return MemoryAccessor.readUShort(memory, pc.read().toInt())
     }
 
     private fun decode(opcode: UShort): Command {

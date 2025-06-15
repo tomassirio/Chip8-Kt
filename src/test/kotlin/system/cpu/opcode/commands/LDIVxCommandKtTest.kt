@@ -3,14 +3,12 @@ package system.cpu.opcode.commands
 import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.factory.CPUFactory
 import com.tomassirio.system.cpu.opcode.commands.ldIVxCommand
-import com.tomassirio.system.memory.util.toUByteAt
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-@OptIn(ExperimentalUnsignedTypes::class)
 class LDIVxCommandKtTest {
     private val ldIVxCommand = ldIVxCommand()
     private lateinit var cpu: CPU
@@ -33,9 +31,7 @@ class LDIVxCommandKtTest {
         ldIVxCommand.execute(cpu, opcode)
 
         // Then
-        assertThat(cpu.memory.read(memoryAddress.toInt()){ bytes, addr ->
-            bytes.toUByteAt(addr)
-        }).isEqualTo(0x42.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress.toInt())).isEqualTo(0x42.toUByte())
     }
 
     @Test
@@ -55,22 +51,12 @@ class LDIVxCommandKtTest {
         ldIVxCommand.execute(cpu, opcode)
 
         // Then
-        assertThat(cpu.memory.read(memoryAddress.toInt()){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0x10.toUByte())
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 1){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0x20.toUByte())
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 2){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0x30.toUByte())
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 3){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0x40.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress.toInt())).isEqualTo(0x10.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 1)).isEqualTo(0x20.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 2)).isEqualTo(0x30.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 3)).isEqualTo(0x40.toUByte())
         // V4 should not be stored, memory should remain 0
-        assertThat(cpu.memory.read(memoryAddress.toInt() + 4){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0x00.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress.toInt() + 4)).isEqualTo(0x00.toUByte())
     }
 
     @ParameterizedTest
@@ -92,16 +78,12 @@ class LDIVxCommandKtTest {
 
         // Then - Check that V0 through Vx are stored
         for (i in 0..registerIndex) {
-            assertThat(cpu.memory.read(memoryAddress.toInt() + i){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo((0x10 + i).toUByte())
+            assertThat(cpu.memory.readByte(memoryAddress.toInt() + i)).isEqualTo((0x10 + i).toUByte())
         }
 
         // Check that Vx+1 is not stored (if within bounds)
         if (registerIndex < 15) {
-            assertThat(cpu.memory.read(memoryAddress.toInt() + registerIndex + 1){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0x00.toUByte())
+            assertThat(cpu.memory.readByte(memoryAddress.toInt() + registerIndex + 1)).isEqualTo(0x00.toUByte())
         }
     }
 
@@ -119,22 +101,14 @@ class LDIVxCommandKtTest {
         cpu.I.write(memoryAddress1)
         ldIVxCommand.execute(cpu, opcode)
 
-        assertThat(cpu.memory.read(memoryAddress1.toInt()){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0xAA.toUByte())
-        assertThat(cpu.memory.read(memoryAddress1.toInt() + 1){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0xBB.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress1.toInt())).isEqualTo(0xAA.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress1.toInt() + 1)).isEqualTo(0xBB.toUByte())
 
         // Test with second address
         cpu.I.write(memoryAddress2)
         ldIVxCommand.execute(cpu, opcode)
 
-        assertThat(cpu.memory.read(memoryAddress2.toInt()){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0xAA.toUByte())
-        assertThat(cpu.memory.read(memoryAddress2.toInt() + 1){ bytes, addr ->
-                bytes.toUByteAt(addr)
-            }).isEqualTo(0xBB.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress2.toInt())).isEqualTo(0xAA.toUByte())
+        assertThat(cpu.memory.readByte(memoryAddress2.toInt() + 1)).isEqualTo(0xBB.toUByte())
     }
 }

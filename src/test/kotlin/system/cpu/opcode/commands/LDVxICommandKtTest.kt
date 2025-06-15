@@ -23,7 +23,7 @@ class LDVxICommandKtTest {
         val opcode = 0xF065.toUShort() // F065 - LD V0, [I]
 
         cpu.I.write(memoryAddress)
-        cpu.memory.write(memoryAddress.toInt(), 0x99.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt(), 0x99.toUByte())
 
         // When
         ldVxICommand.execute(cpu, opcode)
@@ -39,12 +39,12 @@ class LDVxICommandKtTest {
         val opcode = 0xF465.toUShort() // F465 - LD V4, [I]
 
         cpu.I.write(memoryAddress)
-        cpu.memory.write(memoryAddress.toInt(), 0x11.toUByte())
-        cpu.memory.write(memoryAddress.toInt() + 1, 0x22.toUByte())
-        cpu.memory.write(memoryAddress.toInt() + 2, 0x33.toUByte())
-        cpu.memory.write(memoryAddress.toInt() + 3, 0x44.toUByte())
-        cpu.memory.write(memoryAddress.toInt() + 4, 0x55.toUByte())
-        cpu.memory.write(memoryAddress.toInt() + 5, 0x66.toUByte()) // Should not be loaded
+        cpu.memory.writeByte(memoryAddress.toInt(), 0x11.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt() + 1, 0x22.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt() + 2, 0x33.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt() + 3, 0x44.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt() + 4, 0x55.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt() + 5, 0x66.toUByte()) // Should not be loaded
 
         // When
         ldVxICommand.execute(cpu, opcode)
@@ -72,9 +72,9 @@ class LDVxICommandKtTest {
 
         // Set up memory
         cpu.I.write(memoryAddress)
-        cpu.memory.write(memoryAddress.toInt(), 0x01.toUByte())
-        cpu.memory.write(memoryAddress.toInt() + 1, 0x02.toUByte())
-        cpu.memory.write(memoryAddress.toInt() + 2, 0x03.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt(), 0x01.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt() + 1, 0x02.toUByte())
+        cpu.memory.writeByte(memoryAddress.toInt() + 2, 0x03.toUByte())
 
         // When
         ldVxICommand.execute(cpu, opcode)

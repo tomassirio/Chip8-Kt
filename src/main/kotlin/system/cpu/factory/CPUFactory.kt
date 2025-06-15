@@ -2,12 +2,12 @@ package com.tomassirio.system.cpu.factory
 
 import com.tomassirio.system.cpu.CPU
 import com.tomassirio.system.cpu.CPUType
-import com.tomassirio.system.register.Register
-import com.tomassirio.system.register.utils.RegisterSet
-import com.tomassirio.system.memory.factory.MemoryFactory
 import com.tomassirio.system.cpu.utils.SizedStack
 import com.tomassirio.system.io.DisplayState
 import com.tomassirio.system.io.KeyboardState
+import com.tomassirio.system.memory.factory.MemoryFactory
+import com.tomassirio.system.register.Register
+import com.tomassirio.system.register.utils.RegisterSet
 
 object CPUFactory {
     fun createCPU(cpuType: CPUType = CPUType.CHIP8): CPU {

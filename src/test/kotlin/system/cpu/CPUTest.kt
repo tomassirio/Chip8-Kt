@@ -1,16 +1,16 @@
 package system.cpu
 
 import com.tomassirio.system.cpu.CPU
-import com.tomassirio.system.register.Register
 import com.tomassirio.system.cpu.opcode.Command
 import com.tomassirio.system.cpu.opcode.OpCodeTable
 import com.tomassirio.system.cpu.opcode.commands.sysAddrCommand
-import com.tomassirio.system.register.utils.RegisterSet
+import com.tomassirio.system.cpu.utils.SizedStack
 import com.tomassirio.system.io.DisplayState
 import com.tomassirio.system.io.KeyboardState
 import com.tomassirio.system.memory.Memory
-import com.tomassirio.system.memory.util.toUShortAt
-import com.tomassirio.system.cpu.utils.SizedStack
+import com.tomassirio.system.memory.accessor.MemoryAccessor
+import com.tomassirio.system.register.Register
+import com.tomassirio.system.register.utils.RegisterSet
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkObject
@@ -21,7 +21,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-@OptIn(ExperimentalUnsignedTypes::class)
 class CPUTest {
     private lateinit var cpu: CPU
     private lateinit var memory: Memory
@@ -48,7 +47,7 @@ class CPUTest {
         mockCommand = mockk(relaxed = true)
 
         // Write test opcode to memory
-        memory.write(0x200, 0x0000u)
+        memory.writeByte(0x200, 0x0000u)
 
         // Create CPU instance with mocked opcodes
         cpu = CPU(
@@ -85,7 +84,7 @@ class CPUTest {
     @Test
     fun `test opcode fetching`() {
         // Test that we can read the correct opcode from memory
-        val opcode = memory.read(pc.read().toInt()) { bytes, addr -> bytes.toUShortAt(addr) }
+        val opcode = MemoryAccessor.readUShort(memory, pc.read().toInt())
         assertThat(0x0000u).isEqualTo(opcode.toUInt())
             .withFailMessage("Should read correct opcode from memory")
     }
@@ -112,7 +111,7 @@ class CPUTest {
         mockkObject(OpCodeTable)
         every { OpCodeTable.getCommand(0x8888u) } throws IllegalArgumentException("Invalid opcode")
 
-        memory.write(0x200, 0x8888u)
+        MemoryAccessor.writeUShort(memory, 0x200, 0x8888u)
 
         assertThrows<IllegalArgumentException>("Should throw for invalid opcode") {
             cpu.runCycle()

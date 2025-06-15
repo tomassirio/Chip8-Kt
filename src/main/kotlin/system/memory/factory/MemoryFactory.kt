@@ -13,7 +13,10 @@ object MemoryFactory {
     fun createETIMemory(): Memory = initMemory(MEMORY_SIZE, ETI_START)
 
     private fun initMemory(size: Int, startAddress: Int = 0x200): Memory =
-        Memory(size, startAddress).apply { loadFontSet(this) }
+        Memory(size, startAddress).apply {
+            loadFontSet(this)
+            lockBootSection()
+        }
 
     private fun loadFontSet(memory: Memory) {
         val fontBase = FONTSET_BASE_ADDRESS
@@ -23,7 +26,7 @@ object MemoryFactory {
             .flatten()
 
         fontData.forEachIndexed { index, byte ->
-            memory.write((fontBase + index.toUInt()).toInt(), byte)
+            memory.writeByte((fontBase + index.toUInt()).toInt(), byte)
         }
     }
 }

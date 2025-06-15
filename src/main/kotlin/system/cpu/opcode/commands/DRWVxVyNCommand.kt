@@ -1,7 +1,6 @@
 package com.tomassirio.system.cpu.opcode.commands
 
 import com.tomassirio.system.cpu.opcode.Command
-import com.tomassirio.system.memory.util.toUByteAt
 
 /**
  * Dxyn - DRW Vx, Vy, nibble
@@ -28,9 +27,7 @@ fun drwVxVyNCommand(): Command {
 
         // Read n bytes starting from memory address I
         for (i in 0 until nibble) {
-            spriteData[i] = cpu.memory.read((cpu.I.read() + i.toUInt()).toInt()) { bytes, addr ->
-                bytes.toUByteAt(addr)
-            }
+            spriteData[i] = cpu.memory.readByte((cpu.I.read() + i.toUInt()).toInt())
         }
 
         // Draw the sprite and check for collision
