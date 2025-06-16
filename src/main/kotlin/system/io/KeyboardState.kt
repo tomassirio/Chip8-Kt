@@ -13,9 +13,16 @@ class KeyboardState {
     var registerToStoreKeyIn: Int? = null
         private set
 
+    var waitingKeyPressed: Char? = null
+        private set
+
     fun pressKey(physicalKey: Char) {
         if (keyboardState.containsKey(physicalKey)) {
             keyboardState[physicalKey] = true
+
+            if (isWaitingForKey && waitingKeyPressed == null) {
+                waitingKeyPressed = physicalKey
+            }
         }
     }
 

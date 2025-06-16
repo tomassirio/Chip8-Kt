@@ -18,5 +18,6 @@ fun andVxVyCommand(): Command {
         val registerY = cpu.registers[(opcode and 0xF0u).toInt() shr 4]
 
         registerX.write((registerX.read() and registerY.read()))
+        cpu.registers[0xF].write(0x0.toUByte())
     }
 }

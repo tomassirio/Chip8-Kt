@@ -20,5 +20,6 @@ fun ldIVxCommand(): Command {
             val registerValue = cpu.registers[i].read()
             cpu.memory.writeByte(memoryAddress + i, registerValue)
         }
+        cpu.I.write((cpu.I.read() + (registerIndex.toUShort() + 1u)).toUShort())
     }
 }
