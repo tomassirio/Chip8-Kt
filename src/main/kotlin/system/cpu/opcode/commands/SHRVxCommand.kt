@@ -13,7 +13,7 @@ fun shrVxCommand(): Command {
         val vxRegister = cpu.registers[(opcode and 0xF00u).toInt() shr 8]
         val vxValue = vxRegister.read()
 
-        cpu.registers[0xF].write(if(vxValue.toInt() and 0x1 == 1) 1u else 0u)
         vxRegister.write(vxValue.toInt().shr(1).toUByte())
+        cpu.registers[0xF].write(if(vxValue.toInt() and 0x1 == 1) 1u else 0u)
     }
 }
