@@ -20,5 +20,6 @@ fun ldVxICommand(): Command {
             val memoryValue = cpu.memory.readByte(memoryAddress + i)
             cpu.registers[i].write(memoryValue)
         }
+        cpu.I.write((cpu.I.read() + (registerIndex.toUShort() + 1u)).toUShort())
     }
 }
