@@ -6,11 +6,8 @@ import com.tomassirio.system.memory.preload.FontSet
 
 object MemoryFactory {
     private const val MEMORY_SIZE = 4096
-    private const val ETI_START = 0x600
 
     fun createMemory(): Memory = initMemory(MEMORY_SIZE)
-
-    fun createETIMemory(): Memory = initMemory(MEMORY_SIZE, ETI_START)
 
     private fun initMemory(size: Int, startAddress: Int = 0x200): Memory =
         Memory(size, startAddress).apply {

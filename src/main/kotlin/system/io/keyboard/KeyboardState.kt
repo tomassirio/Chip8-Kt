@@ -1,4 +1,4 @@
-package com.tomassirio.system.io
+package com.tomassirio.system.io.keyboard
 
 import com.tomassirio.constants.KEYBOARD_KEYS
 
