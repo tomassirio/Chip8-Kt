@@ -3,14 +3,16 @@ package com.tomassirio.system.cpu
 import com.tomassirio.system.cpu.opcode.Command
 import com.tomassirio.system.cpu.opcode.OpCodeTable
 import com.tomassirio.system.cpu.utils.SizedStack
-import com.tomassirio.system.io.DisplayState
-import com.tomassirio.system.io.KeyboardState
+import com.tomassirio.system.io.display.DisplayState
+import com.tomassirio.system.io.keyboard.KeyboardState
 import com.tomassirio.system.memory.Memory
 import com.tomassirio.system.memory.accessor.MemoryAccessor
 import com.tomassirio.system.register.Register
 import com.tomassirio.system.register.utils.RegisterSet
 
+@OptIn(ExperimentalUnsignedTypes::class)
 class CPU(
+    private val cpuType: CPUType,
     val memory: Memory,
     val registers: RegisterSet,
     val keyboardState: KeyboardState,
@@ -20,10 +22,12 @@ class CPU(
     val DT: Register.TimerRegister,
     val ST: Register.TimerRegister,
     val stack: SizedStack<UShort>,
+    val rplFlags: UByteArray?
 ) {
+    var halted = false
 
     fun runCycle() {
-        if (keyboardState.isWaitingForKey) return
+        if (halted || keyboardState.isWaitingForKey) return
 
         val opcode = fetch()
         val command = decode(opcode)
@@ -35,7 +39,10 @@ class CPU(
     }
 
     private fun decode(opcode: UShort): Command {
-        return OpCodeTable.getCommand(opcode)
+        return when (cpuType) {
+            CPUType.CHIP8 -> OpCodeTable.chip8CommandGetter(opcode)
+            CPUType.SCHIP8 -> OpCodeTable.chip48CommandGetter(opcode)
+        }
     }
 
     private fun execute(command: Command, opcode: UShort) {
