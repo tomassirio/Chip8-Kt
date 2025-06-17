@@ -1,6 +1,6 @@
 package system.io
 
-import com.tomassirio.system.io.DisplayState
+import com.tomassirio.system.io.display.DisplayState
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -79,4 +79,78 @@ class DisplayStateTest {
         // Check that the collision was detected
         assertThat(collision).isTrue()
     }
+
+    @Test
+    fun `test scrollDown moves pixels down and clears top rows`() {
+        // Set some pixels in top rows
+        displayState.setPixel(1, 0, true)
+        displayState.setPixel(2, 1, true)
+
+        displayState.scrollDown(2)
+
+        // Expect those pixels to move 2 rows down
+        assertThat(displayState.getPixel(1, 2)).isTrue()
+        assertThat(displayState.getPixel(2, 3)).isTrue()
+
+        // Top rows should now be empty
+        assertThat(displayState.getPixel(1, 0)).isFalse()
+        assertThat(displayState.getPixel(2, 1)).isFalse()
+    }
+
+    @Test
+    fun `test scrollLeft shifts pixels left and clears rightmost pixels`() {
+        displayState.setPixel(5, 0, true)
+        displayState.setPixel(6, 0, true)
+
+        displayState.scrollLeft(2)
+
+        assertThat(displayState.getPixel(3, 0)).isTrue()
+        assertThat(displayState.getPixel(4, 0)).isTrue()
+
+        // Rightmost pixels should now be false
+        assertThat(displayState.getPixel(displayState.width - 1, 0)).isFalse()
+        assertThat(displayState.getPixel(displayState.width - 2, 0)).isFalse()
+    }
+
+    @Test
+    fun `test scrollRight shifts pixels right and clears leftmost pixels`() {
+        displayState.setPixel(0, 0, true)
+        displayState.setPixel(1, 0, true)
+
+        displayState.scrollRight(2)
+
+        assertThat(displayState.getPixel(2, 0)).isTrue()
+        assertThat(displayState.getPixel(3, 0)).isTrue()
+
+        // Leftmost should be cleared
+        assertThat(displayState.getPixel(0, 0)).isFalse()
+        assertThat(displayState.getPixel(1, 0)).isFalse()
+    }
+
+    @Test
+    fun `test clipping disables wrapped drawing`() {
+        displayState.setClipping(true)
+        val height = displayState.height
+        val sprite = ubyteArrayOf(0b11111111u)
+
+        // Drawing beyond the edge with clipping should skip those pixels
+        displayState.drawSprite(0, height - 1, sprite)
+        assertThat(displayState.getPixel(0, height - 1)).isTrue()
+        assertThat(displayState.getPixel(1, height - 1)).isTrue()
+        assertThat(displayState.getPixel(0, 0)).isFalse() // Should not wrap
+    }
+
+    @Test
+    fun `test extended mode toggles resolution`() {
+        displayState.enableExtendedMode()
+        assertThat(displayState.isExtended()).isTrue()
+        val extendedSize = displayState.width * displayState.height
+
+        displayState.disableExtendedMode()
+        assertThat(displayState.isExtended()).isFalse()
+        val normalSize = displayState.width * displayState.height
+
+        assertThat(extendedSize).isGreaterThan(normalSize)
+    }
+
 }
