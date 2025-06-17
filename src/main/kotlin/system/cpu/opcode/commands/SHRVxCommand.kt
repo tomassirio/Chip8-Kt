@@ -11,10 +11,9 @@ import com.tomassirio.system.cpu.opcode.Command
 fun shrVxCommand(): Command {
     return Command { cpu, opcode ->
         val x = (opcode and 0x0F00u).toInt() shr 8
-        val y = (opcode and 0x00F0u).toInt() shr 4
-        val vy = cpu.registers[y].read()
+        val vx = cpu.registers[x].read()
 
-        cpu.registers[0xF].write(if (vy.toInt() and 0x1 == 1) 1u else 0u)
-        cpu.registers[x].write((vy.toInt() shr 1).toUByte())
+        cpu.registers[0xF].write(if (vx.toInt() and 0x01 == 1) 1u else 0u)
+        cpu.registers[x].write((vx.toInt() shr 1).toUByte())
     }
 }

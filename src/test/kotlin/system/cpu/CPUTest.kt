@@ -1,12 +1,13 @@
 package system.cpu
 
 import com.tomassirio.system.cpu.CPU
+import com.tomassirio.system.cpu.CPUType
 import com.tomassirio.system.cpu.opcode.Command
 import com.tomassirio.system.cpu.opcode.OpCodeTable
 import com.tomassirio.system.cpu.opcode.commands.sysAddrCommand
 import com.tomassirio.system.cpu.utils.SizedStack
-import com.tomassirio.system.io.DisplayState
-import com.tomassirio.system.io.KeyboardState
+import com.tomassirio.system.io.display.DisplayState
+import com.tomassirio.system.io.keyboard.KeyboardState
 import com.tomassirio.system.memory.Memory
 import com.tomassirio.system.memory.accessor.MemoryAccessor
 import com.tomassirio.system.register.Register
@@ -51,6 +52,7 @@ class CPUTest {
 
         // Create CPU instance with mocked opcodes
         cpu = CPU(
+            CPUType.CHIP8,
             memory = memory,
             registers = RegisterSet.Builder().build(),
             keyboardState = keyboardState,
@@ -60,6 +62,7 @@ class CPUTest {
             DT = DT,
             ST = ST,
             stack = SizedStack(16),
+            null
         )
     }
 

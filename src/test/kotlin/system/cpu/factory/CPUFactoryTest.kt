@@ -39,29 +39,29 @@ class CPUFactoryTest {
     }
 
     @Test
-    fun `createCPU with ETI660 type returns initialized ETI660 CPU`() {
-        val eti660: CPU = cpuFactory.createCPU(CPUType.ETI660)
+    fun `createCPU with SuperChip8 type returns initialized SuperChip8 CPU`() {
+        val superChip8: CPU = cpuFactory.createCPU(CPUType.SCHIP8)
 
         // Assert that CPU is initialized
-        assertThat(eti660).isNotNull
+        assertThat(superChip8).isNotNull
 
-        // Check memory is initialized (specific memory for ETI660)
-        assertThat(eti660.memory).isNotNull
+        // Check memory is initialized (specific memory for SuperChip8)
+        assertThat(superChip8.memory).isNotNull
 
         // Check PC, SP, and I registers
-        assertThat(eti660.pc.read()).isEqualTo(0x600u.toUShort())
-        assertThat(eti660.stack.lastIndex).isEqualTo(-1)
-        assertThat(eti660.I.read()).isEqualTo(0x0u.toUShort())
+        assertThat(superChip8.pc.read()).isEqualTo(0x200u.toUShort())
+        assertThat(superChip8.stack.lastIndex).isEqualTo(-1)
+        assertThat(superChip8.I.read()).isEqualTo(0x0u.toUShort())
 
         // Check that the register set is initialized correctly
-        assertThat(eti660.registers).hasSize(16)
+        assertThat(superChip8.registers).hasSize(16)
 
         // Check that the stack is initialized to 16 empty entries
-        assertThat(eti660.stack.maxSize).isEqualTo(16)
-        assertThat(eti660.stack).isEmpty()
+        assertThat(superChip8.stack.maxSize).isEqualTo(16)
+        assertThat(superChip8.stack).isEmpty()
 
         // Check that keyboard and display are initialized
-        assertThat(eti660.keyboardState).isNotNull
-        assertThat(eti660.displayState).isNotNull
+        assertThat(superChip8.keyboardState).isNotNull
+        assertThat(superChip8.displayState).isNotNull
     }
 }

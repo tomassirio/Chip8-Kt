@@ -1,7 +1,7 @@
 package system.io
 
 import com.tomassirio.constants.KEYBOARD_KEYS
-import com.tomassirio.system.io.KeyboardState
+import com.tomassirio.system.io.keyboard.KeyboardState
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.Test
 

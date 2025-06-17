@@ -4,7 +4,7 @@ import com.tomassirio.system.cpu.exception.CPUNotFoundException
 
 enum class CPUType {
     CHIP8,
-    ETI660;
+    SCHIP8;
 
     companion object {
         fun getByName(cpuType: String): CPUType {
