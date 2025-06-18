@@ -12,7 +12,7 @@ import com.tomassirio.system.register.utils.RegisterSet
 
 @OptIn(ExperimentalUnsignedTypes::class)
 class CPU(
-    private val cpuType: CPUType,
+    val cpuType: CPUType,
     val memory: Memory,
     val registers: RegisterSet,
     val keyboardState: KeyboardState,
