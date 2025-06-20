@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.tomassirio</groupId>
         <artifactId>Chip8-Kt</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <packaging>jar</packaging>
 
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>io.github.tomassirio</groupId>
             <artifactId>controller</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
