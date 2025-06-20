@@ -40,3 +40,4 @@ build/
 ### Mac OS ###
 .DS_Store
 /.idea/*
+/chip8-app/dependency-reduced-pom.xml
