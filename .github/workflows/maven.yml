@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 env:
-  GITHUB_DEPLOY_TOKEN: ${{ secrets.GITHUB_DEPLOY_TOKEN }}
+  GITHUB_DEPLOY_TOKEN: ${{ secrets._DEPLOY_TOKEN }}
 
 permissions:
   contents: write
@@ -52,10 +52,10 @@ jobs:
           distribution: 'temurin'
           server-id: github
           server-username: GITHUB_ACTOR
-          server-password: ${{ secrets.GITHUB_TOKEN }}
+          server-password: ${{ secrets._DEPLOY_TOKEN }}
 
       - name: Publish package
         run: mvn --batch-mode deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets._DEPLOY_TOKEN }}
 

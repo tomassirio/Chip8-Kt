@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.tomassirio</groupId>
         <artifactId>Chip8-Kt</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
     <packaging>jar</packaging>
 
@@ -16,7 +16,7 @@
         <dependency>
             <groupId>io.github.tomassirio</groupId>
             <artifactId>system</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.0.1</version>
         </dependency>
 
         <!--Test-->
