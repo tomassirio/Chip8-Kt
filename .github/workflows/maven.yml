@@ -33,7 +33,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          path: target/chip8-app-1.0.0.jar
+          path: chip8-app/target/chip8-app-1.0.0.jar
 
   publish:
     needs: build
