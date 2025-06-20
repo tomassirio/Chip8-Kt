@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.tomassirio.emulation.chip8</groupId>
         <artifactId>Chip8-KT</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <packaging>jar</packaging>
 
@@ -16,7 +16,7 @@
         <dependency>
             <groupId>com.tomassirio.emulation.chip8</groupId>
             <artifactId>system</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
 
         <!--Test-->
