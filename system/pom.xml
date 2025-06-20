@@ -6,11 +6,13 @@
     <parent>
         <groupId>io.github.tomassirio</groupId>
         <artifactId>chip8-kt</artifactId>
-        <version>1.0.1</version>
+        <version>${revision}${changelist}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <packaging>jar</packaging>
 
     <artifactId>system</artifactId>
+    <version>1.0.1</version>
 
     <dependencies>
         <dependency>

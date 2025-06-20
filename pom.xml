@@ -7,7 +7,7 @@
     <groupId>io.github.tomassirio</groupId>
     <artifactId>chip8-kt</artifactId>
     <description>A Kotlin-based Chip8 emulator</description>
-    <version>1.0.1</version>
+    <version>${revision}${changelist}</version>
     <packaging>pom</packaging>
 
     <distributionManagement>
@@ -26,6 +26,9 @@
     </modules>
 
     <properties>
+        <revision>1.0.2</revision>
+        <changelist>-SNAPSHOT</changelist>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.stdlib.version>2.1.10</kotlin.stdlib.version>
         <kotlin.code.style>official</kotlin.code.style>
