@@ -9,6 +9,14 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/tomassirio/Chip8-Kt</url>
+        </repository>
+    </distributionManagement>
+
     <modules>
         <module>system</module>
         <module>ui</module>
