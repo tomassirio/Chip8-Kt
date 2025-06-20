@@ -14,7 +14,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/tomassirio/Chip8-Kt</url>
+            <url>https://maven.pkg.github.com/tomassirio/Chip8-KT</url>
         </repository>
     </distributionManagement>
 
