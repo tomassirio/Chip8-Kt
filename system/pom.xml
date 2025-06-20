@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.tomassirio</groupId>
-        <artifactId>Chip8-Kt</artifactId>
+        <artifactId>chip8-kt</artifactId>
         <version>1.0.1</version>
     </parent>
     <packaging>jar</packaging>
