@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.tomassirio.emulation.chip8</groupId>
+        <groupId>io.github.tomassirio</groupId>
         <artifactId>Chip8-KT</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -14,7 +14,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.tomassirio.emulation.chip8</groupId>
+            <groupId>io.github.tomassirio</groupId>
             <artifactId>system</artifactId>
             <version>1.0.0</version>
         </dependency>

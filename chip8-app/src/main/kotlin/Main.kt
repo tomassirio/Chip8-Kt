@@ -1,6 +1,6 @@
-package com.tomassirio.emulation.chip8
+package io.github.tomassirio
 
-import com.tomassirio.emulation.chip8.ui.EmulatorUI
+import io.github.tomassirio.ui.EmulatorUI
 import javafx.application.Application
 
 fun main(args: Array<String>) {
