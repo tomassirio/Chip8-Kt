@@ -809,7 +809,7 @@ In order to run the project you will need a rom. This repository provides a sele
 So after running `mvn clean install` you can just begin playing roms with 
 
 ```sh
-❯ java -jar chip8-app/target/chip8-app-1.0-SNAPSHOT.jar --rom=roms/games/PONG     
+❯ java -jar chip8-app/target/chip8-app-1.0.0.jar --rom=roms/games/PONG     
 ```
 
 #### 🔡 Parameters
@@ -841,7 +841,7 @@ or you can compile and test it with
 The project can also be tested with the 'Rom-Tests' in the roms folder. Each of them can be ran as any other rom
 
 ```shell
-❯ java -jar chip8-app/target/chip8-app-1.0-SNAPSHOT.jar --rom=roms/test-suite/1-chip8-logo.ch8     
+❯ java -jar chip8-app/target/chip8-app-1.0.0.jar --rom=roms/test-suite/1-chip8-logo.ch8     
 ```
 
   <blockquote>
