@@ -5,16 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.tomassirio</groupId>
-    <artifactId>Chip8-KT</artifactId>
+    <artifactId>chip8-kt</artifactId>
     <description>A Kotlin-based Chip8 emulator</description>
-    <version>1.0.0</version>
+    <version>${revision}${changelist}</version>
     <packaging>pom</packaging>
 
     <distributionManagement>
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/tomassirio/Chip8-KT</url>
+            <url>https://maven.pkg.github.com/tomassirio/Chip8-Kt</url>
         </repository>
     </distributionManagement>
 
@@ -26,6 +26,9 @@
     </modules>
 
     <properties>
+        <revision>1.0.2</revision>
+        <changelist>-SNAPSHOT</changelist>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.stdlib.version>2.1.10</kotlin.stdlib.version>
         <kotlin.code.style>official</kotlin.code.style>

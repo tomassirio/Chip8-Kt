@@ -1,0 +1,37 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+
+permissions:
+  contents: write
+  packages: write
+  security-events: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Set up Maven settings
+        run: |
+          mkdir -p $HOME/.m2
+          cp .github/maven-settings.xml $HOME/.m2/settings.xml
+
+      - name: Build and Deploy with Maven
+        run: mvn --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+
+      - name: Update dependency graph
+        uses: advanced-security/maven-dependency-submission-action@v4
