@@ -1,0 +1,30 @@
+name: PR Build
+
+on:
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      - name: Update dependency graph
+        uses: advanced-security/maven-dependency-submission-action@v4
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chip8-app-jar
+          path: chip8-app/target/*.jar
