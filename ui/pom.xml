@@ -12,7 +12,6 @@
     <packaging>jar</packaging>
 
     <artifactId>ui</artifactId>
-    <version>1.0.1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,7 +23,7 @@
         <dependency>
             <groupId>io.github.tomassirio</groupId>
             <artifactId>controller</artifactId>
-            <version>1.0.1</version>
+            <version>${revision}${changelist}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>

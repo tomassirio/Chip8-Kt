@@ -12,7 +12,6 @@
     <packaging>jar</packaging>
 
     <artifactId>system</artifactId>
-    <version>1.0.1</version>
 
     <dependencies>
         <dependency>
