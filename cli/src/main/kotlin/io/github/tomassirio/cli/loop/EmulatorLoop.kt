@@ -39,10 +39,11 @@ class EmulatorLoop(
 
     private fun handleInput(): Boolean {
         val nowMillis = System.currentTimeMillis()
+        val chars = inputReader.pollChars()
 
-        for (char in inputReader.pollChars()) {
-            if (char == ESCAPE) return false
+        if (chars.size == 1 && chars[0] == ESCAPE) return false
 
+        for (char in chars) {
             val chip8Key = keyMapper.mapToChip8Key(char) ?: continue
             if (keyHoldTracker.keyReceived(chip8Key, nowMillis)) {
                 systemController.onKeyPressed(chip8Key)

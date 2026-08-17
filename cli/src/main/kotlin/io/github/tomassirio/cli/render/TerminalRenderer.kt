@@ -10,6 +10,8 @@ private const val CURSOR_HOME = "\u001B[H"
 private const val CLEAR_AND_HIDE_CURSOR = "\u001B[2J\u001B[?25l"
 
 class TerminalRenderer(private val writer: PrintWriter) {
+    private var lastFrame: String? = null
+
     fun clearAndHideCursor() {
         writer.print(CLEAR_AND_HIDE_CURSOR)
         writer.flush()
@@ -27,10 +29,14 @@ class TerminalRenderer(private val writer: PrintWriter) {
             for (x in 0 until width) {
                 frame.append(if (display.getPixel(x, y)) ON else OFF)
             }
-            frame.append('\n')
+            if (y < height - 1) frame.append('\n')
         }
 
-        writer.print(frame)
+        val frameText = frame.toString()
+        if (frameText == lastFrame) return
+        lastFrame = frameText
+
+        writer.print(frameText)
         writer.flush()
     }
 }

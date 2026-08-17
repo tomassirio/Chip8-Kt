@@ -848,7 +848,7 @@ a s d f        7 8 9 E
 z x c v        A 0 B F
 ```
 
-Press `Esc` to quit. The terminal needs at least 128x32 columns for CHIP-8 or 256x64 for Super-CHIP-8 (2 characters are drawn per pixel) — the CLI checks this on startup and exits with an error if the terminal is too small.
+Press `Esc` to quit. The terminal needs at least 128 columns x 32 rows for CHIP-8, or 256 columns x 64 rows for Super-CHIP-8 (2 characters are drawn per pixel) — the CLI checks this on startup and exits with an error if the terminal is too small.
 
 ### ✅ Testing
 This project allows for two different types of testing. Both Unit tests and 'Rom-tests'

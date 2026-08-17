@@ -48,7 +48,7 @@ class EmulatorRunner : ApplicationRunner {
         }
 
         val originalAttributes = terminal.enterRawMode()
-        val shutdownHook = Thread { restoreTerminal(terminal, originalAttributes) }
+        val shutdownHook = Thread { restoreAttributesAndCursor(terminal, originalAttributes) }
         Runtime.getRuntime().addShutdownHook(shutdownHook)
         try {
             EmulatorLoop(
@@ -65,14 +65,14 @@ class EmulatorRunner : ApplicationRunner {
             } catch (e: IllegalStateException) {
                 // JVM is already shutting down (hook already running/ran) — nothing to remove
             }
-            restoreTerminal(terminal, originalAttributes)
+            restoreAttributesAndCursor(terminal, originalAttributes)
+            terminal.close()
         }
     }
 
-    private fun restoreTerminal(terminal: Terminal, originalAttributes: Attributes) {
+    private fun restoreAttributesAndCursor(terminal: Terminal, originalAttributes: Attributes) {
         terminal.writer().print(SHOW_CURSOR)
         terminal.writer().flush()
         terminal.attributes = originalAttributes
-        terminal.close()
     }
 }
