@@ -23,6 +23,7 @@
         <module>ui</module>
         <module>controller</module>
         <module>chip8-app</module>
+        <module>cli</module>
     </modules>
 
     <properties>
@@ -39,6 +40,8 @@
         <mockk.jvm.version>1.13.10</mockk.jvm.version>
         <maven.plugin.version>2.22.2</maven.plugin.version>
         <codehaus.mojo.version>1.6.0</codehaus.mojo.version>
+        <spring.boot.version>3.3.4</spring.boot.version>
+        <jline.version>3.26.3</jline.version>
     </properties>
 
     <dependencyManagement>
