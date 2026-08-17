@@ -105,7 +105,6 @@
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>${codehaus.mojo.version}</version>
                 </plugin>
-
             </plugins>
         </pluginManagement>
     </build>
