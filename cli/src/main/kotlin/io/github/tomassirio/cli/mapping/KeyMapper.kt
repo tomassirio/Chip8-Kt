@@ -1,5 +1,6 @@
 package io.github.tomassirio.cli.mapping
 
+// Physical layout mirrored in io.github.tomassirio.ui.mapping.KeyMapper (JavaFX KeyCode-based) — keep both in sync.
 class KeyMapper {
     fun mapToChip8Key(key: Char): Char? = keyMap[key.lowercaseChar()]
 

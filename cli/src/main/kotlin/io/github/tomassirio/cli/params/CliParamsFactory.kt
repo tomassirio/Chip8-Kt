@@ -14,6 +14,7 @@ object CliParamsFactory {
         val cpuType = args.getOptionValues(CPU_ARG)?.firstOrNull()?.let { CPUType.getByName(it) }
             ?: CPUType.CHIP8
         val fps = args.getOptionValues(FPS_ARG)?.firstOrNull()?.toIntOrNull() ?: 15
+        require(fps > 0) { "--fps must be a positive number, got: $fps" }
 
         return CliParams(romPath, cpuType, fps)
     }

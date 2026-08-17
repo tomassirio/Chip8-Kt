@@ -46,4 +46,13 @@ class CliParamsFactoryTest {
             CliParamsFactory.fromArguments(args)
         }
     }
+
+    @Test
+    fun `fromArguments with non-positive fps throws IllegalArgumentException`() {
+        val args = DefaultApplicationArguments("--rom=roms/games/PONG", "--fps=0")
+
+        assertThrows<IllegalArgumentException> {
+            CliParamsFactory.fromArguments(args)
+        }
+    }
 }

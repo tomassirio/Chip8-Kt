@@ -19,6 +19,8 @@ class EmulatorLoop(
     private val cyclesPerFrame: Int
 ) {
     fun run() {
+        renderer.clearAndHideCursor()
+
         var lastFrameTime = System.nanoTime()
         var running = true
 
@@ -39,7 +41,7 @@ class EmulatorLoop(
         val nowMillis = System.currentTimeMillis()
 
         for (char in inputReader.pollChars()) {
-            if (char == 'q' || char == ESCAPE) return false
+            if (char == ESCAPE) return false
 
             val chip8Key = keyMapper.mapToChip8Key(char) ?: continue
             if (keyHoldTracker.keyReceived(chip8Key, nowMillis)) {

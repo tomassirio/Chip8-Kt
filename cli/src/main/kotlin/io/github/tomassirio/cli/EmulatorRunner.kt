@@ -7,13 +7,19 @@ import io.github.tomassirio.cli.mapping.KeyMapper
 import io.github.tomassirio.cli.params.CliParamsFactory
 import io.github.tomassirio.cli.render.TerminalRenderer
 import io.github.tomassirio.controller.SystemController
+import io.github.tomassirio.system.cpu.CPUType
 import io.github.tomassirio.system.cpu.factory.CPUFactory
+import io.github.tomassirio.system.io.display.DisplayType
+import org.jline.terminal.Attributes
+import org.jline.terminal.Terminal
 import org.jline.terminal.TerminalBuilder
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.stereotype.Component
 import java.io.File
 import kotlin.system.exitProcess
+
+private const val SHOW_CURSOR = "\u001B[?25h"
 
 @Component
 class EmulatorRunner : ApplicationRunner {
@@ -30,7 +36,20 @@ class EmulatorRunner : ApplicationRunner {
         systemController.loadRom(File(params.romPath).readBytes())
 
         val terminal = TerminalBuilder.builder().system(true).build()
+        val displayType = if (params.cpuType == CPUType.SCHIP8) DisplayType.SCHIP8 else DisplayType.CHIP8
+        val requiredColumns = displayType.width * 2
+        if (terminal.width < requiredColumns || terminal.height < displayType.height) {
+            System.err.println(
+                "Error: terminal is too small. Need at least ${requiredColumns}x${displayType.height} " +
+                    "(columns x rows) for ${params.cpuType}, got ${terminal.width}x${terminal.height}."
+            )
+            terminal.close()
+            exitProcess(1)
+        }
+
         val originalAttributes = terminal.enterRawMode()
+        val shutdownHook = Thread { restoreTerminal(terminal, originalAttributes) }
+        Runtime.getRuntime().addShutdownHook(shutdownHook)
         try {
             EmulatorLoop(
                 systemController,
@@ -41,8 +60,19 @@ class EmulatorRunner : ApplicationRunner {
                 params.fps
             ).run()
         } finally {
-            terminal.attributes = originalAttributes
-            terminal.close()
+            try {
+                Runtime.getRuntime().removeShutdownHook(shutdownHook)
+            } catch (e: IllegalStateException) {
+                // JVM is already shutting down (hook already running/ran) — nothing to remove
+            }
+            restoreTerminal(terminal, originalAttributes)
         }
+    }
+
+    private fun restoreTerminal(terminal: Terminal, originalAttributes: Attributes) {
+        terminal.writer().print(SHOW_CURSOR)
+        terminal.writer().flush()
+        terminal.attributes = originalAttributes
+        terminal.close()
     }
 }

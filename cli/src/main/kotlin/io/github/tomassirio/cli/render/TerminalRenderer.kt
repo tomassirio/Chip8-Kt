@@ -7,8 +7,14 @@ import java.io.PrintWriter
 private const val ON = "██"
 private const val OFF = "  "
 private const val CURSOR_HOME = "\u001B[H"
+private const val CLEAR_AND_HIDE_CURSOR = "\u001B[2J\u001B[?25l"
 
 class TerminalRenderer(private val writer: PrintWriter) {
+    fun clearAndHideCursor() {
+        writer.print(CLEAR_AND_HIDE_CURSOR)
+        writer.flush()
+    }
+
     fun render(display: DisplayState) {
         val (width, height) = if (display.isExtended()) {
             DisplayType.SCHIP8.width to DisplayType.SCHIP8.height

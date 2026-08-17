@@ -1,6 +1,6 @@
 package io.github.tomassirio.cli.input
 
-class KeyHoldTracker(private val timeoutMillis: Long = 100L) {
+class KeyHoldTracker(private val timeoutMillis: Long = 300L) {
     private val lastSeen = mutableMapOf<Char, Long>()
 
     fun keyReceived(key: Char, now: Long): Boolean {
