@@ -81,11 +81,12 @@ The main ideas behind the project were:
 
 ![Project structure](img/package.png)
 
-This Chip-8 project is divided into 4 Maven submodules.
+This Chip-8 project is divided into 5 Maven submodules.
 
 ```
 └── Chip8-Kt/
     ├── chip8-app   - This submodule only contains the Main file
+    ├── cli         - Spring Boot terminal (CLI) frontend; renders to ANSI, reads keyboard via JLine
     ├── controller  - A mother board of sorts. Controls tickers and timers
     ├── ui          - JavaFx UI implementation; Handles keyboard 
     ├── roms        - Rom selection
@@ -823,6 +824,31 @@ This implementation of the **Chip-8** console includes a few options you can pla
 --scale   [Int](default=10) scale for the pixels in the screen
 --fps     [Int](default=15) Frames per second at which the rom will run
 ```
+
+### 🖥️ Terminal (CLI) Frontend
+
+Prefer a terminal over a window? The `cli` module runs the same emulator core inside your terminal, using ANSI block characters for the display — no JavaFX involved.
+
+```sh
+❯ java -jar cli/target/cli-1.0.1.jar --rom=roms/games/PONG
+```
+
+```
+--rom     [Mandatory] declares path to rom
+--cpu     [CHIP8/SCHIP8](default=CHIP8) defines which system to emulate between the Chip-8 and Super-Chip
+--fps     [Int](default=15) CPU cycles executed per rendered frame (not literal frames-per-second — the display always redraws at 60Hz)
+```
+
+Controls use the same physical layout as the JavaFX UI:
+
+```
+1 2 3 4        1 2 3 C
+q w e r   ->   4 5 6 D
+a s d f        7 8 9 E
+z x c v        A 0 B F
+```
+
+Press `Esc` to quit. The terminal needs at least 128 columns x 32 rows for CHIP-8, or 256 columns x 64 rows for Super-CHIP-8 (2 characters are drawn per pixel) — the CLI checks this on startup and exits with an error if the terminal is too small.
 
 ### ✅ Testing
 This project allows for two different types of testing. Both Unit tests and 'Rom-tests'

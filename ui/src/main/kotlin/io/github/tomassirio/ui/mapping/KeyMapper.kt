@@ -2,6 +2,7 @@ package io.github.tomassirio.ui.mapping
 
 import javafx.scene.input.KeyCode
 
+// Physical layout mirrored in io.github.tomassirio.cli.mapping.KeyMapper (Char-based, terminal frontend) — keep both in sync.
 class KeyMapper {
     fun mapToChip8Key(keyCode: KeyCode): Char? = keyMap[keyCode]
 
