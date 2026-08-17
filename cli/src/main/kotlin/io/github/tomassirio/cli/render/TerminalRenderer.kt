@@ -6,7 +6,7 @@ import java.io.PrintWriter
 
 private const val ON = "██"
 private const val OFF = "  "
-private const val CURSOR_HOME = "[H"
+private const val CURSOR_HOME = "\u001B[H"
 
 class TerminalRenderer(private val writer: PrintWriter) {
     fun render(display: DisplayState) {
